@@ -1,12 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
-@import "primeng/resources/themes/lara-light-blue/theme.css";
-@import "primeng/resources/primeng.css";
-@import "primeicons/primeicons.css";
+@import "~primeng/resources/themes/luna-blue/theme.css";
+@import "~primeng/resources/primeng.min.css";
+@import "~primeicons/primeicons.css";
 @import "primeflex/primeflex.css";
 @import "./assets/styles/index.scss";
 
-// * {
-//   color: $contentColor;
-//   background-color: $basicBgColor;
-//   // font-family: "Roboto-mono";
-// }
+* {
+  color: $contentColor;
+
+  ul,
+  li {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

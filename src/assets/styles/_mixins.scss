@@ -1,0 +1,10 @@
+@import "./variables.scss";
+
+@mixin links {
+  @media screen and (min-width: map-get($break-points, large)) {
+    &:hover {
+      color: $hoverLinkColor;
+      transition: $transition;
+    }
+  }
+}

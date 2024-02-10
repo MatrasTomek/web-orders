@@ -1,25 +1,19 @@
 <!-- Header -->
 <header id="header">
-  <nav class="nav-wrapper">
+  <nav class="flex align-items-center justify-content-between nav-wrapper">
     <!-- App Name -->
-    <a class="nav-wrapper__link" href="index.html">WebOrders</a>
+    <div class="nav-wrapper__link">
+      <a href="index.html">WebOrders</a>
+    </div>
 
-    <div class="nav-wrapper__menu ml-10">
+    <div class="nav-wrapper__menu flex">
       <!-- Primary Navigation -->
-      <ul class="">
+      <ul class="flex">
         <!-- Navigation Links -->
-        <li>
-          <a class="p-mb-6" href="#" (click)="openModal($event)"
-            >Logowanie/ Rejestracja</a
-          >
+        <li class="ml-4">
+          <a href="#" (click)="openModal($event)">Rejestracja</a>
         </li>
-        <li>
-          <a class="" href="#">Manage</a>
-        </li>
-        <li>
-          <a class="" href="#">Upload</a>
-        </li>
-        <li>
+        <li class="ml-4">
           <a class="" href="about.html">About</a>
         </li>
       </ul>

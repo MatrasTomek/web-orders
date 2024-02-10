@@ -1,5 +1,26 @@
 @import "../../styles.scss";
 
 .nav-wrapper {
+  width: 100%;
+  height: 60px;
   background-color: $elementsBgColor;
+  padding: 2rem;
+
+  @media screen and (min-width: map-get($break-points, medium)) {
+    &__link,
+    &__menu {
+      a {
+        font-size: $s-fz;
+      }
+    }
+  }
+
+  @media screen and (min-width: map-get($break-points, large)) {
+    &__link,
+    &__menu {
+      a {
+        @include links;
+      }
+    }
+  }
 }
