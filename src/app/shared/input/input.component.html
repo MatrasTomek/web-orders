@@ -1,0 +1,19 @@
+<input
+  [type]="type"
+  class=""
+  [placeholder]="placeholder"
+  [formControl]="control"
+  [mask]="format"
+  [dropSpecialCharacters]="false"
+/>
+<ng-container *ngIf="control.touched && control.dirty">
+  <!-- <p *ngIf="control.errors?.pattern" class="">
+    Password must have at least 8 characters, 1 uppercase letter, 1 lowercase
+    letter, and 1 number.
+  </p> -->
+  <p *ngIf="control.errors?.['required']" class="">Field is required.</p>
+
+  <p *ngIf="control.errors?.['email']" class="">
+    You must enter a valid email.
+  </p>
+</ng-container>

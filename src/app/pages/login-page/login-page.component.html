@@ -1,0 +1,37 @@
+<form #loginForm="ngForm" (ngSubmit)="login()">
+  <div class="">
+    <label>Email</label>
+    <input
+      #email="ngModel"
+      type="email"
+      name="email"
+      [(ngModel)]="credentials.email"
+      required
+      placeholder="Wpisz email"
+      class=""
+      required
+      pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+    />
+    <p *ngIf="email.errors && email.touched && email.dirty" class="">
+      Email jest wymagany
+    </p>
+  </div>
+  <div class="">
+    <label class="">Hasło</label>
+    <input
+      #password="ngModel"
+      type="password"
+      name="password"
+      [(ngModel)]="credentials.password"
+      class=""
+      placeholder="Hasło"
+      required
+    />
+    <p *ngIf="password.errors && password.touched && password.dirty" class="">
+      Hasło jest wymagane
+    </p>
+  </div>
+  <button type="submit" class="" [disabled]="loginForm.invalid">
+    Logowanie
+  </button>
+</form>
