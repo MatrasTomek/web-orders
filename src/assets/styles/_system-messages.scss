@@ -1,0 +1,12 @@
+@import "./reset";
+@import "./variables";
+@import "./mixins";
+
+.form-warning {
+  margin-top: 0.5rem;
+  padding: 5px 8px;
+  background-color: $warningLite;
+  border-left: 7px solid $warningHard;
+  border-radius: $primeBorderRadius;
+  color: $darkContentColor;
+}

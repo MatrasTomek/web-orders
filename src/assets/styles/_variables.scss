@@ -3,11 +3,15 @@ $basicBgColor: #060725;
 $elementsBgColor: #2d2e55;
 
 $contentColor: #fefefe;
+$darkContentColor: #04051f;
 $hoverLinkColor: #16aae1;
-$warningBox: #ec130c;
+$warningHard: #ec130c;
+$warningMid: #be140e;
+$warningLite: #e57373;
 $isDoneBox: #49b800;
 
 //font-size
+$xxs-fz: 0.85rem;
 $xs-fz: 1rem;
 $s-fz: 1.2rem;
 $m-fz: 1.5rem;
@@ -25,3 +29,6 @@ $break-points: (
 
 //others
 $transition: 0.4s;
+$navComponentHeight: 60px;
+$pagePadding: 40px;
+$primeBorderRadius: 3px;

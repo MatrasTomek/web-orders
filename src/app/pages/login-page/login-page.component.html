@@ -1,37 +1,49 @@
-<form #loginForm="ngForm" (ngSubmit)="login()">
-  <div class="">
-    <label>Email</label>
-    <input
-      #email="ngModel"
-      type="email"
-      name="email"
-      [(ngModel)]="credentials.email"
-      required
-      placeholder="Wpisz email"
+<div class="page-wrapper">
+  <form #loginForm="ngForm" (ngSubmit)="login()" class="login-page-wrapper">
+    <div class="input-column-wrapper">
+      <label class="input-label">Email</label>
+      <input
+        #email="ngModel"
+        type="email"
+        name="email"
+        [(ngModel)]="credentials.email"
+        required
+        placeholder="Wpisz email"
+        required
+        pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+        pInputText
+      />
+      <p
+        *ngIf="email.errors && email.touched && email.dirty"
+        class="form-warning"
+      >
+        Poprawny adres Email jest wymagany
+      </p>
+    </div>
+    <div class="input-column-wrapper">
+      <label class="input-label">Hasło</label>
+      <input
+        #password="ngModel"
+        type="password"
+        name="password"
+        [(ngModel)]="credentials.password"
+        placeholder="Hasło"
+        required
+        pInputText
+      />
+      <p
+        *ngIf="password.errors && password.touched && password.dirty"
+        class="form-warning"
+      >
+        Hasło jest wymagane
+      </p>
+    </div>
+    <p-button
+      type="submit"
       class=""
-      required
-      pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
-    />
-    <p *ngIf="email.errors && email.touched && email.dirty" class="">
-      Email jest wymagany
-    </p>
-  </div>
-  <div class="">
-    <label class="">Hasło</label>
-    <input
-      #password="ngModel"
-      type="password"
-      name="password"
-      [(ngModel)]="credentials.password"
-      class=""
-      placeholder="Hasło"
-      required
-    />
-    <p *ngIf="password.errors && password.touched && password.dirty" class="">
-      Hasło jest wymagane
-    </p>
-  </div>
-  <button type="submit" class="" [disabled]="loginForm.invalid">
-    Logowanie
-  </button>
-</form>
+      [disabled]="loginForm.invalid || false"
+      label="Logowanie"
+    >
+    </p-button>
+  </form>
+</div>

@@ -8,3 +8,9 @@
     }
   }
 }
+
+@mixin pageWrapper {
+  width: 100%;
+  height: calc(100% - $navComponentHeight);
+  padding: $pagePadding;
+}

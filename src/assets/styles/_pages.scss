@@ -1,0 +1,9 @@
+@import "./reset";
+@import "./variables";
+@import "./mixins";
+
+.page-wrapper {
+  width: 100%;
+  min-height: calc(100vh - $navComponentHeight - 4px);
+  padding: $pagePadding;
+}
