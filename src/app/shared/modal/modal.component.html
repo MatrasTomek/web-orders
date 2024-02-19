@@ -1,0 +1,24 @@
+<div
+  class="modal-wrapper"
+  id="modal"
+  [ngClass]="{ hidden: !modal.isModalOpen(modalID) }"
+>
+  <div class="">
+    <div class="" (click)="closeModal($event)">
+      <div class=""></div>
+    </div>
+
+    <span class="hidden">&#8203;</span>
+
+    <div class="">
+      <div class="">
+        <div class="">
+          <ng-content select="[heading]"></ng-content>
+
+          <div class="" (click)="closeModal($event)">&#x2715;</div>
+        </div>
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>
