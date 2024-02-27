@@ -4,11 +4,20 @@ $elementsBgColor: #2d2e55;
 
 $contentColor: #fefefe;
 $darkContentColor: #04051f;
-$hoverLinkColor: #16aae1;
 $warningHard: #ec130c;
 $warningMid: #be140e;
 $warningLite: #e57373;
 $isDoneBox: #49b800;
+$buttonColor: #4879c7;
+$borderColor: #3b3131;
+
+//hoverColors
+$buttonHoverColor: #3b82f6;
+$hoverLinkColor: #16aae1;
+$textHoverColor: #fefefe94;
+
+//background
+$blur-background: rgba(25, 24, 24, 0.097);
 
 //font-size
 $xxs-fz: 0.85rem;
@@ -32,3 +41,4 @@ $transition: 0.4s;
 $navComponentHeight: 60px;
 $pagePadding: 40px;
 $primeBorderRadius: 3px;
+$ownRadius: 0.5rem;

@@ -1,3 +1,48 @@
 <app-modal modalID="auth">
-  <p class="text-2xl font-bold" heading>Your Account</p>
+  <!-- <app-alert *ngIf="showAlert" [color]="alertColor">
+    {{ alertMsg }}
+  </app-alert> -->
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <div class="input-column-wrapper">
+      <label class="input-label">Nazwa</label>
+      <app-input
+        [control]="name"
+        [type]="'text'"
+        [placeholder]="'Wpisz nazwę'"
+      ></app-input>
+    </div>
+    <div class="input-column-wrapper">
+      <label class="input-label">Email</label>
+      <app-input
+        [control]="name"
+        [type]="'text'"
+        [placeholder]="'Wpisz Email'"
+      ></app-input>
+    </div>
+    <div class="input-column-wrapper">
+      <label class="input-label">Hasło</label>
+      <app-input
+        [control]="name"
+        [type]="'password'"
+        [placeholder]="'Wpisz hasło'"
+      ></app-input>
+    </div>
+    <div class="input-column-wrapper">
+      <label class="input-label">Powtórz hasło</label>
+      <app-input
+        [control]="name"
+        [type]="'password'"
+        [placeholder]="'Powtórz hasło'"
+      ></app-input>
+    </div>
+    <div class="buttons">
+      <p-button
+        type="submit"
+        class=""
+        [disabled]="registerForm.invalid || inSubmission"
+        label="Rejestracja"
+      >
+      </p-button>
+    </div>
+  </form>
 </app-modal>

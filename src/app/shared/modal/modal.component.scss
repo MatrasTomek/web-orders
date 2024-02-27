@@ -1,11 +1,57 @@
 @import "../../../styles.scss";
 
-.modal-wrapper {
+.modal-mask {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  height: 300px;
-  background-color: $hoverLinkColor;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $blur-background;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+    backdrop-filter: blur(5px);
+    z-index: -1;
+  }
+
+  .modal-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    background-color: $elementsBgColor;
+    padding: 1.5rem;
+    border-radius: $ownRadius;
+    border: 1px solid $borderColor;
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .header-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background-color: $buttonColor;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $buttonHoverColor;
+        }
+      }
+    }
+  }
 }
