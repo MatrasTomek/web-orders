@@ -5,20 +5,21 @@
   bottom: 2rem;
   right: 1rem;
   border-radius: $ownRadius;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
 
   &.info {
     border: 1px solid $hoverLinkColor;
-    border-left: 0.5rem solid $hoverLinkColor;
+    border-left: 0.75rem solid $hoverLinkColor;
   }
 
   &.warning {
     border: 1px solid $warningMid;
-    border-left: 0.5rem solid $warningMid;
+    border-left: 0.75rem solid $warningMid;
   }
 
   &.success {
     border: 1px solid $isDoneBox;
-    border-left: 0.5rem solid $isDoneBox;
+    border-left: 0.75rem solid $isDoneBox;
   }
 }

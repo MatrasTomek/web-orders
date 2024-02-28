@@ -13,8 +13,8 @@ export class RegisterModalComponent implements OnInit, OnDestroy {
   inSubmission: boolean = false;
 
   showAlert: boolean = false;
-  alertMsg: string = 'Please wait! Your account is being created';
-  alertColor: string = 'blue';
+  alertMsg: string = 'Proszę czekać, konto jest tworzone.';
+  alertColor: string = 'info';
 
   ngOnInit(): void {
     this.modal.register('auth');
@@ -24,7 +24,7 @@ export class RegisterModalComponent implements OnInit, OnDestroy {
     this.modal.unregister('auth');
   }
 
-  name = new FormControl('', [Validators.required]);
+  name = new FormControl('', [Validators.required, Validators.minLength(3)]);
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [
     Validators.required,

@@ -1,1 +1,10 @@
 @import "../../../styles.scss";
+
+.text-input-wrapper {
+  width: 100%;
+
+  .text-input,
+  .form-warning {
+    width: 100%;
+  }
+}

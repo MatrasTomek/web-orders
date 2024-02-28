@@ -1,27 +1,33 @@
-<input
-  [type]="type"
-  class=""
-  [placeholder]="placeholder"
-  [formControl]="control"
-  [mask]="format"
-  [dropSpecialCharacters]="false"
-  pInputText
-/>
-<ng-container *ngIf="control.touched && control.dirty">
-  <p *ngIf="control.errors?.['pattern']" class="form-warning">
-    Hasło musi mieć 8 znaków, jedna dużą literę, jedna małą i jedna liczbę
-  </p>
-  <p *ngIf="control.errors?.['required']" class="form-warning">
-    Pole jest wymagane
-  </p>
+<div class="text-input-wrapper">
+  <input
+    [type]="type"
+    class="text-input"
+    [placeholder]="placeholder"
+    [formControl]="control"
+    [mask]="format"
+    [dropSpecialCharacters]="false"
+    pInputText
+  />
+  <ng-container *ngIf="control.touched && control.dirty">
+    <p *ngIf="control.errors?.['minlength']" class="form-warning">
+      Minimalna dłogość to
+      {{ control.errors?.['minlength'].requiredLength }} znaki
+    </p>
+    <p *ngIf="control.errors?.['pattern']" class="form-warning">
+      Hasło musi mieć 8 znaków, jedna dużą literę, jedna małą i jedna liczbę
+    </p>
+    <p *ngIf="control.errors?.['required']" class="form-warning">
+      Pole jest wymagane
+    </p>
 
-  <p *ngIf="control.errors?.['email']" class="form-warning">
-    Musisz podać prawidłowy adres email
-  </p>
-  <p *ngIf="control.errors?.['noMatch']" class="form-warning">
-    Hasła nie sa takie same
-  </p>
-  <p *ngIf="control.errors?.['emailTaken']" class="form-warning">
-    Ten adres email jest juz uzywany, wypróbuj inny
-  </p>
-</ng-container>
+    <p *ngIf="control.errors?.['email']" class="form-warning">
+      Musisz podać prawidłowy adres email
+    </p>
+    <p *ngIf="control.errors?.['noMatch']" class="form-warning">
+      Hasła nie sa takie same
+    </p>
+    <p *ngIf="control.errors?.['emailTaken']" class="form-warning">
+      Ten adres email jest juz uzywany, wypróbuj inny
+    </p>
+  </ng-container>
+</div>

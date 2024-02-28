@@ -1,49 +1,48 @@
 <app-modal modalID="auth">
-  <!-- <app-alert *ngIf="showAlert" [color]="alertColor">
-    {{ alertMsg }}
-  </app-alert> -->
-  <form [formGroup]="registerForm" (ngSubmit)="register()">
-    <div class="input-column-wrapper">
-      <label class="input-label">Nazwa</label>
-      <app-input
-        [control]="name"
-        [type]="'text'"
-        [placeholder]="'Wpisz nazwę'"
-      ></app-input>
-    </div>
-    <div class="input-column-wrapper">
-      <label class="input-label">Email</label>
-      <app-input
-        [control]="name"
-        [type]="'text'"
-        [placeholder]="'Wpisz Email'"
-      ></app-input>
-    </div>
-    <div class="input-column-wrapper">
-      <label class="input-label">Hasło</label>
-      <app-input
-        [control]="name"
-        [type]="'password'"
-        [placeholder]="'Wpisz hasło'"
-      ></app-input>
-    </div>
-    <div class="input-column-wrapper">
-      <label class="input-label">Powtórz hasło</label>
-      <app-input
-        [control]="name"
-        [type]="'password'"
-        [placeholder]="'Powtórz hasło'"
-      ></app-input>
-    </div>
-    <div class="buttons">
-      <p-button
-        type="submit"
-        class=""
-        [disabled]="registerForm.invalid || inSubmission"
-        label="Rejestracja"
-      >
-      </p-button>
-    </div>
-  </form>
+  <div class="register-form-wrapper">
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <div class="input-column-wrapper">
+        <label class="input-label">Nazwa</label>
+        <app-input
+          [control]="name"
+          [type]="'text'"
+          [placeholder]="'Wpisz nazwę'"
+        ></app-input>
+      </div>
+      <div class="input-column-wrapper">
+        <label class="input-label">Email</label>
+        <app-input
+          [control]="email"
+          [type]="'text'"
+          [placeholder]="'Wpisz Email'"
+        ></app-input>
+      </div>
+      <div class="input-column-wrapper">
+        <label class="input-label">Hasło</label>
+        <app-input
+          [control]="password"
+          [type]="'password'"
+          [placeholder]="'Wpisz hasło'"
+        ></app-input>
+      </div>
+      <div class="input-column-wrapper">
+        <label class="input-label">Powtórz hasło</label>
+        <app-input
+          [control]="confirm_password"
+          [type]="'password'"
+          [placeholder]="'Powtórz hasło'"
+        ></app-input>
+      </div>
+      <div class="buttons">
+        <p-button
+          type="submit"
+          class=""
+          [disabled]="registerForm.invalid || inSubmission"
+          label="Rejestracja"
+        >
+        </p-button>
+      </div>
+    </form>
+  </div>
 </app-modal>
 <app-alert *ngIf="showAlert" [color]="alertColor"> {{ alertMsg }}</app-alert>
