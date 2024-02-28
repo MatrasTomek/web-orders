@@ -1,0 +1,24 @@
+@import "../../../styles.scss";
+
+.alert-wrapper {
+  position: fixed;
+  bottom: 2rem;
+  right: 1rem;
+  border-radius: $ownRadius;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &.info {
+    border: 1px solid $hoverLinkColor;
+    border-left: 0.5rem solid $hoverLinkColor;
+  }
+
+  &.warning {
+    border: 1px solid $warningMid;
+    border-left: 0.5rem solid $warningMid;
+  }
+
+  &.success {
+    border: 1px solid $isDoneBox;
+    border-left: 0.5rem solid $isDoneBox;
+  }
+}

@@ -6,9 +6,10 @@ import { provideEnvironmentNgxMask, NgxMaskDirective } from 'ngx-mask';
 import { ModalComponent } from './modal/modal.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { TooltipModule } from 'primeng/tooltip';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
-  declarations: [InputComponent, ModalComponent],
+  declarations: [InputComponent, ModalComponent, AlertComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -17,7 +18,7 @@ import { TooltipModule } from 'primeng/tooltip';
     InputTextModule,
     TooltipModule,
   ],
-  exports: [InputComponent, ModalComponent],
+  exports: [InputComponent, ModalComponent, AlertComponent],
   providers: [provideEnvironmentNgxMask()],
 })
 export class SharedModule {}

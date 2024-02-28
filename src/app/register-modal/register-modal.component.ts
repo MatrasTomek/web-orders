@@ -12,6 +12,10 @@ export class RegisterModalComponent implements OnInit, OnDestroy {
 
   inSubmission: boolean = false;
 
+  showAlert: boolean = false;
+  alertMsg: string = 'Please wait! Your account is being created';
+  alertColor: string = 'blue';
+
   ngOnInit(): void {
     this.modal.register('auth');
   }
