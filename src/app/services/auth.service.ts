@@ -18,7 +18,7 @@ export class AuthService {
 
   constructor(private auth: AngularFireAuth, private db: AngularFirestore) {
     this.usersCollection = db.collection('users');
-    this.isAuthenticated$ = auth.user.pipe(map((user) => !!user));
+    this.isAuthenticated$ = this.auth.user.pipe(map((user) => !!user));
     this.isAuthenticatesWithDelay$ = this.isAuthenticated$.pipe(delay(1000));
   }
 
@@ -35,10 +35,10 @@ export class AuthService {
       throw new Error("User can't be found");
     }
 
-    await this.usersCollection.doc(userCredential.user?.uid).set({
+    await this.usersCollection.doc(userCredential.user.uid).set({
       name: userData.name,
       email: userData.email,
-      phoneNumber: userData.phoneNumber,
+      phone: userData.phone,
     });
 
     userCredential.user.updateProfile({

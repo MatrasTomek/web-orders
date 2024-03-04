@@ -45,22 +45,23 @@ export class RegisterModalComponent implements OnInit, OnDestroy {
 
   async register() {
     this.showAlert = true;
-    this.alertMsg = 'Please wait! Your account is being created';
-    this.alertColor = 'blue';
+    this.alertMsg = 'Proszę czekać, konto jest tworzone.';
+    this.alertColor = 'info';
     this.inSubmission = true;
 
     try {
-      this.auth.createUser(this.registerForm.value as IUser);
-    } catch (error) {
-      console.error(error);
-      this.alertMsg = 'Niespodziewany błąd, sprópuj później';
+      await this.auth.createUser(this.registerForm.value as IUser);
+    } catch (e) {
+      console.error(e);
+
+      this.alertMsg = 'Niespodziewany błąd, sprópuj później.';
       this.alertColor = 'warning';
       this.inSubmission = false;
 
       return;
     }
 
-    this.alertMsg = 'Sukces! Twoje konto zostało utworzone';
+    this.alertMsg = 'Sukces! Twoje konto zostało utworzone.';
     this.alertColor = 'success';
   }
 }
