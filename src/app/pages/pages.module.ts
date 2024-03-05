@@ -5,9 +5,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { StartPageComponent } from './start-page/start-page.component';
 
 @NgModule({
-  declarations: [LoginPageComponent],
+  declarations: [LoginPageComponent, StartPageComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -16,6 +17,6 @@ import { LoginPageComponent } from './login-page/login-page.component';
     InputTextModule,
     ButtonModule,
   ],
-  exports: [LoginPageComponent],
+  exports: [LoginPageComponent, StartPageComponent],
 })
 export class PagesModule {}

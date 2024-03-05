@@ -10,9 +10,26 @@
       <!-- Primary Navigation -->
       <ul class="flex">
         <!-- Navigation Links -->
-        <li class="ml-4">
+        <li
+          *ngIf="!(auth.isAuthenticated$ | async); else authLinks"
+          class="ml-4"
+        >
           <a href="#" (click)="openModal($event)">Rejestracja</a>
         </li>
+        <ng-template #authLinks>
+          <li class="ml-4">
+            <a href="">Zlecenia</a>
+          </li>
+          <li class="ml-4">
+            <a href="">Dodaj zlecenie</a>
+          </li>
+          <li class="ml-4">
+            <a href="">Klienci</a>
+          </li>
+          <li class="ml-4">
+            <a href="">Dodaj klienta</a>
+          </li>
+        </ng-template>
         <li class="ml-4">
           <a class="" href="about.html">About</a>
         </li>

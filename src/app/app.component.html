@@ -1,5 +1,11 @@
 <app-nav></app-nav>
 
-<app-login-page></app-login-page>
+<app-login-page
+  *ngIf="!(auth.isAuthenticated$ | async); else startPage"
+></app-login-page>
+
+<ng-template #startPage>
+  <app-start-page></app-start-page>
+</ng-template>
 
 <app-register-modal></app-register-modal>
