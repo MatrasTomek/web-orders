@@ -39,8 +39,5 @@ export class LoginPageComponent {
 
       return;
     }
-
-    this.alertMsg = 'Sukces! Zalogowano.';
-    this.alertColor = 'success';
   }
 }

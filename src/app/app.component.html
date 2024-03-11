@@ -8,4 +8,6 @@
   <app-start-page></app-start-page>
 </ng-template>
 
-<app-register-modal></app-register-modal>
+<app-register-modal
+  *ngIf="!(auth.isAuthenticatesWithDelay$ | async)"
+></app-register-modal>
