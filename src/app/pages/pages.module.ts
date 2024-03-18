@@ -6,9 +6,16 @@ import { ButtonModule } from 'primeng/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { StartPageComponent } from './start-page/start-page.component';
+import { OrdersPageComponent } from './orders-page/orders-page.component';
+import { NewOrderPageComponent } from './new-order-page/new-order-page.component';
 
 @NgModule({
-  declarations: [LoginPageComponent, StartPageComponent],
+  declarations: [
+    LoginPageComponent,
+    StartPageComponent,
+    OrdersPageComponent,
+    NewOrderPageComponent,
+  ],
   imports: [
     CommonModule,
     SharedModule,

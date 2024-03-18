@@ -3,7 +3,9 @@
   <nav class="flex align-items-center justify-content-between nav-wrapper">
     <!-- App Name -->
     <div class="nav-wrapper__link">
-      <a href="index.html">WebOrders</a>
+      <a [routerLink]="!(auth.isAuthenticated$ | async) ? 'login' : 'start'"
+        >WebOrders</a
+      >
     </div>
 
     <div class="nav-wrapper__menu flex">
@@ -18,10 +20,10 @@
         </li>
         <ng-template #authLinks>
           <li class="ml-4">
-            <a href="">Zlecenia</a>
+            <a routerLink="orders">Zlecenia</a>
           </li>
           <li class="ml-4">
-            <a href="">Nowe zlecenie</a>
+            <a routerLink="new-order">Nowe zlecenie</a>
           </li>
           <li class="ml-4">
             <a href="">Klienci</a>
