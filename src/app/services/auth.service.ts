@@ -12,7 +12,7 @@ import { delay, map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private usersCollection: AngularFirestoreCollection<IUser>;
+  public usersCollection: AngularFirestoreCollection<IUser>;
   public isAuthenticated$: Observable<boolean>;
   public isAuthenticatesWithDelay$: Observable<boolean>;
 
