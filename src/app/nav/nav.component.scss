@@ -6,6 +6,16 @@
   background-color: $elementsBgColor;
   padding: 2rem;
 
+  .router-link-active {
+    background-color: $hoverLinkColor;
+    border-radius: $ownRadius;
+    padding: 0.25rem 0.5rem;
+
+    &:hover {
+      color: $contentColor;
+    }
+  }
+
   @media screen and (min-width: map-get($break-points, medium)) {
     &__link,
     &__menu {

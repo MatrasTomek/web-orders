@@ -20,10 +20,14 @@
         </li>
         <ng-template #authLinks>
           <li class="ml-4">
-            <a routerLink="orders">Zlecenia</a>
+            <a routerLink="orders" routerLinkActive="router-link-active"
+              >Zlecenia</a
+            >
           </li>
           <li class="ml-4">
-            <a routerLink="new-order">Nowe zlecenie</a>
+            <a routerLink="new-order" routerLinkActive="router-link-active"
+              >Nowe zlecenie</a
+            >
           </li>
           <li class="ml-4">
             <a href="">Klienci</a>
@@ -31,7 +35,7 @@
           <li class="ml-4">
             <a href="">Dodaj klienta</a>
           </li>
-          <li class="ml-4" (click)="logOut($event)">
+          <li class="ml-4" (click)="auth.logOut($event)">
             <a class="" href="about.html">Wyloguj</a>
           </li>
         </ng-template>
