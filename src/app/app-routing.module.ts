@@ -6,10 +6,10 @@ import { NewOrderPageComponent } from './pages/new-order-page/new-order-page.com
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 const routes: Routes = [
-  // {
-  //   path: 'start',
-  //   component: StartPageComponent,
-  // },
+  {
+    path: '',
+    component: StartPageComponent,
+  },
   // {
   //   path: 'login',
   //   component: LoginPageComponent,
@@ -17,10 +17,16 @@ const routes: Routes = [
   {
     path: 'orders',
     component: OrdersPageComponent,
+    data: {
+      isAuth: true,
+    },
   },
   {
     path: 'new-order',
     component: NewOrderPageComponent,
+    data: {
+      isAuth: true,
+    },
   },
 ];
 

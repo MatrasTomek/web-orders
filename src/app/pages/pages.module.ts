@@ -8,6 +8,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { StartPageComponent } from './start-page/start-page.component';
 import { OrdersPageComponent } from './orders-page/orders-page.component';
 import { NewOrderPageComponent } from './new-order-page/new-order-page.component';
+import { PagesRoutingModule } from './pages-routing.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { NewOrderPageComponent } from './new-order-page/new-order-page.component
     ReactiveFormsModule,
     InputTextModule,
     ButtonModule,
+    PagesRoutingModule,
   ],
   exports: [LoginPageComponent, StartPageComponent],
 })

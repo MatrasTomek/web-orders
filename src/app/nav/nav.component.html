@@ -3,9 +3,7 @@
   <nav class="flex align-items-center justify-content-between nav-wrapper">
     <!-- App Name -->
     <div class="nav-wrapper__link">
-      <a [routerLink]="!(auth.isAuthenticated$ | async) ? 'login' : 'start'"
-        >WebOrders</a
-      >
+      <a [routerLink]="'/'">WebOrders</a>
     </div>
 
     <div class="nav-wrapper__menu flex">
