@@ -28,17 +28,21 @@
             >
           </li>
           <li class="ml-4">
-            <a href="">Klienci</a>
+            <a routerLink="new-order" routerLinkActive="router-link-active"
+              >Klienci</a
+            >
           </li>
           <li class="ml-4">
-            <a href="">Dodaj klienta</a>
+            <a routerLink="add-customer" routerLinkActive="router-link-active"
+              >Dodaj klienta</a
+            >
           </li>
           <li class="ml-4" (click)="auth.logOut($event)">
-            <a class="" href="about.html">Wyloguj</a>
+            <a>Wyloguj</a>
           </li>
         </ng-template>
         <li class="ml-4">
-          <a class="" href="about.html">About</a>
+          <a routerLink="about" routerLinkActive="router-link-active">About</a>
         </li>
       </ul>
     </div>

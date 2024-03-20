@@ -9,6 +9,9 @@ import { StartPageComponent } from './start-page/start-page.component';
 import { OrdersPageComponent } from './orders-page/orders-page.component';
 import { NewOrderPageComponent } from './new-order-page/new-order-page.component';
 import { PagesRoutingModule } from './pages-routing.module';
+import { CustomersPageComponent } from './customers-page/customers-page.component';
+import { AddCustomerComponent } from './add-customer/add-customer.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +19,9 @@ import { PagesRoutingModule } from './pages-routing.module';
     StartPageComponent,
     OrdersPageComponent,
     NewOrderPageComponent,
+    CustomersPageComponent,
+    AddCustomerComponent,
+    AboutComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +32,6 @@ import { PagesRoutingModule } from './pages-routing.module';
     ButtonModule,
     PagesRoutingModule,
   ],
-  exports: [LoginPageComponent, StartPageComponent],
+  exports: [LoginPageComponent, AboutComponent],
 })
 export class PagesModule {}
