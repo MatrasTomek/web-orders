@@ -12,6 +12,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { CustomersPageComponent } from './customers-page/customers-page.component';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { AboutComponent } from './about/about.component';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AboutComponent } from './about/about.component';
     InputTextModule,
     ButtonModule,
     PagesRoutingModule,
+    TableModule,
   ],
   exports: [LoginPageComponent, AboutComponent],
 })

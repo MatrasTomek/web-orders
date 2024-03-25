@@ -1,0 +1,63 @@
+<app-modal modalID="customer">
+  <div class="add-customer-form-wrapper">
+    <form [formGroup]="customerForm" (ngSubmit)="addCustomer()">
+      <div class="input-column-wrapper">
+        <label class="input-label">Nazwa</label>
+        <app-input
+          [control]="name"
+          [type]="'text'"
+          [placeholder]="'Wpisz nazwę'"
+        ></app-input>
+      </div>
+      <div class="input-column-wrapper">
+        <label class="input-label">Adres</label>
+        <app-input
+          [control]="address"
+          [type]="'text'"
+          [placeholder]="'Wpisz adres'"
+        ></app-input>
+      </div>
+      <div class="input-column-wrapper">
+        <label class="input-label">Nip</label>
+        <app-input
+          [control]="vat"
+          [type]="'text'"
+          [placeholder]="'Wpisz Nip'"
+        ></app-input>
+      </div>
+      <div class="input-column-wrapper">
+        <label class="input-label">Email</label>
+        <app-input
+          [control]="email"
+          [type]="'text'"
+          [placeholder]="'Wpisz Email'"
+        ></app-input>
+      </div>
+      <div class="input-column-wrapper">
+        <label class="input-label">Telefon</label>
+        <app-input
+          [control]="phone"
+          [type]="'text'"
+          [placeholder]="'Wpisz telefon'"
+        ></app-input>
+      </div>
+      <div class="buttons">
+        <p-button
+          type="button"
+          styleClass="p-button-secondary"
+          label="Wyjdź"
+          (click)="closeModal($event)"
+        >
+        </p-button>
+        <p-button
+          type="submit"
+          class=""
+          [disabled]="customerForm.invalid || inSubmission"
+          label="Dodaj"
+        >
+        </p-button>
+      </div>
+    </form>
+  </div>
+</app-modal>
+<app-alert *ngIf="showAlert" [color]="alertColor"> {{ alertMsg }}</app-alert>
