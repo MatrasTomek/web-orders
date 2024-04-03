@@ -16,6 +16,10 @@
     }
   }
 
+  .log-out {
+    cursor: pointer;
+  }
+
   @media screen and (min-width: map-get($break-points, medium)) {
     &__link,
     &__menu {
