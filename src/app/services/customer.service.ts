@@ -24,9 +24,17 @@ export class CustomerService {
     });
   }
 
-  public async getCustomers() {}
+  public getCustomers() {
+    return new Promise<any>((resolve) => {
+      this.customerCollection
+        .valueChanges({ idField: 'id' })
+        .subscribe((users) => resolve(users));
+    });
+  }
+
   public async getCustomer() {}
   public async editCustomer() {}
 
   //https://angularindepth.com/posts/1441/handling-realtime-data-storage-in-angular-using-firebase-cloud-firestore
 }
+// https://www.makeuseof.com/store-update-retrieve-data-from-firebase-database-in-angular/
