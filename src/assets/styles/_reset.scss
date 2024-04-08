@@ -1,13 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
-
 /* Box sizing rules */
-*,
+body,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Lato", sans-serif;
   scroll-behavior: smooth;
 }
 

@@ -8,7 +8,7 @@
 }
 
 .p-datatable .p-datatable-header {
-  background: $tableBackground !important;
+  background: transparent !important;
   border-top-left-radius: $ownRadius;
   border-top-right-radius: $ownRadius;
   border-top: none !important;
@@ -17,11 +17,17 @@
 .p-datatable > .p-datatable-wrapper {
 }
 .p-datatable .p-datatable-thead > tr > th {
-  background: $tableBackground !important;
+  background: $tableHeaderBackground !important;
 }
 
-.p-datatable .p-datatable-tbody > tr {
-  background: $tableBackground !important;
+.p-datatable .p-datatable-tbody {
+  tr:nth-child(even) {
+    background: $tableBackground !important;
+  }
+
+  tr:nth-child(odd) {
+    background: $tableOddBackground !important;
+  }
 }
 
 .p-datatable .p-paginator-bottom {
