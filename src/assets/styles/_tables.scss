@@ -1,0 +1,30 @@
+@import "./reset";
+@import "./variables";
+@import "./mixins";
+
+.p-datatable {
+  border: 1px solid $tableBorder !important;
+  border-radius: $ownRadius;
+}
+
+.p-datatable .p-datatable-header {
+  background: $tableBackground !important;
+  border-top-left-radius: $ownRadius;
+  border-top-right-radius: $ownRadius;
+  border-top: none !important;
+}
+
+.p-datatable > .p-datatable-wrapper {
+}
+.p-datatable .p-datatable-thead > tr > th {
+  background: $tableBackground !important;
+}
+
+.p-datatable .p-datatable-tbody > tr {
+  background: $tableBackground !important;
+}
+
+.p-datatable .p-paginator-bottom {
+  background: transparent !important;
+  border-bottom: none !important;
+}
