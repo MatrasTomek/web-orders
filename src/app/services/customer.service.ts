@@ -15,13 +15,7 @@ export class CustomerService {
   }
 
   public async createCustomer(customerData: ICustomer) {
-    await this.customerCollection.doc().set({
-      name: customerData.name,
-      adress: customerData.adress,
-      vat: customerData.vat,
-      email: customerData.email,
-      phone: customerData.phone,
-    });
+    await this.customerCollection.add(customerData);
   }
 
   public getCustomers() {
