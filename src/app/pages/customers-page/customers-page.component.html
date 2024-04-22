@@ -11,6 +11,7 @@
   </div>
   <div class="tables mt-4">
     <p-table
+      *ngIf="allUsers && allUsers.length > 0"
       #customersTb
       [value]="allUsers"
       dataKey="id"
@@ -31,10 +32,15 @@
             icon="pi pi-filter-slash"
             (click)="clear(customersTb)"
           ></button>
-          <!-- <span class="p-input-icon-left ml-auto">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="allUsers.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
-            </span> -->
+          <span class="p-input-icon-left ml-auto">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              placeholder="Wyszukaj"
+              (input)="handleInput($event)"
+            />
+          </span>
         </div>
       </ng-template>
       <ng-template pTemplate="header">
