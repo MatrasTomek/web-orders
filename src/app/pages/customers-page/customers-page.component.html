@@ -45,113 +45,29 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th style="min-width: 15rem">
+          <th pSortableColumn="name" style="min-width: 15rem">
             <div class="flex align-items-center">
               Nazwa
-              <p-columnFilter
-                type="text"
-                field="name"
-                display="menu"
-              ></p-columnFilter>
+              <p-sortIcon field="name"></p-sortIcon>
             </div>
           </th>
-          <th style="min-width: 15rem">
+          <th pSortableColumn="vat" style="min-width: 15rem">
             <div class="flex align-items-center">
-              Nip
-              <p-columnFilter
-                type="text"
-                field="vat"
-                display="menu"
-              ></p-columnFilter>
+              Nip <p-sortIcon field="vat"></p-sortIcon>
             </div>
           </th>
-          <th style="min-width: 15rem">
+          <th pSortableColumn="adress" style="min-width: 15rem">
             <div class="flex align-items-center">
-              Adres
-              <p-columnFilter
-                type="text"
-                field="vat"
-                display="menu"
-              ></p-columnFilter>
+              Adres <p-sortIcon field="adress"></p-sortIcon>
             </div>
           </th>
-          <!-- <th style="min-width: 15rem">
-            <div class="flex align-items-center">
-              Adres
-              <p-columnFilter
-                field="representative"
-                matchMode="in"
-                display="menu"
-                [showMatchModes]="false"
-                [showOperator]="false"
-                [showAddButton]="false"
-              >
-                <ng-template pTemplate="header">
-                  <div class="px-3 pt-3 pb-0">
-                    <span class="font-bold">Agent Picker</span>
-                  </div>
-                </ng-template>
-                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-multiSelect [ngModel]="value" [options]="representatives" placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
-                                <ng-template let-option pTemplate="item">
-                                    <div class="inline-block vertical-align-middle">
-                                        <img [alt]="option.label" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ option.image }}" width="24" class="vertical-align-middle" />
-                                        <span class="ml-1 mt-1">{{ option.name }}</span>
-                                    </div>
-                                </ng-template>
-                            </p-multiSelect>
-                        </ng-template>
-              </p-columnFilter>
-            </div>
-          </th> -->
+
           <th style="min-width: 10rem">
-            <div class="flex align-items-center">
-              eMail
-              <p-columnFilter
-                type="date"
-                field="email"
-                display="menu"
-              ></p-columnFilter>
-            </div>
+            <div class="flex align-items-center">eMail</div>
           </th>
           <th style="min-width: 10rem">
-            <div class="flex align-items-center">
-              Telefon
-              <p-columnFilter
-                type="date"
-                field="phone"
-                display="menu"
-              ></p-columnFilter>
-            </div>
+            <div class="flex align-items-center">Telefon</div>
           </th>
-          <!-- <th style="min-width:10rem">
-                <div class="flex align-items-center">
-                    Status
-                    <p-columnFilter field="status" matchMode="equals" display="menu">
-                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any">
-                                <ng-template let-option pTemplate="item">
-                                    <p-tag [value]="option.value" [severity]="getSeverity(option.label)"></p-tag>
-                                </ng-template>
-                            </p-dropdown>
-                        </ng-template>
-                    </p-columnFilter>
-                </div>
-            </th> -->
-          <!-- <th style="min-width:10rem">
-                <div class="flex align-items-center">
-                    Activity
-                    <p-columnFilter field="activity" matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
-                        <ng-template pTemplate="filter" let-filter="filterCallback">
-                            <p-slider [ngModel]="activityValues" [range]="true" (onSlideEnd)="filter($event.values)" styleClass="m-3"></p-slider>
-                            <div class="flex align-items-center px-2">
-                                <span>{{ activityValues[0] }}</span>
-                                <span>{{ activityValues[1] }}</span>
-                            </div>
-                        </ng-template>
-                    </p-columnFilter>
-                </div>
-            </th> -->
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-customer>
