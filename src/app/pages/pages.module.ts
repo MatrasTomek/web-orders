@@ -13,6 +13,8 @@ import { CustomersPageComponent } from './customers-page/customers-page.componen
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { AboutComponent } from './about/about.component';
 import { TableModule } from 'primeng/table';
+import { TooltipModule } from 'primeng/tooltip';
+import { AddCustomerModalModule } from '../add-customer-modal/add-customer-modal.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { TableModule } from 'primeng/table';
     ButtonModule,
     PagesRoutingModule,
     TableModule,
+    TooltipModule,
+    AddCustomerModalModule,
   ],
   exports: [LoginPageComponent, AboutComponent],
 })

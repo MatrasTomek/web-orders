@@ -4,4 +4,5 @@ export default interface ICustomer {
   vat: string;
   email?: string;
   phone?: string;
+  id?: string;
 }

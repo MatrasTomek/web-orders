@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
+  DocumentReference,
 } from '@angular/fire/compat/firestore';
 import ICustomer from '../models/customer.model';
+import { firstValueFrom, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +16,34 @@ export class CustomerService {
     this.customerCollection = db.collection('customers');
   }
 
-  public async createCustomer(customerData: ICustomer) {
-    await this.customerCollection.add(customerData);
+  createCustomer(
+    customerData: ICustomer
+  ): Promise<DocumentReference<ICustomer>> {
+    // const clientExists = await firstValueFrom(
+    //   this.checkIfCustomerExistByVat(customerData)
+    // );
+
+    // if (clientExists) {
+    //   throw Error;
+    // }
+
+    this.checkIfCustomerExistByVat(customerData);
+
+    // return this.customerCollection.add(customerData);
+
+    throw Error;
+  }
+
+  private extractDigits(vat: string): string {
+    return vat.replace(/\D/g, '');
+  }
+
+  checkIfCustomerExistByVat(customerData: ICustomer) {
+    const vatDigits = this.extractDigits(customerData.vat);
+
+    console.log(vatDigits);
+
+    const query = this.customerCollection.ref.where('vat', '==', vatDigits);
   }
 
   public getCustomers() {

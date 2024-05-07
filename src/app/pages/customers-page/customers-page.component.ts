@@ -1,7 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { ModalService } from 'src/app/services/modal.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { Table } from 'primeng/table';
+import ICustomer from 'src/app/models/customer.model';
 
 @Component({
   selector: 'app-customers-page',
@@ -16,6 +17,7 @@ export class CustomersPageComponent {
   }
 
   allUsers: [] = [];
+  activeCustomer: ICustomer | null = null;
 
   async getUsers() {
     this.allUsers = await this.customers.getCustomers();
@@ -23,6 +25,7 @@ export class CustomersPageComponent {
   openModal($event: Event) {
     $event.preventDefault();
     this.modal.toggleModal('customer');
+    this.activeCustomer = null;
   }
 
   handleInput(event: Event) {
@@ -34,5 +37,11 @@ export class CustomersPageComponent {
 
   clear(table: Table) {
     table.clear();
+  }
+
+  editCustomer($event: Event, customer: ICustomer) {
+    $event.preventDefault();
+    this.activeCustomer = customer;
+    this.modal.toggleModal('customer');
   }
 }

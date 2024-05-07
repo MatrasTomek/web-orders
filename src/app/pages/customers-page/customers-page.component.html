@@ -68,6 +68,9 @@
           <th style="min-width: 10rem">
             <div class="flex align-items-center">Telefon</div>
           </th>
+          <th>
+            <div class="flex align-items-center">Opcje</div>
+          </th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-customer>
@@ -87,6 +90,20 @@
           <td>
             {{ customer.phone }}
           </td>
+          <td style="width: 5rem">
+            <i
+              pTooltip="Edytuj"
+              tooltipPosition="top"
+              class="pi pi-pencil table-icon"
+              (click)="editCustomer($event, customer)"
+            ></i>
+            <i
+              pTooltip="Usuń"
+              tooltipPosition="top"
+              style="margin-left: 1rem"
+              class="pi pi-trash table-icon"
+            ></i>
+          </td>
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage">
@@ -97,3 +114,6 @@
     </p-table>
   </div>
 </div>
+<app-add-customer-modal
+  [activeCustomer]="activeCustomer"
+></app-add-customer-modal>

@@ -1,5 +1,6 @@
 <app-modal modalID="customer">
   <div class="add-customer-form-wrapper">
+    <h2>{{ !activeCustomer ? "Nowy klient" : "Edycja klienta" }}</h2>
     <form [formGroup]="customerForm" (ngSubmit)="addCustomer()">
       <div class="add-customer-form-wrapper__content">
         <div class="input-column-wrapper">
