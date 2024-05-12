@@ -1,8 +1,8 @@
-<app-modal modalID="addCustomer">
-  <div class="add-customer-form-wrapper">
-    <h2>Nowy klient</h2>
-    <form [formGroup]="customerForm" (ngSubmit)="addCustomer()">
-      <div class="add-customer-form-wrapper__content">
+<app-modal modalID="editCustomer">
+  <div class="edit-customer-form-wrapper">
+    <h2>{{ !activeCustomer ? "Nowy klient" : "Edycja klienta" }}</h2>
+    <form [formGroup]="editCustomerForm" (ngSubmit)="editCustomer()">
+      <div class="edit-customer-form-wrapper__content">
         <div class="input-column-wrapper">
           <label class="input-label">Nazwa</label>
           <app-input
@@ -44,7 +44,7 @@
           ></app-input>
         </div>
       </div>
-      <div class="add-customer-form-wrapper__buttons">
+      <div class="edit-customer-form-wrapper__buttons">
         <p-button
           type="button"
           styleClass="p-button-secondary"
@@ -55,8 +55,8 @@
         <p-button
           type="submit"
           class=""
-          [disabled]="customerForm.invalid || inSubmission"
-          label="Dodaj"
+          [disabled]="editCustomerForm.invalid || inSubmission"
+          label="Zapisz"
         >
         </p-button>
       </div>

@@ -12,15 +12,13 @@ import { CustomerService } from '../services/customer.service';
 import ICustomer from '../models/customer.model';
 
 @Component({
-  selector: 'app-add-customer-modal',
-  templateUrl: './add-customer-modal.component.html',
-  styleUrls: ['./add-customer-modal.component.scss'],
+  selector: 'app-edit-customer-modal',
+  templateUrl: './edit-customer-modal.component.html',
+  styleUrls: ['./edit-customer-modal.component.scss'],
 })
-export class AddCustomerModalComponent implements OnInit, OnDestroy {
+export class EditCustomerModalComponent implements OnInit, OnDestroy {
   @Input() activeCustomer: ICustomer | null = null;
-  @Output() addUpdate = new EventEmitter();
-
-  constructor(public modal: ModalService, private customer: CustomerService) {}
+  @Output() editUpdate = new EventEmitter();
 
   inSubmission: boolean = false;
 
@@ -33,63 +31,75 @@ export class AddCustomerModalComponent implements OnInit, OnDestroy {
   vat = new FormControl('', [Validators.required, Validators.minLength(10)]);
   email = new FormControl('', [Validators.email]);
   phone = new FormControl('', [Validators.minLength(9)]);
+  customerID = new FormControl('');
 
-  customerForm = new FormGroup({
+  editCustomerForm = new FormGroup({
     name: this.name,
     adress: this.address,
     vat: this.vat,
     email: this.email,
     phone: this.phone,
+    id: this.customerID,
   });
 
+  constructor(public modal: ModalService, private customer: CustomerService) {}
+
   ngOnInit(): void {
-    this.modal.register('addCustomer');
+    this.modal.register('editCustomer');
   }
 
   ngOnChanges() {
     if (!this.activeCustomer) {
       return;
     }
+    this.inSubmission = false;
+    this.showAlert = false;
+    this.name.setValue(this.activeCustomer.name);
+    this.address.setValue(this.activeCustomer.adress);
+    this.vat.setValue(this.activeCustomer.vat);
+    this.email.setValue(this.activeCustomer.email as string);
+    this.phone.setValue(this.activeCustomer.phone as string);
+    this.customerID.setValue(this.activeCustomer.id as string);
   }
 
   ngOnDestroy() {
-    this.modal.unregister('addCustomer');
+    this.modal.unregister('editCustomer');
   }
 
-  async addCustomer() {
+  async editCustomer() {
+    if (!this.activeCustomer) {
+      return;
+    }
     this.showAlert = true;
-    this.alertMsg = 'Proszę czekać, klient jest dodawany.';
+    this.alertMsg = 'Proszę czekać, klient jest zapisywany.';
     this.alertColor = 'info';
     this.inSubmission = true;
-
     try {
-      await this.customer.createCustomer(this.customerForm.value as ICustomer);
+      await this.customer.editCustomer(
+        this.activeCustomer.id as string,
+        this.editCustomerForm.value as ICustomer
+      );
     } catch (e) {
       console.error(e);
-
       this.alertMsg = 'Cos poszło nie tak, spróbuj jeszcze raz za chwilę.';
       this.alertColor = 'warning';
       this.inSubmission = false;
-
       setTimeout(() => {
         this.showAlert = false;
       }, 3000);
-
       return;
     }
+    this.editUpdate.emit(this.editCustomerForm.value as ICustomer);
 
-    this.addUpdate.emit(this.customerForm.value as ICustomer);
-
-    this.alertMsg = 'Sukces! Klient dodany.';
+    this.alertMsg = 'Sukces! Klient zapisany.';
     this.alertColor = 'success';
     this.closeModal('close');
-
     setTimeout(() => {
       this.showAlert = false;
     }, 2500);
   }
 
   closeModal($event: any) {
-    this.modal.toggleModal('addCustomer');
+    this.modal.toggleModal('editCustomer');
   }
 }

@@ -16,16 +16,15 @@ export class CustomersPageComponent {
     this.getUsers();
   }
 
-  allUsers: [] = [];
+  allUsers: any = [];
   activeCustomer: ICustomer | null = null;
 
   async getUsers() {
     this.allUsers = await this.customers.getCustomers();
   }
-  openModal($event: Event) {
+  openAddModal($event: Event) {
     $event.preventDefault();
-    this.modal.toggleModal('customer');
-    this.activeCustomer = null;
+    this.modal.toggleModal('addCustomer');
   }
 
   handleInput(event: Event) {
@@ -41,7 +40,20 @@ export class CustomersPageComponent {
 
   editCustomer($event: Event, customer: ICustomer) {
     $event.preventDefault();
+
     this.activeCustomer = customer;
-    this.modal.toggleModal('customer');
+    this.modal.toggleModal('editCustomer');
+  }
+
+  addUpdate($event: ICustomer) {
+    return this.allUsers.unshift($event);
+  }
+
+  editUpdate($event: ICustomer) {
+    this.allUsers.forEach((item: { id: any }, index: any) => {
+      if (item.id === $event.id) {
+        this.allUsers[index] = $event;
+      }
+    });
   }
 }

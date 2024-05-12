@@ -27,11 +27,9 @@ export class CustomerService {
     //   throw Error;
     // }
 
-    this.checkIfCustomerExistByVat(customerData);
+    // this.checkIfCustomerExistByVat(customerData);
 
-    // return this.customerCollection.add(customerData);
-
-    throw Error;
+    return this.customerCollection.add(customerData);
   }
 
   private extractDigits(vat: string): string {
@@ -54,8 +52,18 @@ export class CustomerService {
     });
   }
 
+  public async editCustomer(id: string, customer: ICustomer) {
+    console.log(customer.phone);
+    return this.customerCollection.doc(id).update({
+      adress: customer.adress,
+      email: customer.email,
+      name: customer.name,
+      phone: customer.phone,
+      vat: customer.vat,
+    });
+  }
+
   public async getCustomer() {}
-  public async editCustomer() {}
 
   //https://angularindepth.com/posts/1441/handling-realtime-data-storage-in-angular-using-firebase-cloud-firestore
 }

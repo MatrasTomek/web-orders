@@ -5,7 +5,7 @@
       type="button"
       class=""
       label="Dodaj klienta"
-      (click)="openModal($event)"
+      (click)="openAddModal($event)"
     >
     </p-button>
   </div>
@@ -115,5 +115,9 @@
   </div>
 </div>
 <app-add-customer-modal
-  [activeCustomer]="activeCustomer"
+  (addUpdate)="addUpdate($event)"
 ></app-add-customer-modal>
+<app-edit-customer-modal
+  (editUpdate)="editUpdate($event)"
+  [activeCustomer]="activeCustomer"
+></app-edit-customer-modal>
