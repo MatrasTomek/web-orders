@@ -53,7 +53,6 @@ export class CustomerService {
   }
 
   public async editCustomer(id: string, customer: ICustomer) {
-    console.log(customer.phone);
     return this.customerCollection.doc(id).update({
       adress: customer.adress,
       email: customer.email,
@@ -64,6 +63,10 @@ export class CustomerService {
   }
 
   public async getCustomer() {}
+
+  public async deleteCustomer(customer: ICustomer) {
+    this.customerCollection.doc(customer.id).delete();
+  }
 
   //https://angularindepth.com/posts/1441/handling-realtime-data-storage-in-angular-using-firebase-cloud-firestore
 }

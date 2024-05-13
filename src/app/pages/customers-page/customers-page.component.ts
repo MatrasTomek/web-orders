@@ -56,4 +56,15 @@ export class CustomersPageComponent {
       }
     });
   }
+
+  deleteCustomer($event: Event, customer: ICustomer) {
+    $event.preventDefault();
+    this.customers.deleteCustomer(customer);
+
+    this.allUsers.forEach((item: { id: any }, index: any) => {
+      if (item.id === customer.id) {
+        this.allUsers.splice(index, 1);
+      }
+    });
+  }
 }
