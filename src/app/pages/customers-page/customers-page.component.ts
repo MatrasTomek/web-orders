@@ -62,7 +62,7 @@ export class CustomersPageComponent {
   openConfirmationModal($event: Event, customer: ICustomer) {
     $event.preventDefault();
 
-    this.confirmationMessage = `Czy chesz usunąc klienta ${customer.name} ?`;
+    this.confirmationMessage = `Czy chesz usunąć klienta: ${customer.name} ?`;
     this.activeCustomer = customer;
     this.modal.toggleModal('confirmationModal');
   }
