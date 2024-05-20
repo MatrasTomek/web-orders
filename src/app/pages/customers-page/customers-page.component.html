@@ -8,6 +8,9 @@
       (click)="openAddModal($event)"
     >
     </p-button>
+    <!-- Temporary btn to test -->
+    <p-button type="button" class="" label="Pobierz" (click)="take($event)">
+    </p-button>
   </div>
   <div class="tables mt-4">
     <p-table
@@ -102,7 +105,7 @@
               tooltipPosition="top"
               style="margin-left: 1rem"
               class="pi pi-trash table-icon"
-              (click)="deleteCustomer($event, customer)"
+              (click)="openConfirmationModal($event, customer)"
             ></i>
           </td>
         </tr>
@@ -122,3 +125,9 @@
   (editUpdate)="editUpdate($event)"
   [activeCustomer]="activeCustomer"
 ></app-edit-customer-modal>
+<app-confirmation-modal
+  (confirmationFn)="deleteConfirmed($event)"
+  [activeCustomer]="activeCustomer"
+  [confirmationMessage]="confirmationMessage"
+  confirmationAcceptLabel="Usuń"
+></app-confirmation-modal>

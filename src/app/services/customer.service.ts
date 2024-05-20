@@ -36,12 +36,8 @@ export class CustomerService {
     return vat.replace(/\D/g, '');
   }
 
-  checkIfCustomerExistByVat(customerData: ICustomer) {
-    const vatDigits = this.extractDigits(customerData.vat);
-
-    console.log(vatDigits);
-
-    const query = this.customerCollection.ref.where('vat', '==', vatDigits);
+  async checkIfCustomerExistByVat(customerData: ICustomer) {
+    const vatWithoutCountry = this.extractDigits(customerData.vat);
   }
 
   public getCustomers() {
@@ -62,7 +58,20 @@ export class CustomerService {
     });
   }
 
-  public async getCustomer() {}
+  // Temporaty fn to gest customer by vat
+  public async getCustomer(vat: string) {
+    const user1 = await this.db.collection('customers', (ref) =>
+      ref.where('vat', '==', vat)
+    );
+
+    const user2 = await this.db.collection('customers', (ref) =>
+      ref.where('vat', '==', this.extractDigits(vat))
+    );
+
+    return new Promise<any>((resolve) => {
+      user1.valueChanges().subscribe((user) => resolve(user));
+    });
+  }
 
   public async deleteCustomer(customer: ICustomer) {
     this.customerCollection.doc(customer.id).delete();

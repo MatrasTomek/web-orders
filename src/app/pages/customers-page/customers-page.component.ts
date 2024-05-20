@@ -18,10 +18,12 @@ export class CustomersPageComponent {
 
   allUsers: any = [];
   activeCustomer: ICustomer | null = null;
+  confirmationMessage: string = '';
 
   async getUsers() {
     this.allUsers = await this.customers.getCustomers();
   }
+
   openAddModal($event: Event) {
     $event.preventDefault();
     this.modal.toggleModal('addCustomer');
@@ -57,14 +59,30 @@ export class CustomersPageComponent {
     });
   }
 
-  deleteCustomer($event: Event, customer: ICustomer) {
+  openConfirmationModal($event: Event, customer: ICustomer) {
     $event.preventDefault();
-    this.customers.deleteCustomer(customer);
+
+    this.confirmationMessage = `Czy chesz usunąc klienta ${customer.name} ?`;
+    this.activeCustomer = customer;
+    this.modal.toggleModal('confirmationModal');
+  }
+
+  deleteConfirmed($event: any) {
+    this.customers.deleteCustomer($event);
 
     this.allUsers.forEach((item: { id: any }, index: any) => {
-      if (item.id === customer.id) {
+      if (item.id === $event.id) {
         this.allUsers.splice(index, 1);
       }
     });
+  }
+
+  // Temporary fn to get customer by vat
+  async take($event: Event) {
+    $event.preventDefault();
+
+    const user = await this.customers.getCustomer('PL8691491653');
+
+    console.log(user);
   }
 }

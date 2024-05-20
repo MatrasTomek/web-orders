@@ -16,6 +16,7 @@ import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { AddCustomerModalModule } from '../add-customer-modal/add-customer-modal.module';
 import { EditCustomerModalModule } from '../edit-customer-modal/edit-customer-modal.module';
+import { ConfirmationModalModule } from '../confirmation-modal/confirmation-modal.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { EditCustomerModalModule } from '../edit-customer-modal/edit-customer-mo
     TooltipModule,
     AddCustomerModalModule,
     EditCustomerModalModule,
+    ConfirmationModalModule,
   ],
   exports: [LoginPageComponent, AboutComponent],
 })
