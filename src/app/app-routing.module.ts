@@ -5,6 +5,7 @@ import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { CustomersPageComponent } from './pages/customers-page/customers-page.component';
 import { AboutComponent } from './pages/about/about.component';
+import { AddOrderPageComponent } from './pages/add-order-page/add-order-page.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,13 @@ const routes: Routes = [
   {
     path: 'orders',
     component: OrdersPageComponent,
+    data: {
+      isAuth: true,
+    },
+  },
+  {
+    path: 'add-order',
+    component: AddOrderPageComponent,
     data: {
       isAuth: true,
     },

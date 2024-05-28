@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { StartPageComponent } from './start-page/start-page.component';
 import { OrdersPageComponent } from './orders-page/orders-page.component';
-
+import { StepsModule } from 'primeng/steps';
 import { PagesRoutingModule } from './pages-routing.module';
 import { CustomersPageComponent } from './customers-page/customers-page.component';
 import { AboutComponent } from './about/about.component';
@@ -16,6 +16,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { AddCustomerModalModule } from '../add-customer-modal/add-customer-modal.module';
 import { EditCustomerModalModule } from '../edit-customer-modal/edit-customer-modal.module';
 import { ConfirmationModalModule } from '../confirmation-modal/confirmation-modal.module';
+import { AddOrderPageComponent } from './add-order-page/add-order-page.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ConfirmationModalModule } from '../confirmation-modal/confirmation-moda
     OrdersPageComponent,
     CustomersPageComponent,
     AboutComponent,
+    AddOrderPageComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +40,7 @@ import { ConfirmationModalModule } from '../confirmation-modal/confirmation-moda
     AddCustomerModalModule,
     EditCustomerModalModule,
     ConfirmationModalModule,
+    StepsModule,
   ],
   exports: [LoginPageComponent, AboutComponent],
 })

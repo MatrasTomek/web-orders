@@ -18,6 +18,7 @@ import ICustomer from '../models/customer.model';
 })
 export class AddCustomerModalComponent implements OnInit, OnDestroy {
   @Input() activeCustomer: ICustomer | null = null;
+  @Input() kindOfCustomer?: 'client' | 'carrier' | null = null;
   @Output() addUpdate = new EventEmitter();
 
   constructor(public modal: ModalService, private customer: CustomerService) {}
@@ -78,7 +79,14 @@ export class AddCustomerModalComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.addUpdate.emit(this.customerForm.value as ICustomer);
+    this.addUpdate.emit(
+      !this.kindOfCustomer
+        ? (this.customerForm.value as ICustomer)
+        : {
+            kindOfCustomer: this.kindOfCustomer,
+            customer: this.customerForm.value as ICustomer,
+          }
+    );
 
     this.alertMsg = 'Sukces! Klient dodany.';
     this.alertColor = 'success';

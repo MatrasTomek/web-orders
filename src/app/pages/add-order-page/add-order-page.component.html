@@ -1,0 +1,83 @@
+<div class="add-order-wrapper">
+  <p-steps
+    [model]="items"
+    [readonly]="false"
+    [activeIndex]="activeIndex"
+    (activeIndexChange)="onActiveIndexChange($event)"
+    styleClass="mt-3 mb-3"
+  ></p-steps>
+  <div class="add-order-wrapper__forms forms">
+    <div *ngIf="activeIndex === 0" class="forms__customer">
+      <div class="item-wrapper">
+        <h3 class="mb-3">Klient</h3>
+        <div class="item-wrapper__buttons">
+          <p-button type="button" label="Pobierz" (click)="getCustomer($event)">
+          </p-button>
+          <p-button
+            type="button"
+            label="Dodaj"
+            (click)="addCustomer($event, 'client')"
+          >
+          </p-button>
+        </div>
+        <div *ngIf="client" class="item-wrapper__details mt-3">
+          <p>
+            Nazwa: <span>{{ client?.name }}</span>
+          </p>
+          <p>
+            Adres: <span>{{ client?.adress }}</span>
+          </p>
+          <p>
+            NIP: <span>{{ client?.vat }}</span>
+          </p>
+          <p>
+            eMail: <span>{{ client?.email }}</span>
+          </p>
+          <p>
+            Telefon: <span>{{ client?.phone }}</span>
+          </p>
+        </div>
+      </div>
+      <div class="item-wrapper">
+        <h3 class="mb-3">Przewoźnik</h3>
+        <div class="item-wrapper__buttons">
+          <p-button
+            type="button"
+            label="Pobierz "
+            (click)="getCustomer($event)"
+          >
+          </p-button>
+          <p-button
+            type="button"
+            label="Dodaj "
+            (click)="addCustomer($event, 'carrier')"
+          >
+          </p-button>
+        </div>
+        <div *ngIf="carrier" class="item-wrapper__details mt-3">
+          <p>
+            Nazwa: <span>{{ carrier?.name }}</span>
+          </p>
+          <p>
+            Adres: <span>{{ carrier?.adress }}</span>
+          </p>
+          <p>
+            NIP: <span>{{ carrier?.vat }}</span>
+          </p>
+          <p>
+            eMail: <span>{{ carrier?.email }}</span>
+          </p>
+          <p>
+            Telefon: <span>{{ carrier?.phone }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeIndex === 1" class="forms__order">BBB</div>
+    <div *ngIf="activeIndex === 2" class="forms__condition">CCC</div>
+  </div>
+</div>
+<app-add-customer-modal
+  (addUpdate)="addUpdate($event)"
+  [kindOfCustomer]="kindOfCustomer"
+></app-add-customer-modal>

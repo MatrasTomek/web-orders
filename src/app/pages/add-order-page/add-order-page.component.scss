@@ -1,0 +1,73 @@
+@import "../../../styles.scss";
+
+:host ::ng-deep .add-order-wrapper {
+  p-steps {
+    .p-steps {
+      .p-steps-item {
+        .p-menuitem-link {
+          width: 200px;
+          background: transparent;
+          cursor: pointer;
+        }
+
+        .p-steps-number {
+          background: $darkContentColor;
+          border-color: $tableHeaderBackground;
+          color: $buttonHoverColor;
+        }
+
+        &.p-highlight {
+          .p-steps-number {
+            background: $buttonHoverColor;
+            color: $contentColor;
+            border-color: $buttonHoverColor;
+            font-weight: 700;
+          }
+
+          .p-steps-title {
+            color: $contentColor;
+          }
+        }
+      }
+    }
+  }
+
+  &__forms {
+  }
+}
+
+.forms {
+  &__customer {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    .item-wrapper {
+      flex-basis: 45%;
+      border: 1px solid $borderColor;
+      border-radius: $ownRadius;
+      padding: 1rem;
+
+      &__buttons {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      &__details {
+        p {
+          span {
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
+  &__order {
+  }
+  &__condition {
+  }
+}
