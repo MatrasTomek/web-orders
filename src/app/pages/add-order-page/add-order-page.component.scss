@@ -48,7 +48,7 @@
 
     .item-wrapper {
       flex-basis: 45%;
-      border: 1px solid $borderColor;
+      border: 1px solid $tableBorder;
       border-radius: $ownRadius;
       padding: 1rem;
 
@@ -58,9 +58,18 @@
       }
 
       &__details {
-        p {
-          span {
-            font-weight: 700;
+        .item-details {
+          &__wrapper {
+            display: flex;
+            align-items: center;
+
+            p {
+              width: 120px;
+            }
+
+            span {
+              font-weight: 700;
+            }
           }
         }
       }

@@ -20,22 +20,27 @@
           >
           </p-button>
         </div>
-        <div *ngIf="client" class="item-wrapper__details mt-3">
-          <p>
-            Nazwa: <span>{{ client?.name }}</span>
-          </p>
-          <p>
-            Adres: <span>{{ client?.adress }}</span>
-          </p>
-          <p>
-            NIP: <span>{{ client?.vat }}</span>
-          </p>
-          <p>
-            eMail: <span>{{ client?.email }}</span>
-          </p>
-          <p>
-            Telefon: <span>{{ client?.phone }}</span>
-          </p>
+        <div *ngIf="client" class="item-wrapper__details item-details mt-3">
+          <div class="item-details__wrapper">
+            <p>Nazwa:</p>
+            <span>{{ client?.name }}</span>
+          </div>
+          <div class="item-details__wrapper">
+            <p>Adres:</p>
+            <span>{{ client?.adress }}</span>
+          </div>
+          <div class="item-details__wrapper">
+            <p>NIP:</p>
+            <span>{{ client?.vat }}</span>
+          </div>
+          <div class="item-details__wrapper">
+            <p>eMail:</p>
+            <span>{{ client?.email }}</span>
+          </div>
+          <div class="item-details__wrapper">
+            <p>Telefon:</p>
+            <span>{{ client?.phone }}</span>
+          </div>
         </div>
       </div>
       <div class="item-wrapper">
@@ -54,22 +59,27 @@
           >
           </p-button>
         </div>
-        <div *ngIf="carrier" class="item-wrapper__details mt-3">
-          <p>
-            Nazwa: <span>{{ carrier?.name }}</span>
-          </p>
-          <p>
-            Adres: <span>{{ carrier?.adress }}</span>
-          </p>
-          <p>
-            NIP: <span>{{ carrier?.vat }}</span>
-          </p>
-          <p>
-            eMail: <span>{{ carrier?.email }}</span>
-          </p>
-          <p>
-            Telefon: <span>{{ carrier?.phone }}</span>
-          </p>
+        <div *ngIf="carrier" class="item-wrapper__details item-details mt-3">
+          <div class="item-details__wrapper">
+            <p>Nazwa:</p>
+            <span>{{ carrier?.name }}</span>
+          </div>
+          <div class="item-details__wrapper">
+            <p>Adres:</p>
+            <span>{{ carrier?.adress }}</span>
+          </div>
+          <div class="item-details__wrapper">
+            <p>NIP:</p>
+            <span>{{ carrier?.vat }}</span>
+          </div>
+          <div class="item-details__wrapper">
+            <p>eMail:</p>
+            <span>{{ carrier?.email }}</span>
+          </div>
+          <div class="item-details__wrapper">
+            <p>Telefon:</p>
+            <span>{{ carrier?.phone }}</span>
+          </div>
         </div>
       </div>
     </div>
