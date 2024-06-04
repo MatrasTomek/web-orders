@@ -1,0 +1,34 @@
+<app-modal modalID="getCustomer">
+  <div class="get-customer-form-wrapper">
+    <h2>Wyszukaj klienta</h2>
+    <form [formGroup]="getCustomerForm" (ngSubmit)="getCustomer()">
+      <div class="get-customer-form-wrapper__content">
+        <div class="input-column-wrapper">
+          <label class="input-label">Nip</label>
+          <app-input
+            [control]="vat"
+            [type]="'text'"
+            [placeholder]="'Wpisz Nip'"
+          ></app-input>
+        </div>
+      </div>
+      <div class="get-customer-form-wrapper__buttons">
+        <p-button
+          type="button"
+          styleClass="p-button-secondary"
+          label="Wyjdź"
+          (click)="closeModal($event)"
+        >
+        </p-button>
+        <p-button
+          type="submit"
+          class=""
+          [disabled]="getCustomerForm.invalid || inSubmission"
+          label="Szukaj"
+        >
+        </p-button>
+      </div>
+    </form>
+  </div>
+</app-modal>
+<app-alert *ngIf="showAlert" [color]="alertColor"> {{ alertMsg }}</app-alert>

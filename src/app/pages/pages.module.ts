@@ -17,6 +17,7 @@ import { AddCustomerModalModule } from '../add-customer-modal/add-customer-modal
 import { EditCustomerModalModule } from '../edit-customer-modal/edit-customer-modal.module';
 import { ConfirmationModalModule } from '../confirmation-modal/confirmation-modal.module';
 import { AddOrderPageComponent } from './add-order-page/add-order-page.component';
+import { GetCustomerModalModule } from '../get-customer-modal/get-customer-modal.module';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AddOrderPageComponent } from './add-order-page/add-order-page.component
     TableModule,
     TooltipModule,
     AddCustomerModalModule,
+    GetCustomerModalModule,
     EditCustomerModalModule,
     ConfirmationModalModule,
     StepsModule,

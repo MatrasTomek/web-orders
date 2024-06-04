@@ -39,7 +39,11 @@ export class AddOrderPageComponent implements OnInit {
     ];
   }
 
-  getCustomer($event: any) {}
+  getCustomer($event: any, kindOfCustomer: 'client' | 'carrier' | null) {
+    $event.preventDefault();
+    this.kindOfCustomer = kindOfCustomer;
+    this.modal.toggleModal('getCustomer');
+  }
 
   addCustomer($event: any, kindOfCustomer: 'client' | 'carrier' | null) {
     $event.preventDefault();
@@ -52,11 +56,12 @@ export class AddOrderPageComponent implements OnInit {
       return;
     }
 
+    console.log($event.customer);
+
     if ($event.kindOfCustomer === 'client') {
       this.client = $event.customer;
     } else {
       this.carrier = $event.customer;
-      console.log(this.carrier);
     }
   }
 }

@@ -37,10 +37,15 @@
 }
 
 .forms {
-  &__customer {
+  &__order,
+  &__customer,
+  &__condition {
     width: 90%;
     margin: 0 auto;
     margin-top: 40px;
+  }
+
+  &__customer {
     display: flex;
     align-items: center;
     flex-wrap: nowrap;

@@ -76,13 +76,4 @@ export class CustomersPageComponent {
       }
     });
   }
-
-  // Temporary fn to get customer by vat
-  async take($event: Event) {
-    $event.preventDefault();
-
-    const user = await this.customers.getCustomer('PL8691491653');
-
-    console.log(user);
-  }
 }

@@ -11,7 +11,11 @@
       <div class="item-wrapper">
         <h3 class="mb-3">Klient</h3>
         <div class="item-wrapper__buttons">
-          <p-button type="button" label="Pobierz" (click)="getCustomer($event)">
+          <p-button
+            type="button"
+            label="Pobierz"
+            (click)="getCustomer($event, 'client')"
+          >
           </p-button>
           <p-button
             type="button"
@@ -49,7 +53,7 @@
           <p-button
             type="button"
             label="Pobierz "
-            (click)="getCustomer($event)"
+            (click)="getCustomer($event, 'carrier')"
           >
           </p-button>
           <p-button
@@ -91,3 +95,7 @@
   (addUpdate)="addUpdate($event)"
   [kindOfCustomer]="kindOfCustomer"
 ></app-add-customer-modal>
+<app-get-customer-modal
+  (getUpdate)="addUpdate($event)"
+  [kindOfCustomer]="kindOfCustomer"
+></app-get-customer-modal>
