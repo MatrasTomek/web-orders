@@ -18,6 +18,8 @@ import { EditCustomerModalModule } from '../edit-customer-modal/edit-customer-mo
 import { ConfirmationModalModule } from '../confirmation-modal/confirmation-modal.module';
 import { AddOrderPageComponent } from './add-order-page/add-order-page.component';
 import { GetCustomerModalModule } from '../get-customer-modal/get-customer-modal.module';
+import { CalendarModule } from 'primeng/calendar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { GetCustomerModalModule } from '../get-customer-modal/get-customer-modal
     EditCustomerModalModule,
     ConfirmationModalModule,
     StepsModule,
+    CalendarModule,
+    BrowserAnimationsModule,
   ],
   exports: [LoginPageComponent, AboutComponent],
 })

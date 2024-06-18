@@ -90,6 +90,7 @@ export class AddCustomerModalComponent implements OnInit, OnDestroy {
 
     this.alertMsg = 'Sukces! Klient dodany.';
     this.alertColor = 'success';
+    this.inSubmission = false;
     this.closeModal('close');
 
     setTimeout(() => {

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
-import ICustomer from 'src/app/models/customer.model';
+import IOrder from 'src/app/models/order.model';
+
 import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
@@ -17,6 +19,37 @@ export class AddOrderPageComponent implements OnInit {
   client: any = null;
   carrier: any = null;
   kindOfCustomer?: 'client' | 'carrier' | null;
+
+  inSubmission: boolean = false;
+
+  loadDate = new FormControl('', [Validators.required]);
+  loadPlace = new FormControl('', [Validators.required]);
+  loadAddress = new FormControl('', [Validators.required]);
+
+  unloadDate = Date;
+  unloadPlace = new FormControl('', [Validators.required]);
+  unloadAddress = new FormControl('', [Validators.required]);
+
+  driver = new FormControl('');
+  truck = new FormControl('');
+
+  goods = new FormControl('');
+  dimension = new FormControl('');
+  weight = new FormControl('');
+
+  orderForm = new FormGroup({
+    loadDate: this.loadDate,
+    loadPlace: this.loadPlace,
+    loadAddress: this.loadAddress,
+    // unloadDate: this.unloadDate,
+    unloadPlace: this.unloadPlace,
+    unloadAddress: this.unloadAddress,
+    driver: this.driver,
+    truck: this.truck,
+    goods: this.goods,
+    dimension: this.dimension,
+    weight: this.weight,
+  });
 
   onActiveIndexChange($event: number) {
     this.activeIndex = $event;
@@ -64,4 +97,6 @@ export class AddOrderPageComponent implements OnInit {
       this.carrier = $event.customer;
     }
   }
+
+  addOrder() {}
 }

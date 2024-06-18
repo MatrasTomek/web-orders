@@ -87,7 +87,129 @@
         </div>
       </div>
     </div>
-    <div *ngIf="activeIndex === 1" class="forms__order">BBB</div>
+    <div *ngIf="activeIndex === 1" class="forms__order">
+      <!-- <div *ngIf="!client && !carrier">
+        <h2 class="mt-4">
+          Klient i Przewoźnik musi być wprowadzony!
+        </h2>
+      </div> -->
+
+      <!-- *ngIf="client && carrier" -->
+      <div class="add-order-form-wrapper">
+        <form [formGroup]="orderForm" (ngSubmit)="addOrder()">
+          <div class="add-order-form-wrapper__pickup">
+            <div class="input-column-wrapper">
+              <label class="input-label">Data załadunku</label>
+              <p-calendar
+                [(ngModel)]="loadDate"
+                [showIcon]="true"
+                [showTime]="true"
+                [showButtonBar]="true"
+              ></p-calendar>
+            </div>
+            <div class="input-column-wrapper">
+              <label class="input-label">Miejsce załadunku</label>
+              <app-input
+                [control]="loadPlace"
+                [type]="'text'"
+                [placeholder]="'Wpisz nazwę'"
+              ></app-input>
+            </div>
+            <div class="input-column-wrapper">
+              <label class="input-label">Adres załadunku</label>
+              <app-input
+                [control]="loadAddress"
+                [type]="'text'"
+                [placeholder]="'Wpisz adres'"
+              ></app-input>
+            </div>
+          </div>
+          <div class="add-order-form-wrapper__delivery">
+            <div class="input-column-wrapper">
+              <label class="input-label">Data rozładunku</label>
+              <p-calendar
+                [(ngModel)]="unloadDate"
+                [showIcon]="true"
+                [showTime]="true"
+                [showButtonBar]="true"
+              ></p-calendar>
+            </div>
+            <div class="input-column-wrapper">
+              <label class="input-label">Miejsce rozładunku</label>
+              <app-input
+                [control]="unloadPlace"
+                [type]="'text'"
+                [placeholder]="'Wpisz nazwę'"
+              ></app-input>
+            </div>
+            <div class="input-column-wrapper">
+              <label class="input-label">Adres rozładunku</label>
+              <app-input
+                [control]="unloadAddress"
+                [type]="'text'"
+                [placeholder]="'Wpisz adres'"
+              ></app-input>
+            </div>
+          </div>
+
+          <div class="add-order-form-wrapper__goods">
+            <div class="input-column-wrapper">
+              <label class="input-label">Towar</label>
+              <app-input
+                [control]="goods"
+                [type]="'text'"
+                [placeholder]="'Wpisz nazwę'"
+              ></app-input>
+            </div>
+            <div class="input-column-wrapper">
+              <label class="input-label">Wymiary</label>
+              <app-input
+                [control]="dimension"
+                [type]="'text'"
+                [placeholder]="'Wpisz nazwę'"
+              ></app-input>
+            </div>
+            <div class="input-column-wrapper">
+              <label class="input-label">Waga</label>
+              <app-input
+                [control]="weight"
+                [type]="'text'"
+                [placeholder]="'Wpisz adres'"
+              ></app-input>
+            </div>
+          </div>
+
+          <div class="add-order-form-wrapper__driver">
+            <div class="input-column-wrapper">
+              <label class="input-label">Kierowca</label>
+              <app-input
+                [control]="driver"
+                [type]="'text'"
+                [placeholder]="'Wpisz nazwę'"
+              ></app-input>
+            </div>
+            <div class="input-column-wrapper">
+              <label class="input-label">Pojazd</label>
+              <app-input
+                [control]="truck"
+                [type]="'text'"
+                [placeholder]="'Wpisz nazwę'"
+              ></app-input>
+            </div>
+          </div>
+
+          <div class="add-order-form-wrapper__buttons">
+            <p-button
+              type="submit"
+              class=""
+              [disabled]="orderForm.invalid || inSubmission"
+              label="Zapisz dane"
+            >
+            </p-button>
+          </div>
+        </form>
+      </div>
+    </div>
     <div *ngIf="activeIndex === 2" class="forms__condition">CCC</div>
   </div>
 </div>

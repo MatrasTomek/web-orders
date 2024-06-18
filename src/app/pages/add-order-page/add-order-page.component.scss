@@ -81,6 +81,57 @@
     }
   }
   &__order {
+    h2 {
+      text-align: center;
+    }
+
+    .add-order-form-wrapper {
+      form {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      &__pickup {
+        flex-basis: 48%;
+      }
+
+      &__delivery {
+        flex-basis: 48%;
+      }
+
+      &__goods {
+        flex-basis: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        > div {
+          flex-basis: 30%;
+        }
+      }
+
+      &__driver {
+        flex-basis: 100%;
+
+        flex-basis: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        > div {
+          flex-basis: 30%;
+        }
+      }
+
+      &__buttons {
+        flex-basis: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
   }
   &__condition {
   }
