@@ -201,9 +201,15 @@
           <div class="add-order-form-wrapper__buttons">
             <p-button
               type="submit"
+              styleClass="p-button-secondary mr-4"
+              label="Wyczyść"
+            >
+            </p-button>
+            <p-button
+              type="submit"
               class=""
               [disabled]="orderForm.invalid || inSubmission"
-              label="Zapisz dane"
+              label="Dalej"
             >
             </p-button>
           </div>
