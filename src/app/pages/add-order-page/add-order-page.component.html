@@ -216,7 +216,94 @@
         </form>
       </div>
     </div>
-    <div *ngIf="activeIndex === 2" class="forms__condition">CCC</div>
+    <div *ngIf="activeIndex === 2" class="forms__condition">
+      <!-- <div *ngIf="!client && !carrier && !order">
+        <h2 class="mt-4">
+          Klient, Przewoźnik i dane zlecenia musszą być wprowadzone!
+        </h2>
+      </div> -->
+
+      <!-- *ngIf="client && carrier && order" -->
+
+      <div class="add-condition-form-wrapper">
+        <form [formGroup]="orderForm" (ngSubmit)="acceptAllForm()">
+          <div class="add-condition-form-wrapper__require">
+            <div class="input-inline-wrapper">
+              <p-inputSwitch styleClass="mr-3"></p-inputSwitch>
+              <label class="input-label">Dostawa terminowa</label>
+            </div>
+            <div class="input-inline-wrapper">
+              <p-inputSwitch styleClass="mr-3"></p-inputSwitch>
+              <label class="input-label">ADR</label>
+            </div>
+            <div class="input-inline-wrapper">
+              <p-inputSwitch styleClass="mr-3"></p-inputSwitch>
+              <label class="input-label">Chłodnia</label>
+            </div>
+          </div>
+          <div class="add-condition-form-wrapper__payment">
+            <div class="input-column-wrapper">
+              <label class="input-label">Fracht klienta</label>
+              <app-input
+                [control]="customerFreight"
+                [type]="'text'"
+                [placeholder]="'Wpisz adres'"
+              ></app-input>
+            </div>
+            <div class="input-column-wrapper">
+              <label class="input-label">Termin klienta</label>
+              <app-input
+                [control]="customerTerm"
+                [type]="'text'"
+                [placeholder]="'Wpisz adres'"
+              ></app-input>
+            </div>
+            <div class="input-column-wrapper">
+              <label class="input-label">Fracht przewoźnika</label>
+              <app-input
+                [control]="carrierFreight"
+                [type]="'text'"
+                [placeholder]="'Wpisz adres'"
+              ></app-input>
+            </div>
+            <div class="input-column-wrapper">
+              <label class="input-label">Termin przewoźnika</label>
+              <app-input
+                [control]="carrierTerm"
+                [type]="'text'"
+                [placeholder]="'Wpisz adres'"
+              ></app-input>
+            </div>
+            <div class="add-condition-form-wrapper__description">
+              <div class="input-column-wrapper">
+                <label class="input-label">Uwagi</label>
+                <!-- Może być text area -->
+                <app-input
+                  [control]="description"
+                  [type]="'text'"
+                  [placeholder]="'Wpisz adres'"
+                ></app-input>
+              </div>
+            </div>
+          </div>
+          <div class="add-order-form-wrapper__buttons">
+            <p-button
+              type="submit"
+              styleClass="p-button-secondary mr-4"
+              label="Wyczyść"
+            >
+            </p-button>
+            <p-button
+              type="submit"
+              class=""
+              [disabled]="orderForm.invalid || inSubmission"
+              label="Zapisz"
+            >
+            </p-button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 <app-add-customer-modal

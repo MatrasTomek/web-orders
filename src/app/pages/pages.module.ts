@@ -20,6 +20,7 @@ import { AddOrderPageComponent } from './add-order-page/add-order-page.component
 import { GetCustomerModalModule } from '../get-customer-modal/get-customer-modal.module';
 import { CalendarModule } from 'primeng/calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ConfirmationModalModule,
     StepsModule,
     CalendarModule,
+    InputSwitchModule,
     BrowserAnimationsModule,
   ],
   exports: [LoginPageComponent, AboutComponent],

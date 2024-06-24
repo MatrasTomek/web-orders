@@ -16,17 +16,20 @@ export class AddOrderPageComponent implements OnInit {
 
   constructor(public modal: ModalService) {}
 
+  //form
+  inSubmission: boolean = false;
+
+  //clients
   client: any = null;
   carrier: any = null;
   kindOfCustomer?: 'client' | 'carrier' | null;
 
-  inSubmission: boolean = false;
-
+  //loads
   loadDate = new FormControl('', [Validators.required]);
   loadPlace = new FormControl('', [Validators.required]);
   loadAddress = new FormControl('', [Validators.required]);
 
-  unloadDate = Date;
+  unloadDate = new FormControl('', [Validators.required]);
   unloadPlace = new FormControl('', [Validators.required]);
   unloadAddress = new FormControl('', [Validators.required]);
 
@@ -50,6 +53,14 @@ export class AddOrderPageComponent implements OnInit {
     dimension: this.dimension,
     weight: this.weight,
   });
+
+  //conditions
+
+  customerTerm = new FormControl('', [Validators.required]);
+  customerFreight = new FormControl('', [Validators.required]);
+  carrierTerm = new FormControl('', [Validators.required]);
+  carrierFreight = new FormControl('', [Validators.required]);
+  description = new FormControl('', [Validators.required]);
 
   onActiveIndexChange($event: number) {
     this.activeIndex = $event;
@@ -99,4 +110,6 @@ export class AddOrderPageComponent implements OnInit {
   }
 
   addOrder() {}
+
+  acceptAllForm() {}
 }
