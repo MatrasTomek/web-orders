@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
-import IOrder from 'src/app/models/order.model';
+import { IOrder } from 'src/app/models/order.model';
 import { ModalService } from 'src/app/services/modal.service';
 import { OrderService } from 'src/app/services/order.service';
 

@@ -4,7 +4,7 @@ import {
   AngularFirestoreCollection,
   DocumentReference,
 } from '@angular/fire/compat/firestore';
-import IOrder from '../models/order.model';
+import { IOrder } from '../models/order.model';
 
 @Injectable({
   providedIn: 'root',

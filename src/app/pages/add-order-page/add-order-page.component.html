@@ -86,22 +86,37 @@
           </div>
         </div>
       </div>
+      <div class="customer-buttons mt-4">
+        <p-button
+          type="button"
+          styleClass="p-button-danger mr-4"
+          label="Wyczyść"
+          (click)="resetForm($event, 'customer')"
+        >
+        </p-button>
+        <p-button
+          type="button"
+          class=""
+          [disabled]="!client || !carrier"
+          label="Dalej"
+          (click)="!client || !carrier ? null : (activeIndex = 1)"
+        >
+        </p-button>
+      </div>
     </div>
     <div *ngIf="activeIndex === 1" class="forms__order">
-      <!-- <div *ngIf="!client && !carrier">
-        <h2 class="mt-4">
-          Klient i Przewoźnik musi być wprowadzony!
-        </h2>
-      </div> -->
+      <div *ngIf="!client && !carrier">
+        <h2 class="mt-4">Klient i Przewoźnik musi być wprowadzony!</h2>
+      </div>
 
       <!-- *ngIf="client && carrier" -->
-      <div class="add-order-form-wrapper">
+      <div *ngIf="client && carrier" class="add-order-form-wrapper">
         <form [formGroup]="orderForm" (ngSubmit)="addOrder()">
           <div class="add-order-form-wrapper__pickup">
             <div class="input-column-wrapper">
               <label class="input-label">Data załadunku</label>
               <p-calendar
-                [(ngModel)]="loadDate"
+                [formControl]="loadDate"
                 [showIcon]="true"
                 [showTime]="true"
                 [showButtonBar]="true"
@@ -128,7 +143,7 @@
             <div class="input-column-wrapper">
               <label class="input-label">Data rozładunku</label>
               <p-calendar
-                [(ngModel)]="unloadDate"
+                [formControl]="unloadDate"
                 [showIcon]="true"
                 [showTime]="true"
                 [showButtonBar]="true"
@@ -200,15 +215,23 @@
 
           <div class="add-order-form-wrapper__buttons">
             <p-button
-              type="submit"
-              styleClass="p-button-secondary mr-4"
+              type="button"
+              styleClass="p-button-danger mr-4"
               label="Wyczyść"
+              (click)="resetForm($event, 'order')"
+            >
+            </p-button>
+            <p-button
+              type="button"
+              styleClass="p-button-secondary mr-4"
+              label="Wstecz"
+              (click)="activeIndex = 0"
             >
             </p-button>
             <p-button
               type="submit"
               class=""
-              [disabled]="orderForm.invalid || inSubmission"
+              [disabled]="orderForm.invalid"
               label="Dalej"
             >
             </p-button>
@@ -288,9 +311,10 @@
           </div>
           <div class="add-order-form-wrapper__buttons">
             <p-button
-              type="submit"
-              styleClass="p-button-secondary mr-4"
+              type="button"
+              styleClass="p-button-danger mr-4"
               label="Wyczyść"
+              (click)="resetForm($event, 'conditions')"
             >
             </p-button>
             <p-button

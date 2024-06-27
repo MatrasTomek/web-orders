@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
-import IOrder from 'src/app/models/order.model';
+import ICustomer from 'src/app/models/customer.model';
+// import IOrder from 'src/app/models/order.model';
 
 import { ModalService } from 'src/app/services/modal.service';
 
@@ -18,6 +19,7 @@ export class AddOrderPageComponent implements OnInit {
 
   //form
   inSubmission: boolean = false;
+  confirmationMessage: string = '';
 
   //clients
   client: any = null;
@@ -44,7 +46,7 @@ export class AddOrderPageComponent implements OnInit {
     loadDate: this.loadDate,
     loadPlace: this.loadPlace,
     loadAddress: this.loadAddress,
-    // unloadDate: this.unloadDate,
+    unloadDate: this.unloadDate,
     unloadPlace: this.unloadPlace,
     unloadAddress: this.unloadAddress,
     driver: this.driver,
@@ -109,7 +111,18 @@ export class AddOrderPageComponent implements OnInit {
     }
   }
 
-  addOrder() {}
+  addOrder() {
+    this.activeIndex = 2;
+    console.log(this.orderForm);
+  }
+
+  resetForm($event: any, formType: string) {
+    console.log($event);
+
+    // $event.preventDefault();
+    // this.confirmationMessage = `Czy chcesz wyczyścić dane ?`;
+    // this.modal.toggleModal('confirmationModal');
+  }
 
   acceptAllForm() {}
 }
