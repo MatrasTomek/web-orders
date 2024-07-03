@@ -7,6 +7,8 @@
     styleClass="mt-3 mb-3"
   ></p-steps>
   <div class="add-order-wrapper__forms forms">
+    <!-- Customer & Carrier -->
+
     <div *ngIf="activeIndex === 0" class="forms__customer">
       <div class="item-wrapper">
         <h3 class="mb-3">Klient</h3>
@@ -104,12 +106,13 @@
         </p-button>
       </div>
     </div>
+
+    <!-- Order details -->
+
     <div *ngIf="activeIndex === 1" class="forms__order">
       <div *ngIf="!client && !carrier">
         <h2 class="mt-4">Klient i Przewoźnik musi być wprowadzony!</h2>
       </div>
-
-      <!-- *ngIf="client && carrier" -->
       <div *ngIf="client && carrier" class="add-order-form-wrapper">
         <form [formGroup]="orderForm" (ngSubmit)="addOrder()">
           <div class="add-order-form-wrapper__pickup">
@@ -239,82 +242,133 @@
         </form>
       </div>
     </div>
+
+    <!-- Order Conditions -->
+
     <div *ngIf="activeIndex === 2" class="forms__condition">
-      <!-- <div *ngIf="!client && !carrier && !order">
+      <div *ngIf="!client || !carrier || orderForm.invalid">
         <h2 class="mt-4">
-          Klient, Przewoźnik i dane zlecenia musszą być wprowadzone!
+          Klient, Przewoźnik i dane zlecenia muszą być wprowadzone!
         </h2>
-      </div> -->
+      </div>
 
-      <!-- *ngIf="client && carrier && order" -->
-
-      <div class="add-condition-form-wrapper">
-        <form [formGroup]="orderForm" (ngSubmit)="acceptAllForm()">
+      <div
+        *ngIf="client && carrier && !orderForm.invalid"
+        class="add-condition-form-wrapper"
+      >
+        <form [formGroup]="conditionForm" (ngSubmit)="acceptAllForm()">
           <div class="add-condition-form-wrapper__require">
-            <div class="input-inline-wrapper">
-              <p-inputSwitch styleClass="mr-3"></p-inputSwitch>
-              <label class="input-label">Dostawa terminowa</label>
-            </div>
-            <div class="input-inline-wrapper">
-              <p-inputSwitch styleClass="mr-3"></p-inputSwitch>
-              <label class="input-label">ADR</label>
-            </div>
-            <div class="input-inline-wrapper">
-              <p-inputSwitch styleClass="mr-3"></p-inputSwitch>
-              <label class="input-label">Chłodnia</label>
-            </div>
-          </div>
-          <div class="add-condition-form-wrapper__payment">
-            <div class="input-column-wrapper">
-              <label class="input-label">Fracht klienta</label>
-              <app-input
-                [control]="customerFreight"
-                [type]="'text'"
-                [placeholder]="'Wpisz adres'"
-              ></app-input>
-            </div>
-            <div class="input-column-wrapper">
-              <label class="input-label">Termin klienta</label>
-              <app-input
-                [control]="customerTerm"
-                [type]="'text'"
-                [placeholder]="'Wpisz adres'"
-              ></app-input>
-            </div>
-            <div class="input-column-wrapper">
-              <label class="input-label">Fracht przewoźnika</label>
-              <app-input
-                [control]="carrierFreight"
-                [type]="'text'"
-                [placeholder]="'Wpisz adres'"
-              ></app-input>
-            </div>
-            <div class="input-column-wrapper">
-              <label class="input-label">Termin przewoźnika</label>
-              <app-input
-                [control]="carrierTerm"
-                [type]="'text'"
-                [placeholder]="'Wpisz adres'"
-              ></app-input>
-            </div>
-            <div class="add-condition-form-wrapper__description">
-              <div class="input-column-wrapper">
-                <label class="input-label">Uwagi</label>
-                <!-- Może być text area -->
+            <div class="switch-input-connect">
+              <div class="input-inline-wrapper">
+                <p-inputSwitch
+                  [formControl]="isFixed"
+                  styleClass="mr-3"
+                ></p-inputSwitch>
+                <label class="input-label">Dostawa terminowa</label>
+              </div>
+              <div *ngIf="isFixed.value" class="mb-2 ml-2">
                 <app-input
-                  [control]="description"
+                  [control]="fixDetails"
                   [type]="'text'"
-                  [placeholder]="'Wpisz adres'"
+                  [placeholder]="'Wpisz Transit Time'"
+                ></app-input>
+              </div>
+            </div>
+            <div class="switch-input-connect">
+              <div class="input-inline-wrapper">
+                <p-inputSwitch
+                  [formControl]="isAdr"
+                  styleClass="mr-3"
+                ></p-inputSwitch>
+                <label class="input-label">ADR</label>
+              </div>
+              <div *ngIf="isAdr.value" class="mb-2 ml-2">
+                <app-input
+                  [control]="adrDetails"
+                  [type]="'text'"
+                  [placeholder]="'Wpisz wymagania ADR'"
+                ></app-input>
+              </div>
+            </div>
+            <div class="switch-input-connect">
+              <div class="input-inline-wrapper">
+                <p-inputSwitch
+                  [formControl]="isFrigo"
+                  styleClass="mr-3"
+                ></p-inputSwitch>
+                <label class="input-label">Chłodnia</label>
+              </div>
+              <div *ngIf="isFrigo.value" class="mb-2 ml-2">
+                <app-input
+                  [control]="frigoDetails"
+                  [type]="'text'"
+                  [placeholder]="'Wpisz temperatury'"
                 ></app-input>
               </div>
             </div>
           </div>
-          <div class="add-order-form-wrapper__buttons">
+          <div class="add-condition-form-wrapper__payment">
+            <div class="customer-payment">
+              <div class="input-column-wrapper mr-4">
+                <label class="input-label">Fracht klienta</label>
+                <app-input
+                  [control]="customerFreight"
+                  [type]="'text'"
+                  [placeholder]="'Kwota + Waluta'"
+                ></app-input>
+              </div>
+              <div class="input-column-wrapper">
+                <label class="input-label">Termin klienta</label>
+                <app-input
+                  [control]="customerTerm"
+                  [type]="'text'"
+                  [placeholder]="'Termin płatności'"
+                ></app-input>
+              </div>
+            </div>
+            <div class="carrier-payment">
+              <div class="input-column-wrapper mr-4">
+                <label class="input-label">Fracht przewoźnika</label>
+                <app-input
+                  [control]="carrierFreight"
+                  [type]="'text'"
+                  [placeholder]="'Kwota + Waluta'"
+                ></app-input>
+              </div>
+              <div class="input-column-wrapper">
+                <label class="input-label">Termin przewoźnika</label>
+                <app-input
+                  [control]="carrierTerm"
+                  [type]="'text'"
+                  [placeholder]="'Termin płatności'"
+                ></app-input>
+              </div>
+            </div>
+          </div>
+          <div class="add-condition-form-wrapper__description">
+            <div class="input-column-wrapper">
+              <label class="input-label">Uwagi</label>
+              <textarea
+                rows="5"
+                cols="30"
+                pInputTextarea
+                [formControl]="description"
+              ></textarea>
+            </div>
+          </div>
+          <div class="add-condition-form-wrapper__buttons">
             <p-button
               type="button"
               styleClass="p-button-danger mr-4"
               label="Wyczyść"
               (click)="resetForm($event, 'conditions')"
+            >
+            </p-button>
+            <p-button
+              type="button"
+              styleClass="p-button-secondary mr-4"
+              label="Wstecz"
+              (click)="activeIndex = 1"
             >
             </p-button>
             <p-button

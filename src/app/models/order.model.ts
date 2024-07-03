@@ -20,6 +20,9 @@ export interface IOrderDetails {
 }
 
 export interface IOrderConditions {
+  fix?: string;
+  adr?: string;
+  frigo?: string;
   customerTerm: string;
   customerFreight: string;
   carrierTerm: string;

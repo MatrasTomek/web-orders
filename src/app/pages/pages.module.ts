@@ -21,6 +21,7 @@ import { GetCustomerModalModule } from '../get-customer-modal/get-customer-modal
 import { CalendarModule } from 'primeng/calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     CalendarModule,
     InputSwitchModule,
     BrowserAnimationsModule,
+    InputTextareaModule,
   ],
   exports: [LoginPageComponent, AboutComponent],
 })

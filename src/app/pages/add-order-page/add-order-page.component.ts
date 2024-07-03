@@ -1,3 +1,4 @@
+import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
@@ -20,6 +21,7 @@ export class AddOrderPageComponent implements OnInit {
   //form
   inSubmission: boolean = false;
   confirmationMessage: string = '';
+  order: boolean = false;
 
   //clients
   client: any = null;
@@ -57,12 +59,31 @@ export class AddOrderPageComponent implements OnInit {
   });
 
   //conditions
-
+  isFixed = new FormControl<boolean>(false);
+  fixDetails = new FormControl('');
+  isAdr = new FormControl<boolean>(false);
+  adrDetails = new FormControl('');
+  isFrigo = new FormControl<boolean>(false);
+  frigoDetails = new FormControl('');
   customerTerm = new FormControl('', [Validators.required]);
   customerFreight = new FormControl('', [Validators.required]);
   carrierTerm = new FormControl('', [Validators.required]);
   carrierFreight = new FormControl('', [Validators.required]);
-  description = new FormControl('', [Validators.required]);
+  description = new FormControl('');
+
+  conditionForm = new FormGroup({
+    isFixed: this.isFixed,
+    fixDetails: this.fixDetails,
+    isAdr: this.isAdr,
+    adrDetails: this.adrDetails,
+    isFrigo: this.isFrigo,
+    frigoDetails: this.frigoDetails,
+    customerTerm: this.customerTerm,
+    customerFreight: this.customerFreight,
+    carrierTerm: this.carrierTerm,
+    carrierFreight: this.carrierFreight,
+    description: this.description,
+  });
 
   onActiveIndexChange($event: number) {
     this.activeIndex = $event;
@@ -113,6 +134,7 @@ export class AddOrderPageComponent implements OnInit {
 
   addOrder() {
     this.activeIndex = 2;
+    this.order = true;
     console.log(this.orderForm);
   }
 

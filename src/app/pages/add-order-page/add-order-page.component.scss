@@ -58,6 +58,7 @@
       padding: 1rem;
 
       &__buttons {
+        width: 100%;
         display: flex;
         justify-content: space-between;
       }
@@ -150,14 +151,33 @@
 
       &__require {
         flex-basis: 48%;
+
+        .switch-input-connect {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+        }
       }
 
       &__payment {
         flex-basis: 48%;
+
+        .customer-payment,
+        .carrier-payment {
+          display: flex;
+          align-items: center;
+        }
       }
 
       &__description {
         flex-basis: 100%;
+      }
+
+      &__buttons {
+        flex-basis: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   }
