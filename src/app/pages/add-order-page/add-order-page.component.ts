@@ -123,8 +123,6 @@ export class AddOrderPageComponent implements OnInit {
       return;
     }
 
-    console.log($event.customer);
-
     if ($event.kindOfCustomer === 'client') {
       this.client = $event.customer;
     } else {
@@ -135,11 +133,23 @@ export class AddOrderPageComponent implements OnInit {
   addOrder() {
     this.activeIndex = 2;
     this.order = true;
-    console.log(this.orderForm);
   }
 
   resetForm($event: any, formType: string) {
-    console.log($event);
+    switch (formType) {
+      case 'customer':
+        this.client = null;
+        this.carrier = null;
+        break;
+      case 'order':
+        this.orderForm.reset();
+        break;
+      case 'conditions':
+        this.conditionForm.reset();
+        break;
+      default:
+        console.log('Nieznana wartość');
+    }
 
     // $event.preventDefault();
     // this.confirmationMessage = `Czy chcesz wyczyścić dane ?`;
