@@ -1,11 +1,12 @@
-import { formatCurrency } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit,  } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
-import ICustomer from 'src/app/models/customer.model';
-// import IOrder from 'src/app/models/order.model';
+import { IOrder } from 'src/app/models/order.model';
+
 
 import { ModalService } from 'src/app/services/modal.service';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-add-order-page',
@@ -16,10 +17,13 @@ export class AddOrderPageComponent implements OnInit {
   items: MenuItem[] = [];
   activeIndex: number = 0;
 
-  constructor(public modal: ModalService) {}
+  constructor(public modal: ModalService, private orderItem: OrderService) {}
 
   //form
   inSubmission: boolean = false;
+  showAlert = false;
+  alertMsg = 'Proszę czekać, klient jest dodawany.';
+  alertColor = 'info';
   confirmationMessage: string = '';
   order: boolean = false;
 
@@ -156,5 +160,47 @@ export class AddOrderPageComponent implements OnInit {
     // this.modal.toggleModal('confirmationModal');
   }
 
-  acceptAllForm() {}
+  async acceptAllForm() {
+
+    this.showAlert = true;
+    this.alertMsg = 'Proszę czekać, klient jest dodawany.';
+    this.alertColor = 'info';
+    this.inSubmission = true;
+
+    const completeOrder = {
+      clientDetails: this.client,
+      carrierDetails: this.carrier,
+      orderDetails: this.orderForm.value,
+      conditions: this.conditionForm.value
+    }
+
+    try {
+      await this.orderItem.createOrder(completeOrder as IOrder);
+    } catch (e) {
+      console.error(e);
+
+      this.alertMsg = 'Cos poszło nie tak, spróbuj jeszcze raz za chwilę.';
+      this.alertColor = 'warning';
+      this.inSubmission = false;
+
+      setTimeout(() => {
+        this.showAlert = false;
+      }, 3000);
+
+      return;
+    }
+
+// Tutaj trezba dodać zlecenie do tabeli - prezkazać do orders-page lub do state
+
+// trezba tez dodac przechodzenie do orders-page
+
+    this.alertMsg = 'Sukces! Klient dodany.';
+    this.alertColor = 'success';
+    this.inSubmission = false;
+
+    setTimeout(() => {
+      this.showAlert = false;
+    }, 2500);
+  }
+
 }

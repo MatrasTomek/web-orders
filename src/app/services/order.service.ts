@@ -22,4 +22,11 @@ export class OrderService {
         .subscribe((orders) => resolve(orders));
     });
   }
+
+  createOrder(
+    orderData: IOrder
+  ): Promise<DocumentReference<IOrder>> {
+
+    return this.orderCollection.add(orderData);
+  }
 }

@@ -1,15 +1,25 @@
 export interface IClientDetails {
-  clientId: string;
+  adress: string;
+  email?: string;
+  name: string;
+  phone?: string;
+  vat: string;
+
 }
 export interface ICarrierDetails {
-  carrierId: string;
+  adress: string
+  email?: string
+  name: string
+  phone?: string
+  vat: string
+
 }
 
 export interface IOrderDetails {
-  loadDate: Date;
+  loadDate: string;
   loadPlace: string;
   loadAddress: string;
-  unloadDate: Date;
+  unloadDate: string;
   unloadPlace: string;
   unloadAddress: string;
   driver?: string;
