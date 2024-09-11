@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
 import { IOrder } from 'src/app/models/order.model';
 import { ModalService } from 'src/app/services/modal.service';
@@ -9,20 +9,66 @@ import { OrderService } from 'src/app/services/order.service';
   templateUrl: './orders-page.component.html',
   styleUrls: ['./orders-page.component.scss'],
 })
-export class OrdersPageComponent {
+export class OrdersPageComponent implements OnInit {
   @ViewChild('ordersTb') customersTable!: Table;
 
   constructor(public modal: ModalService, public orders: OrderService) {
-    this.getOrders();
+
   }
 
-  allOrders: any = [];
+  allOrders: any = [] = [];
+  cols: any[] = [];
+  selectedColumns: any[] = [];
   activeOrder: IOrder | null = null;
   confirmationMessage: string = '';
 
-  async getOrders() {
+
+
+  async ngOnInit() {
     this.allOrders = await this.orders.getOrders();
+
+    console.log(this.allOrders);
+
+
+    this.cols = [
+      { field: 'carrierDetails.name', name: 'Nazwa prewoźnika' },
+      { field: 'carrierDetails.adress', name: 'Adres prewoźnika' },
+      { field: 'carrierDetails.phone', name: 'Telefon prewoźnika' },
+      { field: 'carrierDetails.vat', name: 'VAT prewoźnika' },
+      { field: 'carrierDetails.email', name: 'eMail prewoźnika' },
+      { field: 'clientDetails.name', header: 'Nazwa klienta' },
+      { field: 'clientDetails.adress', name: 'Adres klienta' },
+      { field: 'clientDetails.phone', name: 'Telefon klienta' },
+      { field: 'clientDetails.vat', name: 'VAT klienta' },
+      { field: 'clientDetails.email', name: 'eMail klienta' },
+      { field: 'orderDetails.loadDate.seconds', header: 'Data załadunku' },
+      { field: 'orderDetails.loadPlace', header: 'Miejsce załadunku' },
+      { field: 'orderDetails.loadAddress', header: 'Adres załadunku' },
+      { field: 'orderDetails.unloadDate.seconds', header: 'Data rozładunku' },
+      { field: 'orderDetails.unloadPlace', header: 'Miejsce rozładunku' },
+      { field: 'orderDetails.unloadAddress', header: 'Adres rozładunku' },
+      { field: 'orderDetails.dimension', header: 'Ilość' },
+      { field: 'orderDetails.weight', header: 'Waga' },
+      { field: 'orderDetails.goods', header: 'Towar' },
+      { field: 'orderDetails.driver', header: 'Kierowca' },
+      { field: 'orderDetails.truck', header: 'Samochód' },
+      { field: 'conditions.isAdr', header: 'ADR' },
+      { field: 'conditions.adrDetails', header: 'Adr wymagania' },
+      { field: 'conditions.isFrigo', header: 'Chłodnia' },
+      { field: 'conditions.frigoDetails', header: 'Chłodnia wymagania' },
+      { field: 'conditions.isFixed', header: 'FIX' },
+      { field: 'conditions.fixDetails', header: 'Czas tranzytu' },
+      { field: 'conditions.customerFreight', header: 'Fracht klienta' },
+      { field: 'conditions.customerTerm', header: 'Termin klienta' },
+      { field: 'conditions.carrierFreight', header: 'Fracht przewoźnika' },
+      { field: 'conditions.carrierTerm', header: 'Termin przewoźnika' },
+      { field: 'conditions.description', header: 'Dodatkowy opis' },
+
+    ];
+
+    this.selectedColumns = this.cols;
   }
+
 
   openAddModal($event: Event) {
     $event.preventDefault();
@@ -85,4 +131,7 @@ export class OrdersPageComponent {
 
   //   console.log(user);
   // }
+  resolveField(obj: any, path: string) {
+    return path.split('.').reduce((o, i) => (o ? o[i] : null), obj);
+  }
 }

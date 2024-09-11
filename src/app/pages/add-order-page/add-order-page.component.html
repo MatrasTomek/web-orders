@@ -376,7 +376,6 @@
               class=""
               [disabled]="orderForm.invalid || inSubmission"
               label="Zapisz"
-              routerLink="..//orders"
             >
             </p-button>
           </div>
@@ -393,3 +392,4 @@
   (getUpdate)="addUpdate($event)"
   [kindOfCustomer]="kindOfCustomer"
 ></app-get-customer-modal>
+<app-alert *ngIf="showAlert" [color]="alertColor"> {{ alertMsg }}</app-alert>

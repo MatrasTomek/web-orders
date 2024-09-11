@@ -8,6 +8,12 @@
       routerLink="../add-order"
     >
     </p-button>
+    <p-multiSelect
+      [options]="cols"
+      [(ngModel)]="selectedColumns"
+      optionLabel="header"
+      placeholder="Wybierz kolumny">
+  </p-multiSelect>
   </div>
   <div class="tables mt-4">
     <p-table
@@ -45,51 +51,38 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="name" style="min-width: 15rem">
+          <th *ngFor="let col of selectedColumns">
+            {{ col.header }}
+          </th>
+          <!-- <th pSortableColumn="orderDetails.loadPlace" style="min-width: 15rem">
             <div class="flex align-items-center">
-              Nazwa
-              <p-sortIcon field="name"></p-sortIcon>
+             Załadunek
+              <p-sortIcon field="orderDetails.loadPlace"></p-sortIcon>
             </div>
           </th>
-          <th pSortableColumn="vat" style="min-width: 15rem">
+          <th pSortableColumn="orderDetails.unloadPlace" style="min-width: 15rem">
             <div class="flex align-items-center">
-              Nip <p-sortIcon field="vat"></p-sortIcon>
+             Rozładunek
+              <p-sortIcon field="orderDetails.lunloadPlace"></p-sortIcon>
             </div>
-          </th>
-          <th pSortableColumn="adress" style="min-width: 15rem">
-            <div class="flex align-items-center">
-              Adres <p-sortIcon field="adress"></p-sortIcon>
-            </div>
-          </th>
-
-          <th style="min-width: 10rem">
-            <div class="flex align-items-center">eMail</div>
-          </th>
-          <th style="min-width: 10rem">
-            <div class="flex align-items-center">Telefon</div>
-          </th>
+          </th> -->
           <th>
             <div class="flex align-items-center">Opcje</div>
           </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-customer>
+      <ng-template pTemplate="body" let-order>
         <tr>
-          <td>
-            {{ customer.name }}
+          <!-- <td>
+            {{ order?.orderDetails?.loadPlace }}
           </td>
           <td>
-            {{ customer.vat }}
+            {{ order?.orderDetails?.unloadPlace }}
+          </td> -->
+          <td *ngFor="let col of selectedColumns">
+            {{ resolveField( order, col.field) }}
           </td>
-          <td>
-            {{ customer.adress }}
-          </td>
-          <td>
-            {{ customer.email }}
-          </td>
-          <td>
-            {{ customer.phone }}
-          </td>
+
           <td style="width: 5rem">
             <!-- <i
               pTooltip="Edytuj"

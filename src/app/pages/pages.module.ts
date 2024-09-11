@@ -22,6 +22,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     InputSwitchModule,
     BrowserAnimationsModule,
     InputTextareaModule,
+    MultiSelectModule,
   ],
   exports: [LoginPageComponent, AboutComponent],
 })
