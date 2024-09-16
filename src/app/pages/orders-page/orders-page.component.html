@@ -26,7 +26,7 @@
       [rowsPerPageOptions]="[10, 25, 50]"
       [paginator]="true"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-      [globalFilterFields]="['name', 'adress', 'vat']"
+      [globalFilterFields]="fieldsArray"
     >
       <!-- [loading]="loading" -->
       <ng-template pTemplate="caption">
@@ -51,8 +51,9 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th *ngFor="let col of selectedColumns">
+          <th *ngFor="let col of selectedColumns" [pSortableColumn]="col.field" style="min-width: 20rem">
             {{ col.header }}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
           </th>
           <!-- <th pSortableColumn="orderDetails.loadPlace" style="min-width: 15rem">
             <div class="flex align-items-center">

@@ -1,0 +1,20 @@
+@import "../../../styles.scss";
+
+.page-wrapper {
+  .buttons{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .tables {
+    p-table {
+      tr {
+       > th {
+          // display: flex;
+          // align-items: center;
+          // // min-width: 250px;
+        }
+      }
+    }
+  }
+}

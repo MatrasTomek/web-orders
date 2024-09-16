@@ -10,7 +10,7 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./orders-page.component.scss'],
 })
 export class OrdersPageComponent implements OnInit {
-  @ViewChild('ordersTb') customersTable!: Table;
+  @ViewChild('ordersTb') ordersTable!: Table;
 
   constructor(public modal: ModalService, public orders: OrderService) {
 
@@ -21,7 +21,7 @@ export class OrdersPageComponent implements OnInit {
   selectedColumns: any[] = [];
   activeOrder: IOrder | null = null;
   confirmationMessage: string = '';
-
+  fieldsArray: string[] = [];
 
 
   async ngOnInit() {
@@ -31,16 +31,16 @@ export class OrdersPageComponent implements OnInit {
 
 
     this.cols = [
-      { field: 'carrierDetails.name', name: 'Nazwa prewoźnika' },
-      { field: 'carrierDetails.adress', name: 'Adres prewoźnika' },
-      { field: 'carrierDetails.phone', name: 'Telefon prewoźnika' },
-      { field: 'carrierDetails.vat', name: 'VAT prewoźnika' },
-      { field: 'carrierDetails.email', name: 'eMail prewoźnika' },
+      { field: 'carrierDetails.name', header: 'Nazwa prewoźnika' },
+      { field: 'carrierDetails.adress', header: 'Adres prewoźnika' },
+      { field: 'carrierDetails.phone', header: 'Telefon prewoźnika' },
+      { field: 'carrierDetails.vat', header: 'VAT prewoźnika' },
+      { field: 'carrierDetails.email', header: 'eMail prewoźnika' },
       { field: 'clientDetails.name', header: 'Nazwa klienta' },
-      { field: 'clientDetails.adress', name: 'Adres klienta' },
-      { field: 'clientDetails.phone', name: 'Telefon klienta' },
-      { field: 'clientDetails.vat', name: 'VAT klienta' },
-      { field: 'clientDetails.email', name: 'eMail klienta' },
+      { field: 'clientDetails.adress', header: 'Adres klienta' },
+      { field: 'clientDetails.phone', header: 'Telefon klienta' },
+      { field: 'clientDetails.vat', header: 'VAT klienta' },
+      { field: 'clientDetails.email', header: 'eMail klienta' },
       { field: 'orderDetails.loadDate.seconds', header: 'Data załadunku' },
       { field: 'orderDetails.loadPlace', header: 'Miejsce załadunku' },
       { field: 'orderDetails.loadAddress', header: 'Adres załadunku' },
@@ -67,6 +67,8 @@ export class OrdersPageComponent implements OnInit {
     ];
 
     this.selectedColumns = this.cols;
+
+    this.fieldsArray = this.cols.map(col => col.field);
   }
 
 
@@ -78,7 +80,7 @@ export class OrdersPageComponent implements OnInit {
   handleInput(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement && inputElement.value != null) {
-      this.customersTable.filterGlobal(inputElement.value, 'contains');
+      this.ordersTable.filterGlobal(inputElement.value, 'contains');
     }
   }
 

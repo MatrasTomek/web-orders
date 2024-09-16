@@ -1,0 +1,30 @@
+@import "./reset";
+@import "./variables";
+@import "./mixins";
+
+p-multiselect {
+  .p-multiselect {
+    width: 260px;
+    height: 47px;
+    background: $buttonHoverColor;
+
+
+    .p-multiselect-label{
+      font-weight: 700;
+    }
+
+    .p-multiselect-panel {
+      .p-multiselect-items-wrapper{
+
+        .p-multiselect-item {
+
+         > span {
+           color: $borderColor;
+          }
+
+        }
+      }
+
+    }
+  }
+}

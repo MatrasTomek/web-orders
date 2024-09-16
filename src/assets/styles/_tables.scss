@@ -18,6 +18,7 @@
 }
 .p-datatable .p-datatable-thead > tr > th {
   background: $tableHeaderBackground !important;
+  color: white !important;
 }
 
 .p-datatable .p-datatable-tbody {
@@ -37,4 +38,18 @@
 
 .p-sortable-column-icon {
   color: white !important;
+}
+
+.p-paginator-rpp-options {
+  .p-overlay {
+    .p-dropdown-panel{
+      .p-dropdown-items{
+        .p-dropdown-item {
+       > span{
+        color: $borderColor;
+       }
+        }
+      }
+    }
+  }
 }
