@@ -15,7 +15,7 @@ export class OrderService {
     this.orderCollection = db.collection('orders');
   }
 
-  public getOrders() {
+  public async getOrders() {
     return new Promise<any>((resolve) => {
       this.orderCollection
         .valueChanges({ idField: 'id' })
@@ -30,7 +30,11 @@ export class OrderService {
     return this.orderCollection.add(orderData);
   }
 
-  deleteOrder(order: IOrder) {
+  public async editOrder(id: string, order: IOrder) {
+    return  this.orderCollection.doc(id).update(order);
+  }
+
+  public async  deleteOrder(order: IOrder) {
     this.orderCollection.doc(order.id).delete();
   }
 }

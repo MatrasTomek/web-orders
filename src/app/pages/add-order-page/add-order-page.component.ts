@@ -3,7 +3,7 @@ import { Component, OnInit,  } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
 import { IOrder } from 'src/app/models/order.model';
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ModalService } from 'src/app/services/modal.service';
 import { OrderService } from 'src/app/services/order.service';
@@ -16,8 +16,13 @@ import { OrderService } from 'src/app/services/order.service';
 export class AddOrderPageComponent implements OnInit {
   items: MenuItem[] = [];
   activeIndex: number = 0;
+  orderEditData: any = {}
 
-  constructor(public modal: ModalService, private orderItem: OrderService) {}
+  constructor(public modal: ModalService, private orderItem: OrderService, private route: ActivatedRoute, private router: Router) {
+    this.route.queryParams.subscribe(params => {
+      this.orderEditData = params;
+    });
+  }
 
   //form
   inSubmission: boolean = false;
@@ -26,6 +31,7 @@ export class AddOrderPageComponent implements OnInit {
   alertColor = 'info';
   confirmationMessage: string = '';
   order: boolean = false;
+
 
   //clients
   client: any = null;
@@ -108,6 +114,62 @@ export class AddOrderPageComponent implements OnInit {
         // command: (event: any) => this.messageService.add({severity:'info', summary:'Third Step', detail: event.item.label})
       },
     ];
+
+    if (Object.keys(this.orderEditData).length !== 0) {
+      this.fillFormWithEditData();
+    }
+  }
+
+  fillFormWithEditData() {
+
+    const clientDetails = typeof this.orderEditData.clientDetails === 'string'
+    ? JSON.parse(this.orderEditData.clientDetails)
+    : this.orderEditData.clientDetails;
+
+  const carrierDetails = typeof this.orderEditData.carrierDetails === 'string'
+    ? JSON.parse(this.orderEditData.carrierDetails)
+    : this.orderEditData.carrierDetails;
+
+  const orderDetails = typeof this.orderEditData.orderDetails === 'string'
+    ? JSON.parse(this.orderEditData.orderDetails)
+    : this.orderEditData.orderDetails;
+
+  const conditions = typeof this.orderEditData.conditions === 'string'
+    ? JSON.parse(this.orderEditData.conditions)
+    : this.orderEditData.conditions;
+
+   this.orderForm.patchValue({
+    loadDate: orderDetails?.loadDate || '',
+    loadPlace: orderDetails?.loadPlace || '',
+    loadAddress: orderDetails?.loadAddress || '',
+    unloadDate: orderDetails?.unloadDate || '',
+    unloadPlace: orderDetails?.unloadPlace || '',
+    unloadAddress: orderDetails?.unloadAddress || '',
+    driver: orderDetails?.driver || '',
+    truck: orderDetails?.truck || '',
+    goods: orderDetails?.goods || '',
+    dimension: orderDetails?.dimension || '',
+    weight: orderDetails?.weight || '',
+  });
+
+
+  this.conditionForm.patchValue({
+    isFixed: conditions?.isFixed || false,
+    fixDetails: conditions?.fixDetails || '',
+    isAdr: conditions?.isAdr || false,
+    adrDetails: conditions?.adrDetails || '',
+    isFrigo: conditions?.isFrigo || false,
+    frigoDetails: conditions?.frigoDetails || '',
+    customerTerm: conditions?.customerTerm || '',
+    customerFreight: conditions?.customerFreight || '',
+    carrierTerm: conditions?.carrierTerm || '',
+    carrierFreight: conditions?.carrierFreight || '',
+    description: conditions?.description || '',
+  });
+
+      this.client = clientDetails;
+      this.carrier = carrierDetails;
+
   }
 
   getCustomer($event: any, kindOfCustomer: 'client' | 'carrier' | null) {
@@ -163,19 +225,28 @@ export class AddOrderPageComponent implements OnInit {
   async acceptAllForm() {
 
     this.showAlert = true;
-    this.alertMsg = 'Proszę czekać, klient jest dodawany.';
+    this.alertMsg = 'Proszę czekać, zlecenie jest dodawane.';
     this.alertColor = 'info';
     this.inSubmission = true;
 
-    const completeOrder = {
-      clientDetails: this.client,
-      carrierDetails: this.carrier,
-      orderDetails: this.orderForm.value,
-      conditions: this.conditionForm.value
-    }
+     const completeOrder = {
+          clientDetails: this.client,
+          carrierDetails: this.carrier,
+          orderDetails: this.orderForm.value,
+          conditions: this.conditionForm.value
+        }
+
 
     try {
-      await this.orderItem.createOrder(completeOrder as IOrder);
+
+      if (Object.keys(this.orderEditData).length !== 0) {
+      await this.orderItem.editOrder(this.orderEditData?.id, completeOrder as IOrder)
+
+      } else {
+        await this.orderItem.createOrder(completeOrder as IOrder);
+
+      }
+
     } catch (e) {
       console.error(e);
 
@@ -194,13 +265,16 @@ export class AddOrderPageComponent implements OnInit {
 
 // trezba tez dodac przechodzenie do orders-page
 
-    this.alertMsg = 'Sukces! Klient dodany.';
+    this.alertMsg = Object.keys(this.orderEditData).length !== 0 ? 'Sukces! Zlecenie zmienione.': 'Sukces! Zlecenie dodane.';
     this.alertColor = 'success';
     this.inSubmission = false;
+
+    this.router.navigate(['/orders']);
 
     setTimeout(() => {
       this.showAlert = false;
     }, 2500);
   }
+
 
 }

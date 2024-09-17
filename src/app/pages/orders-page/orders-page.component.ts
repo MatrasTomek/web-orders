@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { IOrder } from 'src/app/models/order.model';
 import { ModalService } from 'src/app/services/modal.service';
@@ -12,9 +13,7 @@ import { OrderService } from 'src/app/services/order.service';
 export class OrdersPageComponent implements OnInit {
   @ViewChild('ordersTb') ordersTable!: Table;
 
-  constructor(public modal: ModalService, public orders: OrderService) {
-
-  }
+  constructor(public modal: ModalService, public orders: OrderService, private router: Router) {}
 
   allOrders: any = [] = [];
   cols: any[] = [];
@@ -26,9 +25,6 @@ export class OrdersPageComponent implements OnInit {
 
   async ngOnInit() {
     this.allOrders = await this.orders.getOrders();
-
-    console.log(this.allOrders);
-
 
     this.cols = [
       { field: 'carrierDetails.name', header: 'Nazwa prewoźnika' },
@@ -105,6 +101,18 @@ export class OrdersPageComponent implements OnInit {
         this.allOrders[index] = $event;
       }
     });
+  }
+
+  goToAddOrder(order: IOrder){
+    const orderParse = {
+      clientDetails: JSON.stringify(order.clientDetails),  // Serializowanie obiektów do JSON
+      carrierDetails: JSON.stringify(order.carrierDetails),
+      orderDetails: JSON.stringify(order.orderDetails),
+      conditions: JSON.stringify(order.conditions),
+      id: order.id
+    };
+
+    this.router.navigate(['/add-order'], { queryParams: orderParse });
   }
 
   openConfirmationModal($event: Event, order: IOrder) {
