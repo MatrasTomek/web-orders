@@ -90,20 +90,22 @@
           <td>
             {{ customer.phone }}
           </td>
-          <td style="width: 5rem">
-            <i
-              pTooltip="Edytuj"
-              tooltipPosition="top"
-              class="pi pi-pencil table-icon"
-              (click)="editCustomer($event, customer)"
-            ></i>
-            <i
-              pTooltip="Usuń"
-              tooltipPosition="top"
-              style="margin-left: 1rem"
-              class="pi pi-trash table-icon"
-              (click)="openConfirmationModal($event, customer)"
-            ></i>
+          <td style="width: 5rem" class="option-row">
+      <div class="flex">
+        <i
+        pTooltip="Edytuj"
+        tooltipPosition="top"
+        class="pi pi-pencil table-icon"
+        (click)="editCustomer($event, customer)"
+      ></i>
+      <i
+        pTooltip="Usuń"
+        tooltipPosition="top"
+        style="margin-left: 1rem"
+        class="pi pi-trash table-icon"
+        (click)="openConfirmationModal($event, customer)"
+      ></i>
+      </div>
           </td>
         </tr>
       </ng-template>
@@ -124,7 +126,7 @@
 ></app-edit-customer-modal>
 <app-confirmation-modal
   (confirmationFn)="deleteConfirmed($event)"
-  [activeCustomer]="activeCustomer"
+  [activeItem]="activeCustomer"
   [confirmationMessage]="confirmationMessage"
   confirmationAcceptLabel="Usuń"
 ></app-confirmation-modal>

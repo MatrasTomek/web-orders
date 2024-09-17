@@ -29,6 +29,16 @@
   tr:nth-child(odd) {
     background: $tableOddBackground !important;
   }
+
+  > tr {
+    > td {
+      &.option-row {
+        i {
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }
 
 .p-datatable .p-paginator-bottom {

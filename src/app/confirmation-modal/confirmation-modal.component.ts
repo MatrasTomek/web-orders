@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ModalService } from '../services/modal.service';
 import ICustomer from '../models/customer.model';
+import { IOrder } from '../models/order.model';
 
 @Component({
   selector: 'app-confirmation-modal',
@@ -10,7 +11,7 @@ import ICustomer from '../models/customer.model';
 export class ConfirmationModalComponent {
   @Input() confirmationMessage: string = '';
   @Input() confirmationAcceptLabel: string = '';
-  @Input() activeCustomer: ICustomer | null = null;
+  @Input() activeItem?: ICustomer | IOrder | null = null;
   @Output() confirmationFn = new EventEmitter();
 
   constructor(public modal: ModalService) {}
@@ -24,7 +25,7 @@ export class ConfirmationModalComponent {
   }
 
   confirmationFunction() {
-    this.confirmationFn.emit(this.activeCustomer);
+    this.confirmationFn.emit(this.activeItem);
     this.closeModal('close');
   }
 

@@ -55,18 +55,6 @@
             {{ col.header }}
             <p-sortIcon [field]="col.field"></p-sortIcon>
           </th>
-          <!-- <th pSortableColumn="orderDetails.loadPlace" style="min-width: 15rem">
-            <div class="flex align-items-center">
-             Załadunek
-              <p-sortIcon field="orderDetails.loadPlace"></p-sortIcon>
-            </div>
-          </th>
-          <th pSortableColumn="orderDetails.unloadPlace" style="min-width: 15rem">
-            <div class="flex align-items-center">
-             Rozładunek
-              <p-sortIcon field="orderDetails.lunloadPlace"></p-sortIcon>
-            </div>
-          </th> -->
           <th>
             <div class="flex align-items-center">Opcje</div>
           </th>
@@ -74,36 +62,31 @@
       </ng-template>
       <ng-template pTemplate="body" let-order>
         <tr>
-          <!-- <td>
-            {{ order?.orderDetails?.loadPlace }}
-          </td>
-          <td>
-            {{ order?.orderDetails?.unloadPlace }}
-          </td> -->
           <td *ngFor="let col of selectedColumns">
             {{ resolveField( order, col.field) }}
           </td>
 
-          <td style="width: 5rem">
-            <!-- <i
-              pTooltip="Edytuj"
-              tooltipPosition="top"
-              class="pi pi-pencil table-icon"
-              (click)="editCustomer($event, customer)"
-            ></i>
-            <i
-              pTooltip="Usuń"
-              tooltipPosition="top"
-              style="margin-left: 1rem"
-              class="pi pi-trash table-icon"
-              (click)="openConfirmationModal($event, customer)"
-            ></i> -->
+          <td  style="width: 5rem" class="option-row">
+        <div class="flex">
+          <i
+          pTooltip="Edytuj"
+          tooltipPosition="top"
+          class="pi pi-pencil table-icon"
+        ></i>
+        <i
+          pTooltip="Usuń"
+          tooltipPosition="top"
+          style="margin-left: 1rem"
+          class="pi pi-trash table-icon"
+          (click)="openConfirmationModal($event, order)"
+        ></i>
+        </div>
           </td>
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="7">No customers found.</td>
+          <td colspan="7">No Orders found.</td>
         </tr>
       </ng-template>
     </p-table>
@@ -115,10 +98,10 @@
 <app-edit-customer-modal
   (editUpdate)="editUpdate($event)"
   [activeCustomer]="activeCustomer"
-></app-edit-customer-modal>
+></app-edit-customer-modal> -->
 <app-confirmation-modal
   (confirmationFn)="deleteConfirmed($event)"
-  [activeCustomer]="activeCustomer"
+  [activeItem]="activeOrder"
   [confirmationMessage]="confirmationMessage"
   confirmationAcceptLabel="Usuń"
-></app-confirmation-modal> -->
+></app-confirmation-modal>

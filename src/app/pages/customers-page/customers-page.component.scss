@@ -3,3 +3,24 @@
 .table-icon {
   cursor: pointer;
 }
+
+
+
+ .page-wrapper {
+  .buttons{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .tables {
+    p-table {
+      tr {
+       td {
+        &.option-column {
+          display: flex;
+        }
+        }
+      }
+    }
+  }
+}

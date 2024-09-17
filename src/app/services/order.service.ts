@@ -29,4 +29,8 @@ export class OrderService {
 
     return this.orderCollection.add(orderData);
   }
+
+  deleteOrder(order: IOrder) {
+    this.orderCollection.doc(order.id).delete();
+  }
 }

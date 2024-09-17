@@ -107,23 +107,23 @@ export class OrdersPageComponent implements OnInit {
     });
   }
 
-  // openConfirmationModal($event: Event, customer: IOrder) {
-  //   $event.preventDefault();
+  openConfirmationModal($event: Event, order: IOrder) {
+    $event.preventDefault();
 
-  //   this.confirmationMessage = `Czy chesz usunąć klienta: ${customer.name} ?`;
-  //   this.activeCustomer = customer;
-  //   this.modal.toggleModal('confirmationModal');
-  // }
+    this.confirmationMessage = `Czy chesz usunąć zlecenie: ${'test'} ?`;
+    this.activeOrder = order;
+    this.modal.toggleModal('confirmationModal');
+  }
 
-  // deleteConfirmed($event: any) {
-  //   this.customers.deleteCustomer($event);
+  deleteConfirmed($event: any) {
+    this.orders.deleteOrder($event);
 
-  //   this.allOrders.forEach((item: { id: any }, index: any) => {
-  //     if (item.id === $event.id) {
-  //       this.allOrders.splice(index, 1);
-  //     }
-  //   });
-  // }
+    this.allOrders.forEach((item: { id: any }, index: any) => {
+      if (item.id === $event.id) {
+        this.allOrders.splice(index, 1);
+      }
+    });
+  }
 
   // Temporary fn to get customer by vat
   // async take($event: Event) {
