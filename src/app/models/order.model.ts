@@ -42,6 +42,7 @@ export interface IOrderConditions {
 
 export interface IOrder {
   id?: string;
+  orderNumber?: string;
   clientDetails: IClientDetails;
   carrierDetails: ICarrierDetails;
   orderDetails: IOrderDetails;

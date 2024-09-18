@@ -29,6 +29,7 @@ export class OrdersPageComponent implements OnInit {
     this.allOrders = await this.orders.getOrders();
 
     this.cols = [
+      { field: 'orderNumber', header: 'Numer zlecenia' },
       { field: 'carrierDetails.name', header: 'Nazwa prewoźnika' },
       { field: 'carrierDetails.adress', header: 'Adres prewoźnika' },
       { field: 'carrierDetails.phone', header: 'Telefon prewoźnika' },

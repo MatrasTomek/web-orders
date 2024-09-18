@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { ModalService } from 'src/app/services/modal.service';
 import { OrderService } from 'src/app/services/order.service';
+import { OrderNumberGeneratorService } from 'src/app/services/order-number-generator.service';
 
 @Component({
   selector: 'app-add-order-page',
@@ -18,7 +19,7 @@ export class AddOrderPageComponent implements OnInit {
   activeIndex: number = 0;
   orderEditData: any = {}
 
-  constructor(public modal: ModalService, private orderItem: OrderService, private route: ActivatedRoute, private router: Router) {
+  constructor(public modal: ModalService, private orderItem: OrderService, private route: ActivatedRoute, private router: Router, private orderNumberGen: OrderNumberGeneratorService) {
     this.route.queryParams.subscribe(params => {
       this.orderEditData = params;
     });
@@ -229,7 +230,11 @@ export class AddOrderPageComponent implements OnInit {
     this.alertColor = 'info';
     this.inSubmission = true;
 
+   const orderNumber =  this.orderNumberGen.numberGenerator(this.items.length)
+
+
      const completeOrder = {
+          orderNumber: orderNumber,
           clientDetails: this.client,
           carrierDetails: this.carrier,
           orderDetails: this.orderForm.value,
