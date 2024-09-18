@@ -4,6 +4,8 @@ import { Table } from 'primeng/table';
 import { IOrder } from 'src/app/models/order.model';
 import { ModalService } from 'src/app/services/modal.service';
 import { OrderService } from 'src/app/services/order.service';
+import { PdfGeneratorService } from 'src/app/services/pdf-generator.service';
+
 
 @Component({
   selector: 'app-orders-page',
@@ -13,7 +15,7 @@ import { OrderService } from 'src/app/services/order.service';
 export class OrdersPageComponent implements OnInit {
   @ViewChild('ordersTb') ordersTable!: Table;
 
-  constructor(public modal: ModalService, public orders: OrderService, private router: Router) {}
+  constructor(public modal: ModalService, public orders: OrderService, private router: Router, private pdfGeneratorService: PdfGeneratorService) {}
 
   allOrders: any = [] = [];
   cols: any[] = [];
@@ -143,5 +145,9 @@ export class OrdersPageComponent implements OnInit {
   // }
   resolveField(obj: any, path: string) {
     return path.split('.').reduce((o, i) => (o ? o[i] : null), obj);
+  }
+
+  generatePDF(order: IOrder) {
+    this.pdfGeneratorService.generatePDF();
   }
 }

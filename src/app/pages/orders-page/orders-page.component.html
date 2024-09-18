@@ -69,8 +69,15 @@
           <td  style="width: 5rem" class="option-row">
         <div class="flex">
           <i
+          pTooltip="Drukuj"
+          tooltipPosition="top"
+          class="pi pi-print table-icon"
+          (click)="generatePDF(order)"
+        ></i>
+          <i
           pTooltip="Edytuj"
           tooltipPosition="top"
+          style="margin-left: 1rem"
           class="pi pi-pencil table-icon"
           (click)="goToAddOrder(order)"
         ></i>
