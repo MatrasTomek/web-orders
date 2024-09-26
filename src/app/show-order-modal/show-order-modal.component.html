@@ -1,0 +1,83 @@
+<app-modal modalID="showOrder">
+<div class="show-order-wrapper">
+  <h3 class="show-order-wrapper__number">Zlecenie spedycyjne nr: {{activeOrder?.orderNumber}}</h3>
+<div class="show-order-wrapper__sides">
+  <table>
+    <thead>
+      <tr>
+        <th>Zleceniodawca</th>
+        <th></th>
+        <th>Zleceniobiorca</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Wiesław Dulowski Przedsiębiorstwo Handlowe "Omega"</td>
+        <td></td>
+        <td>{{activeOrder?.carrierDetails?.name}}</td>
+      </tr>
+      <tr>
+        <td>Bolesława Prusa 22, 58-310 Szczawno-Zdrój</td>
+        <td></td>
+        <td>{{activeOrder?.carrierDetails?.adress}}</td>
+      </tr>
+      <tr>
+        <td>NIP: PL8861111165</td>
+        <td></td>
+        <td>NIP: {{activeOrder?.carrierDetails?.vat}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="show-order-wrapper__dates">
+  <h4>Załadunek: <span>{{activeOrder?.orderDetails?.loadDate}}</span></h4>
+  <p>{{activeOrder?.orderDetails?.loadAddress}}, {{activeOrder?.orderDetails?.loadPlace}}</p>
+  <div class="separator"></div>
+  <h4>Rozładunek: <span>{{activeOrder?.orderDetails?.unloadDate}}</span></h4>
+  <p>{{activeOrder?.orderDetails?.unloadAddress}}, {{activeOrder?.orderDetails?.unloadPlace}}</p>
+  <div class="separator"></div>
+</div>
+<div class="show-order-wrapper__details">
+  <h4>Dane zlecenia:</h4>
+  <table>
+    <tbody>
+      <tr>
+        <td>Towar: {{activeOrder?.orderDetails?.goods}} |</td>
+        <td>Wymiary/Ilość: {{activeOrder?.orderDetails?.dimension}} |</td>
+        <td>Waga: {{activeOrder?.orderDetails?.weight}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table>
+    <tbody>
+      <tr>
+        <!-- <td>ADR: {{activeOrder?.conditions?.isAdr ? activeOrder?.conditions?.adrDetails : 'Nie'}} |</td>
+        <td>Chłodnia: {{activeOrder?.conditions?.frigo ?? 'Nie'}} |</td>
+        <td>Fix: {{activeOrder?.conditions?.fix ?? 'Nie'}}</td> -->
+      </tr>
+    </tbody>
+  </table>
+  <table>
+    <tbody>
+      <tr>
+        <td>Kierowca: {{activeOrder?.orderDetails?.driver}} |</td>
+        <td>Pojazd: {{activeOrder?.orderDetails?.truck}} |</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="show-order-wrapper__conditions">
+<table>
+  <tbody>
+    <tr>
+      <td><h4>Fracht:</h4></td>
+      <td><h4>{{activeOrder?.conditions?.carrierFreight}} All-In</h4></td>
+      <td>Termin płatności:</td>
+      <td>{{activeOrder?.conditions?.carrierTerm}}</td>
+    </tr>
+  </tbody>
+</table>
+<p>Uwagi: {{activeOrder?.conditions?.description}}</p>
+</div>
+</div>
+</app-modal>

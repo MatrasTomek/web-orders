@@ -148,7 +148,12 @@ export class OrdersPageComponent implements OnInit {
     return path.split('.').reduce((o, i) => (o ? o[i] : null), obj);
   }
 
-  generatePDF(order: IOrder) {
-    this.pdfGeneratorService.generatePDF();
+  showOrder($event: Event, order: IOrder) {
+    $event.preventDefault();
+
+      this.activeOrder = order;
+      this.modal.toggleModal('showOrder');
+
+    // this.pdfGeneratorService.generatePDF(order);
   }
 }

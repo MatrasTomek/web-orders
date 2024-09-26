@@ -72,7 +72,7 @@
           pTooltip="Drukuj"
           tooltipPosition="top"
           class="pi pi-print table-icon"
-          (click)="generatePDF(order)"
+          (click)="showOrder($event, order)"
         ></i>
           <i
           pTooltip="Edytuj"
@@ -100,13 +100,9 @@
     </p-table>
   </div>
 </div>
-<!-- <app-add-customer-modal
-  (addUpdate)="addUpdate($event)"
-></app-add-customer-modal>
-<app-edit-customer-modal
-  (editUpdate)="editUpdate($event)"
-  [activeCustomer]="activeCustomer"
-></app-edit-customer-modal> -->
+<app-show-order-modal
+[activeOrder]="activeOrder"
+></app-show-order-modal>
 <app-confirmation-modal
   (confirmationFn)="deleteConfirmed($event)"
   [activeItem]="activeOrder"

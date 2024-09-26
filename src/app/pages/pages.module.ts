@@ -23,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { ShowOrderModalModule } from '../show-order-modal/show-order-modal.module';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     BrowserAnimationsModule,
     InputTextareaModule,
     MultiSelectModule,
+    ShowOrderModalModule
   ],
   exports: [LoginPageComponent, AboutComponent],
 })
