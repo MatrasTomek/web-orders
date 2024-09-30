@@ -16,10 +16,10 @@ export interface ICarrierDetails {
 }
 
 export interface IOrderDetails {
-  loadDate: string;
+  loadDate: any;
   loadPlace: string;
   loadAddress: string;
-  unloadDate: string;
+  unloadDate: any;
   unloadPlace: string;
   unloadAddress: string;
   driver?: string;
@@ -30,9 +30,12 @@ export interface IOrderDetails {
 }
 
 export interface IOrderConditions {
-  fix?: string;
-  adr?: string;
-  frigo?: string;
+  isFixed?: boolean,
+  fixDetails?: string,
+  isAdr?: boolean,
+  adrDetails?: string,
+  isFrigo?: boolean,
+  frigoDetails?: string,
   customerTerm: string;
   customerFreight: string;
   carrierTerm: string;
