@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ModalService } from '../services/modal.service';
 import { IOrder } from '../models/order.model';
-import { Timestamp } from 'firebase/firestore';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-show-order-modal',
@@ -41,5 +41,42 @@ public convertedUnloadDate: Date | null = null
 
   ngOnDestroy() {
     this.modal.unregister('showOrder');
+  }
+
+  generatePDF(orderNumber: any) {
+    // const {orderNumber, carrierDetails, clientDetails, conditions, orderDetails } = order
+    const doc = new jsPDF('p', 'mm', 'a4');
+    const htmlContent  = document.getElementById('htmlData');
+
+    console.log(orderNumber, htmlContent);
+
+
+    if (htmlContent ) {
+
+      const htmlWidth = htmlContent.offsetWidth;
+      const htmlHeight = htmlContent.offsetHeight;
+
+
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const pageHeight = doc.internal.pageSize.getHeight();
+
+
+      const scale = Math.min(pageWidth / htmlWidth, pageHeight / htmlHeight) * 0.9;
+
+      setTimeout(()=>{
+
+        doc.html(htmlContent, {
+          callback: function (doc) {
+
+            doc.save(`zlecenie_${orderNumber}_.pdf`);
+          },
+
+          x: 10,
+          y: 10,
+          width: 170,
+          html2canvas: {scale: scale},
+        });
+      }, 500)
+    }
   }
 }

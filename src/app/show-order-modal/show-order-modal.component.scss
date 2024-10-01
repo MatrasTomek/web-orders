@@ -2,24 +2,40 @@
 
 .show-order-wrapper {
   width: 50vw;
-  height: 90vh;
+  height: 80vh;
   margin: auto;
   background-color: $tableOddBackground;
+
   padding: 20px;
-border-radius: $primeBorderRadius;
+  border-radius: $primeBorderRadius;
+  overflow: auto;
 
   h3 {
     text-align: center;
     margin-bottom: 30px;
+    color: black !important;
+    font-family: 'Roboto';
+  }
+  tr {
+    td {
+      color: black !important;
+      font-family: 'Roboto';
+    }
+  }
+  h4, p, div, span {
+    color: black !important;
+    font-family: 'Roboto';
   }
 
-.sides {
+  .sides {
     &__head-client, &__head-carrier {
-      width: 40%
+      width: 40%;
+      color: black !important;
     }
 
     &__head-empty {
-      width: 20%
+      width: 20%;
+      color: black !important;
     }
   }
 
@@ -33,6 +49,6 @@ border-radius: $primeBorderRadius;
     width: 100%;
     height: 1px;
     margin: 20px auto;
-   background-color: white;
+   background-color: black;
   }
 }

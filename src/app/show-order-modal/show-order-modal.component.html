@@ -1,5 +1,13 @@
 <app-modal modalID="showOrder">
-<div class="show-order-wrapper">
+  <div class="option-buttons">
+    <p-button
+    type="button"
+    styleClass="p-button-secondary mb-2"
+    label="Drukuj"
+    (click)="generatePDF(activeOrder?.orderNumber)"
+    ></p-button>
+  </div>
+<div class="show-order-wrapper" id='htmlData'>
   <h3 class="show-order-wrapper__number">Zlecenie spedycyjne nr: {{activeOrder?.orderNumber}}</h3>
 <div class="show-order-wrapper__sides sides">
   <table>
@@ -31,10 +39,10 @@
 </div>
 <div class="separator"></div>
 <div class="show-order-wrapper__dates">
-  <h4>Załadunek: <span>{{convertedLoadDate | date: 'dd/MM/yyyy HH:mm' }}</span></h4>
+  <h4>Zaladunek -- <span>{{convertedLoadDate | date: 'dd/MM/yyyy HH:mm' }}</span></h4>
   <p>{{activeOrder?.orderDetails?.loadAddress}}, {{activeOrder?.orderDetails?.loadPlace}}</p>
   <div class="separator"></div>
-  <h4>Rozładunek: <span>{{convertedUnloadDate | date: 'dd/MM/yyyy HH:mm'}}</span></h4>
+  <h4>Rozladunek -- <span>{{convertedUnloadDate | date: 'dd/MM/yyyy HH:mm'}}</span></h4>
   <p>{{activeOrder?.orderDetails?.unloadAddress}}, {{activeOrder?.orderDetails?.unloadPlace}}</p>
   <div class="separator"></div>
 </div>
