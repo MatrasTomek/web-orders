@@ -44,7 +44,7 @@ public convertedUnloadDate: Date | null = null
   }
 
   generatePDF(orderNumber: any) {
-    // const {orderNumber, carrierDetails, clientDetails, conditions, orderDetails } = order
+
     const doc = new jsPDF('p', 'mm', 'a4');
     const htmlContent  = document.getElementById('htmlData');
 

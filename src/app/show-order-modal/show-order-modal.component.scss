@@ -1,14 +1,15 @@
 @import "../../styles.scss";
 
 .show-order-wrapper {
-  width: 50vw;
-  height: 80vh;
+  // width: 50vw;
+  // height: 80vh;
   margin: auto;
   background-color: $tableOddBackground;
 
   padding: 20px;
   border-radius: $primeBorderRadius;
-  overflow: auto;
+  border: 1px solid black;
+  transform: scale(0.9);
 
   h3 {
     text-align: center;
@@ -40,9 +41,9 @@
   }
 
  .conditions {
-    &__empty {
-      width: 50%;
-    }
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
   }
 
   .separator {
