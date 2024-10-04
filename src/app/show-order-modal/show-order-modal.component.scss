@@ -7,7 +7,7 @@
   background-color: $tableOddBackground;
 
   padding: 20px;
-  border-radius: $primeBorderRadius;
+  border-radius: $primeBorderRadius * 1.5;
   border: 1px solid black;
   transform: scale(0.9);
 
@@ -44,6 +44,20 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
+  }
+
+  .general-conditions {
+   ul {
+    li {
+      color: black;
+    }
+   }
+    font-size: 12px;
+
+   .red {
+          color: red !important;
+        font-weight: 700;
+    }
   }
 
   .separator {
