@@ -2,9 +2,8 @@ import { Component, Input } from '@angular/core';
 import { ModalService } from '../services/modal.service';
 import { IOrder } from '../models/order.model';
 import jsPDF from 'jspdf';
-import  utf8encode  from 'jspdf';
 import html2canvas from 'html2canvas';
-import { customFontBase64} from '../../assets/custom-font'
+
 
 @Component({
   selector: 'app-show-order-modal',
@@ -54,18 +53,6 @@ public convertedUnloadDate: Date | null = null
     const htmlContent  = document.getElementById('htmlData');
 
     if (htmlContent ) {
-
-      // const htmlWidth = htmlContent.offsetWidth;
-      // const htmlHeight = htmlContent.offsetHeight;
-
-
-      // const pageWidth = doc.internal.pageSize.getWidth();
-      // const pageHeight = doc.internal.pageSize.getHeight();
-
-
-      // const scale = Math.min(pageWidth / htmlWidth, pageHeight / htmlHeight) * 0.9;
-
-
 
       setTimeout(()=>{
 
