@@ -1,10 +1,11 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { selectAllCustomers } from 'src/app/store/selectors/customer.selectors';
+import { deleteCustomer } from '../../store/actions/customer.actions';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/services/modal.service';
 import { Table } from 'primeng/table';
 import ICustomer from 'src/app/models/customer.model';
-import { selectAllCustomers } from 'src/app/store/selectors/customer.selectors';
 
 @Component({
 	selector: 'app-customers-page',
@@ -17,8 +18,8 @@ export class CustomersPageComponent {
 	constructor(public modal: ModalService, private store: Store) {}
 
 	customers$: Observable<ICustomer[]> = this.store.select(selectAllCustomers);
-	allUsers: any = [];
 	activeCustomer: ICustomer | null = null;
+	customerId: string | undefined = undefined;
 	confirmationMessage: string = '';
 
 	openAddModal($event: Event) {
@@ -39,38 +40,21 @@ export class CustomersPageComponent {
 
 	editCustomer($event: Event, customer: ICustomer) {
 		$event.preventDefault();
-
 		this.activeCustomer = customer;
 		this.modal.toggleModal('editCustomer');
-	}
-
-	addUpdate($event: ICustomer) {
-		return this.allUsers.unshift($event);
-	}
-
-	editUpdate($event: ICustomer) {
-		this.allUsers.forEach((item: { id: any }, index: any) => {
-			if (item.id === $event.id) {
-				this.allUsers[index] = $event;
-			}
-		});
 	}
 
 	openConfirmationModal($event: Event, customer: ICustomer) {
 		$event.preventDefault();
 
 		this.confirmationMessage = `Czy chesz usunąć klienta: ${customer.name} ?`;
-		this.activeCustomer = customer;
+		this.customerId = customer.id;
 		this.modal.toggleModal('confirmationModal');
 	}
 
-	deleteConfirmed($event: any) {
-		// this.customers.deleteCustomer($event);
+	deleteConfirmed($event: string) {
+		const customerId = $event;
 
-		this.allUsers.forEach((item: { id: any }, index: any) => {
-			if (item.id === $event.id) {
-				this.allUsers.splice(index, 1);
-			}
-		});
+		this.store.dispatch(deleteCustomer({ customerId }));
 	}
 }

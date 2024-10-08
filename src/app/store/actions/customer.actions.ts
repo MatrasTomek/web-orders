@@ -13,6 +13,6 @@ export const editCustomer = createAction('[Customer] Edit Customer', props<{ cus
 export const editCustomerSuccess = createAction('[Customer] Edit Customer Success', props<{ customer: ICustomer }>());
 export const editCustomerFailure = createAction('[Customer] Edit Customer Failure', props<{ error: string }>());
 
-export const deleteCustomer = createAction('[Customer] Delete Customer', props<{ customer: ICustomer }>());
-export const deleteCustomerSuccess = createAction('[Customer] Delete Customer Success', props<{ customer: ICustomer }>());
+export const deleteCustomer = createAction('[Customer] Delete Customer', props<{ customerId: string }>());
+export const deleteCustomerSuccess = createAction('[Customer] Delete Customer Success', props<{ customerId: string }>());
 export const deleteCustomerFailure = createAction('[Customer] Delete Customer Failure', props<{ error: string }>());

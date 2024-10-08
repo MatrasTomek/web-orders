@@ -9,6 +9,9 @@ import {
 	editCustomer,
 	editCustomerSuccess,
 	editCustomerFailure,
+	deleteCustomer,
+	deleteCustomerSuccess,
+	deleteCustomerFailure,
 } from '../actions/customer.actions';
 import ICustomer from '../../models/customer.model';
 
@@ -42,5 +45,12 @@ export const customerReducer = createReducer(
 		customers: state.customers.map((c) => (c.id === customer.id ? customer : c)),
 		loading: false,
 	})),
-	on(editCustomerFailure, (state, { error }) => ({ ...state, error, loading: false }))
+	on(editCustomerFailure, (state, { error }) => ({ ...state, error, loading: false })),
+	on(deleteCustomer, (state) => ({ ...state, loading: true })),
+	on(deleteCustomerSuccess, (state, { customerId }) => ({
+		...state,
+		customers: state.customers.filter((c) => c.id !== customerId),
+		loading: false,
+	})),
+	on(deleteCustomerFailure, (state, { error }) => ({ ...state, error, loading: false }))
 );

@@ -96,11 +96,11 @@
 		</p-table>
 	</div>
 </div>
-<app-add-customer-modal (addUpdate)="addUpdate($event)"></app-add-customer-modal>
-<app-edit-customer-modal (editUpdate)="editUpdate($event)" [activeCustomer]="activeCustomer"></app-edit-customer-modal>
+<app-add-customer-modal></app-add-customer-modal>
+<app-edit-customer-modal [activeCustomer]="activeCustomer"></app-edit-customer-modal>
 <app-confirmation-modal
 	(confirmationFn)="deleteConfirmed($event)"
-	[activeItem]="activeCustomer"
+	[activeItem]="customerId"
 	[confirmationMessage]="confirmationMessage"
 	confirmationAcceptLabel="Usuń"
 ></app-confirmation-modal>

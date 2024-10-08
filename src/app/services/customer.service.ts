@@ -61,8 +61,8 @@ export class CustomerService {
 		});
 	}
 
-	public async deleteCustomer(customer: ICustomer) {
-		this.customerCollection.doc(customer.id).delete();
+	public async deleteCustomer(customerId: string) {
+		this.customerCollection.doc(customerId).delete();
 	}
 
 	//https://angularindepth.com/posts/1441/handling-realtime-data-storage-in-angular-using-firebase-cloud-firestore
