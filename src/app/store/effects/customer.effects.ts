@@ -9,6 +9,9 @@ import {
 	addCustomer,
 	addCustomerSuccess,
 	addCustomerFailure,
+	editCustomer,
+	editCustomerSuccess,
+	editCustomerFailure,
 } from '../actions/customer.actions';
 import { Injectable } from '@angular/core';
 import ICustomer from 'src/app/models/customer.model';
@@ -40,6 +43,18 @@ export class CustomerEffects {
 					})
 				)
 			)
+		)
+	);
+
+	editCustomer$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(editCustomer),
+			mergeMap(({ customer }) => {
+				return from(this.customerService.editCustomer(customer.id!, customer)).pipe(
+					map(() => editCustomerSuccess({ customer })),
+					catchError((error) => of(editCustomerFailure({ error: error.message })))
+				);
+			})
 		)
 	);
 }

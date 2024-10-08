@@ -6,6 +6,9 @@ import {
 	addCustomer,
 	addCustomerSuccess,
 	addCustomerFailure,
+	editCustomer,
+	editCustomerSuccess,
+	editCustomerFailure,
 } from '../actions/customer.actions';
 import ICustomer from '../../models/customer.model';
 
@@ -32,5 +35,12 @@ export const customerReducer = createReducer(
 		customers: [...state.customers, customer],
 		loading: false,
 	})),
-	on(addCustomerFailure, (state, { error }) => ({ ...state, error, loading: false }))
+	on(addCustomerFailure, (state, { error }) => ({ ...state, error, loading: false })),
+	on(editCustomer, (state) => ({ ...state, loading: true })),
+	on(editCustomerSuccess, (state, { customer }) => ({
+		...state,
+		customers: state.customers.map((c) => (c.id === customer.id ? customer : c)),
+		loading: false,
+	})),
+	on(editCustomerFailure, (state, { error }) => ({ ...state, error, loading: false }))
 );
