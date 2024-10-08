@@ -1,132 +1,106 @@
 <div class="page-wrapper">
-  <h2 class="page-title mb-4">Klienci</h2>
-  <div class="buttons">
-    <p-button
-      type="button"
-      class=""
-      label="Dodaj klienta"
-      (click)="openAddModal($event)"
-    >
-    </p-button>
-  </div>
-  <div class="tables mt-4">
-    <p-table
-      *ngIf="allUsers && allUsers.length > 0"
-      #customersTb
-      [value]="allUsers"
-      dataKey="id"
-      [rows]="10"
-      [showCurrentPageReport]="true"
-      [rowsPerPageOptions]="[10, 25, 50]"
-      [paginator]="true"
-      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-      [globalFilterFields]="['name', 'adress', 'vat']"
-    >
-      <!-- [loading]="loading" -->
-      <ng-template pTemplate="caption">
-        <div class="flex">
-          <button
-            pButton
-            label="Clear"
-            class="p-button-outlined"
-            icon="pi pi-filter-slash"
-            (click)="clear(customersTb)"
-          ></button>
-          <span class="p-input-icon-left ml-auto">
-            <i class="pi pi-search"></i>
-            <input
-              pInputText
-              type="text"
-              placeholder="Wyszukaj"
-              (input)="handleInput($event)"
-            />
-          </span>
-        </div>
-      </ng-template>
-      <ng-template pTemplate="header">
-        <tr>
-          <th pSortableColumn="name" style="min-width: 15rem">
-            <div class="flex align-items-center">
-              Nazwa
-              <p-sortIcon field="name"></p-sortIcon>
-            </div>
-          </th>
-          <th pSortableColumn="vat" style="min-width: 15rem">
-            <div class="flex align-items-center">
-              Nip <p-sortIcon field="vat"></p-sortIcon>
-            </div>
-          </th>
-          <th pSortableColumn="adress" style="min-width: 15rem">
-            <div class="flex align-items-center">
-              Adres <p-sortIcon field="adress"></p-sortIcon>
-            </div>
-          </th>
+	<h2 class="page-title mb-4">Klienci</h2>
+	<div class="buttons">
+		<p-button type="button" class="" label="Dodaj klienta" (click)="openAddModal($event)"> </p-button>
+	</div>
+	<div class="tables mt-4">
+		<p-table
+			*ngIf="customers$ | async as customers"
+			#customersTb
+			[value]="customers"
+			dataKey="id"
+			[rows]="10"
+			[showCurrentPageReport]="true"
+			[rowsPerPageOptions]="[10, 25, 50]"
+			[paginator]="true"
+			currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+			[globalFilterFields]="['name', 'adress', 'vat']"
+		>
+			<!-- [loading]="loading" -->
+			<ng-template pTemplate="caption">
+				<div class="flex">
+					<button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(customersTb)"></button>
+					<span class="p-input-icon-left ml-auto">
+						<i class="pi pi-search"></i>
+						<input pInputText type="text" placeholder="Wyszukaj" (input)="handleInput($event)" />
+					</span>
+				</div>
+			</ng-template>
+			<ng-template pTemplate="header">
+				<tr>
+					<th pSortableColumn="name" style="min-width: 15rem">
+						<div class="flex align-items-center">
+							Nazwa
+							<p-sortIcon field="name"></p-sortIcon>
+						</div>
+					</th>
+					<th pSortableColumn="vat" style="min-width: 15rem">
+						<div class="flex align-items-center">Nip <p-sortIcon field="vat"></p-sortIcon></div>
+					</th>
+					<th pSortableColumn="adress" style="min-width: 15rem">
+						<div class="flex align-items-center">Adres <p-sortIcon field="adress"></p-sortIcon></div>
+					</th>
 
-          <th style="min-width: 10rem">
-            <div class="flex align-items-center">eMail</div>
-          </th>
-          <th style="min-width: 10rem">
-            <div class="flex align-items-center">Telefon</div>
-          </th>
-          <th>
-            <div class="flex align-items-center">Opcje</div>
-          </th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-customer>
-        <tr>
-          <td>
-            {{ customer.name }}
-          </td>
-          <td>
-            {{ customer.vat }}
-          </td>
-          <td>
-            {{ customer.adress }}
-          </td>
-          <td>
-            {{ customer.email }}
-          </td>
-          <td>
-            {{ customer.phone }}
-          </td>
-          <td style="width: 5rem" class="option-row">
-      <div class="flex">
-        <i
-        pTooltip="Edytuj"
-        tooltipPosition="top"
-        class="pi pi-pencil table-icon"
-        (click)="editCustomer($event, customer)"
-      ></i>
-      <i
-        pTooltip="Usuń"
-        tooltipPosition="top"
-        style="margin-left: 1rem"
-        class="pi pi-trash table-icon"
-        (click)="openConfirmationModal($event, customer)"
-      ></i>
-      </div>
-          </td>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="emptymessage">
-        <tr>
-          <td colspan="7">No customers found.</td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </div>
+					<th style="min-width: 10rem">
+						<div class="flex align-items-center">eMail</div>
+					</th>
+					<th style="min-width: 10rem">
+						<div class="flex align-items-center">Telefon</div>
+					</th>
+					<th>
+						<div class="flex align-items-center">Opcje</div>
+					</th>
+				</tr>
+			</ng-template>
+			<ng-template pTemplate="body" let-customer>
+				<tr>
+					<td>
+						{{ customer.name }}
+					</td>
+					<td>
+						{{ customer.vat }}
+					</td>
+					<td>
+						{{ customer.adress }}
+					</td>
+					<td>
+						{{ customer.email }}
+					</td>
+					<td>
+						{{ customer.phone }}
+					</td>
+					<td style="width: 5rem" class="option-row">
+						<div class="flex">
+							<i
+								pTooltip="Edytuj"
+								tooltipPosition="top"
+								class="pi pi-pencil table-icon"
+								(click)="editCustomer($event, customer)"
+							></i>
+							<i
+								pTooltip="Usuń"
+								tooltipPosition="top"
+								style="margin-left: 1rem"
+								class="pi pi-trash table-icon"
+								(click)="openConfirmationModal($event, customer)"
+							></i>
+						</div>
+					</td>
+				</tr>
+			</ng-template>
+			<ng-template pTemplate="emptymessage">
+				<tr>
+					<td colspan="7">No customers found.</td>
+				</tr>
+			</ng-template>
+		</p-table>
+	</div>
 </div>
-<app-add-customer-modal
-  (addUpdate)="addUpdate($event)"
-></app-add-customer-modal>
-<app-edit-customer-modal
-  (editUpdate)="editUpdate($event)"
-  [activeCustomer]="activeCustomer"
-></app-edit-customer-modal>
+<app-add-customer-modal (addUpdate)="addUpdate($event)"></app-add-customer-modal>
+<app-edit-customer-modal (editUpdate)="editUpdate($event)" [activeCustomer]="activeCustomer"></app-edit-customer-modal>
 <app-confirmation-modal
-  (confirmationFn)="deleteConfirmed($event)"
-  [activeItem]="activeCustomer"
-  [confirmationMessage]="confirmationMessage"
-  confirmationAcceptLabel="Usuń"
+	(confirmationFn)="deleteConfirmed($event)"
+	[activeItem]="activeCustomer"
+	[confirmationMessage]="confirmationMessage"
+	confirmationAcceptLabel="Usuń"
 ></app-confirmation-modal>

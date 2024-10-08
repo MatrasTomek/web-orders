@@ -12,21 +12,29 @@ import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
+import { reducers } from './store/reducers';
+import { effects } from './store/effects';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    PagesModule,
-    SharedModule,
-    RegisterModalModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
+	declarations: [AppComponent, NavComponent],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		PagesModule,
+		SharedModule,
+		RegisterModalModule,
+		AngularFireModule.initializeApp(environment.firebase),
+		AngularFireAuthModule,
+		AngularFirestoreModule,
+		StoreModule.forRoot(reducers),
+		EffectsModule.forRoot(effects),
+		// !environment.production ? StoreDevtoolsModule.instrument() : [], // devtools
+	],
+	providers: [],
+	bootstrap: [AppComponent],
 })
 export class AppModule {}
