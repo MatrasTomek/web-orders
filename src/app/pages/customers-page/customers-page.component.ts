@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectAllCustomers } from 'src/app/store/selectors/customer.selectors';
-import { deleteCustomer } from '../../store/actions/customer.actions';
+import { deleteCustomer, loadCustomers } from '../../store/actions/customer.actions';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/services/modal.service';
 import { Table } from 'primeng/table';
@@ -21,6 +21,14 @@ export class CustomersPageComponent {
 	activeCustomer: ICustomer | null = null;
 	customerId: string | undefined = undefined;
 	confirmationMessage: string = '';
+
+	ngOnInit() {
+		this.customers$.subscribe((customers) => {
+			if (!customers || customers.length === 0) {
+				this.store.dispatch(loadCustomers());
+			}
+		});
+	}
 
 	openAddModal($event: Event) {
 		$event.preventDefault();

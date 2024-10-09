@@ -6,9 +6,9 @@
 	</div>
 	<div class="tables mt-4">
 		<p-table
-			*ngIf="allOrders && allOrders.length > 0"
+			*ngIf="orders$ | async as orders"
 			#ordersTb
-			[value]="allOrders"
+			[value]="orders"
 			dataKey="id"
 			[rows]="10"
 			[showCurrentPageReport]="true"
