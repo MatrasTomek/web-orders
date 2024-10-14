@@ -50,27 +50,27 @@ export class OrderEffects {
 		)
 	);
 
-	// editOrder$ = createEffect(() =>
-	// 	this.actions$.pipe(
-	// 		ofType(editOrder),
-	// 		mergeMap(({ order }) => {
-	// 			return from(this.orderService.editOrder(order.id!, order)).pipe(
-	// 				map(() => editOrderSuccess({ order: IOrder })),
-	// 				catchError((error) => of(editOrderFailure({ error: error.message })))
-	// 			);
-	// 		})
-	// 	)
-	// );
+	editOrder$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(editOrder),
+			mergeMap(({ orderId, order }) => {
+				return from(this.orderService.editOrder(orderId, order)).pipe(
+					map(() => editOrderSuccess({ orderId, order })),
+					catchError((error) => of(editOrderFailure({ error: error.message })))
+				);
+			})
+		)
+	);
 
-	// deleteOrder$ = createEffect(() =>
-	// 	this.actions$.pipe(
-	// 		ofType(deleteOrder),
-	// 		mergeMap(({ orderId }) => {
-	// 			return from(this.orderService.deleteOrder(orderId)).pipe(
-	// 				map(() => deleteOrderSuccess({ orderId })),
-	// 				catchError((error) => of(deleteOrderFailure({ error: error.message })))
-	// 			);
-	// 		})
-	// 	)
-	// );
+	deleteOrder$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(deleteOrder),
+			mergeMap(({ orderId }) => {
+				return from(this.orderService.deleteOrder(orderId)).pipe(
+					map(() => deleteOrderSuccess({ orderId })),
+					catchError((error) => of(deleteOrderFailure({ error: error.message })))
+				);
+			})
+		)
+	);
 }

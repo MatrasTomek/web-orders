@@ -40,9 +40,9 @@ export const orderReducer = createReducer(
 	})),
 	on(addOrderFailure, (state, { error }) => ({ ...state, error, loading: false })),
 	on(editOrder, (state) => ({ ...state, loading: true })),
-	on(editOrderSuccess, (state, { Order }) => ({
+	on(editOrderSuccess, (state, { orderId, order }) => ({
 		...state,
-		orders: state.orders.map((c) => (c.id === Order.id ? Order : c)),
+		orders: state.orders.map((c) => (c.id === orderId ? order : c)),
 		loading: false,
 	})),
 	on(editOrderFailure, (state, { error }) => ({ ...state, error, loading: false })),

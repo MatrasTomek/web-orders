@@ -10,6 +10,7 @@ import { OrderNumberGeneratorService } from 'src/app/services/order-number-gener
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectAllOrders } from 'src/app/store/selectors/order.selectors';
+import { addOrder, editOrder } from 'src/app/store/actions/order.actions';
 
 @Component({
 	selector: 'app-add-order-page',
@@ -232,7 +233,7 @@ export class AddOrderPageComponent implements OnInit {
 		// this.modal.toggleModal('confirmationModal');
 	}
 
-	async acceptAllForm() {
+	acceptAllForm() {
 		this.showAlert = true;
 		this.alertMsg = 'Proszę czekać, zlecenie jest dodawane.';
 		this.alertColor = 'info';
@@ -256,9 +257,9 @@ export class AddOrderPageComponent implements OnInit {
 
 		try {
 			if (Object.keys(this.orderEditData).length !== 0) {
-				await this.orderItem.editOrder(this.orderEditData?.id, completeOrder as IOrder);
+				this.store.dispatch(editOrder({ orderId: this.orderEditData?.id, order: completeOrder as IOrder }));
 			} else {
-				await this.orderItem.createOrder(completeOrder as IOrder);
+				this.store.dispatch(addOrder({ Order: completeOrder as IOrder }));
 			}
 		} catch (e) {
 			console.error(e);

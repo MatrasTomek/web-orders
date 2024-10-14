@@ -100,7 +100,7 @@
 <app-edit-customer-modal [activeCustomer]="activeCustomer"></app-edit-customer-modal>
 <app-confirmation-modal
 	(confirmationFn)="deleteConfirmed($event)"
-	[activeItem]="customerId"
+	[activeItemId]="customerId"
 	[confirmationMessage]="confirmationMessage"
 	confirmationAcceptLabel="Usuń"
 ></app-confirmation-modal>

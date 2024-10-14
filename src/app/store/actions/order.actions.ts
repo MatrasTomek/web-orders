@@ -9,8 +9,8 @@ export const addOrder = createAction('[Order] Add Order', props<{ Order: IOrder 
 export const addOrderSuccess = createAction('[Order] Add Order Success', props<{ order: IOrder }>());
 export const addOrderFailure = createAction('[Order] Add Order Failure', props<{ error: string }>());
 
-export const editOrder = createAction('[Order] Edit Order', props<{ order: IOrder }>());
-export const editOrderSuccess = createAction('[Order] Edit Order Success', props<{ Order: IOrder }>());
+export const editOrder = createAction('[Order] Edit Order', props<{ orderId: string; order: IOrder }>());
+export const editOrderSuccess = createAction('[Order] Edit Order Success', props<{ orderId: string; order: IOrder }>());
 export const editOrderFailure = createAction('[Order] Edit Order Failure', props<{ error: string }>());
 
 export const deleteOrder = createAction('[Order] Delete Order', props<{ orderId: string }>());

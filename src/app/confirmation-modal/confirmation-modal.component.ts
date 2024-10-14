@@ -11,7 +11,7 @@ import { IOrder } from '../models/order.model';
 export class ConfirmationModalComponent {
 	@Input() confirmationMessage: string = '';
 	@Input() confirmationAcceptLabel: string = '';
-	@Input() activeItem?: string | undefined = undefined;
+	@Input() activeItemId?: string | undefined = undefined;
 	@Output() confirmationFn = new EventEmitter();
 
 	constructor(public modal: ModalService) {}
@@ -25,7 +25,7 @@ export class ConfirmationModalComponent {
 	}
 
 	confirmationFunction() {
-		this.confirmationFn.emit(this.activeItem);
+		this.confirmationFn.emit(this.activeItemId);
 		this.closeModal('close');
 	}
 

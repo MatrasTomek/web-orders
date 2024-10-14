@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { IOrder } from 'src/app/models/order.model';
 import { ModalService } from 'src/app/services/modal.service';
 import { OrderService } from 'src/app/services/order.service';
-import { loadOrders } from 'src/app/store/actions/order.actions';
+import { deleteOrder, loadOrders } from 'src/app/store/actions/order.actions';
 import { selectAllOrders } from 'src/app/store/selectors/order.selectors';
 
 @Component({
@@ -17,12 +17,13 @@ import { selectAllOrders } from 'src/app/store/selectors/order.selectors';
 export class OrdersPageComponent implements OnInit {
 	@ViewChild('ordersTb') ordersTable!: Table;
 
-	constructor(public modal: ModalService, public orders: OrderService, private router: Router, private store: Store) {}
+	constructor(public modal: ModalService, private router: Router, private store: Store) {}
 
 	orders$: Observable<IOrder[]> = this.store.select(selectAllOrders);
 	cols: any[] = [];
 	selectedColumns: any[] = [];
 	activeOrder: IOrder | null = null;
+	activeOrderId: string | undefined = undefined;
 	confirmationMessage: string = '';
 	fieldsArray: string[] = [];
 
@@ -87,25 +88,6 @@ export class OrdersPageComponent implements OnInit {
 		table.clear();
 	}
 
-	// editCustomer($event: Event, customer: IOrder) {
-	//   $event.preventDefault();
-
-	//   this.activeCustomer = customer;
-	//   this.modal.toggleModal('editCustomer');
-	// }
-
-	// addUpdate($event: IOrder) {
-	// 	return this.allOrders.unshift($event);
-	// }
-
-	// editUpdate($event: IOrder) {
-	// 	this.allOrders.forEach((item: { id: any }, index: any) => {
-	// 		if (item.id === $event.id) {
-	// 			this.allOrders[index] = $event;
-	// 		}
-	// 	});
-	// }
-
 	goToAddOrder(order: IOrder) {
 		const orderParse = {
 			clientDetails: JSON.stringify(order.clientDetails), // Serializowanie obiektów do JSON
@@ -122,28 +104,14 @@ export class OrdersPageComponent implements OnInit {
 		$event.preventDefault();
 
 		this.confirmationMessage = `Czy chesz usunąć zlecenie: ${'test'} ?`;
-		this.activeOrder = order;
+		this.activeOrderId = order.id;
 		this.modal.toggleModal('confirmationModal');
 	}
 
 	deleteConfirmed($event: any) {
-		this.orders.deleteOrder($event);
-
-		// this.allOrders.forEach((item: { id: any }, index: any) => {
-		// 	if (item.id === $event.id) {
-		// 		this.allOrders.splice(index, 1);
-		// 	}
-		// });
+		this.store.dispatch(deleteOrder({ orderId: $event }));
 	}
 
-	// Temporary fn to get customer by vat
-	// async take($event: Event) {
-	//   $event.preventDefault();
-
-	//   const user = await this.customers.getCustomer('PL8691491653');
-
-	//   console.log(user);
-	// }
 	resolveField(obj: any, path: string) {
 		return path.split('.').reduce((o, i) => (o ? o[i] : null), obj);
 	}
