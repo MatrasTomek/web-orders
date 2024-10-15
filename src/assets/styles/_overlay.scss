@@ -1,0 +1,28 @@
+@import './reset';
+@import './variables';
+@import './mixins';
+
+.p-dropdown-header {
+	background-color: grey !important;
+
+	.p-dropdown-filter {
+		background-color: $elementsBgColor !important;
+		color: $contentColor !important;
+	}
+}
+
+.p-dropdown-items-wrapper {
+	background-color: grey !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
+	background-color: $elementsBgColor !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+	background-color: $elementsBgColor !important;
+}
+
+.p-paginator-rpp-options .p-overlay .p-dropdown-panel .p-dropdown-items .p-dropdown-item > span {
+	color: $contentColor !important;
+}

@@ -11,6 +11,9 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectAllOrders } from 'src/app/store/selectors/order.selectors';
 import { addOrder, editOrder } from 'src/app/store/actions/order.actions';
+import ICustomer from 'src/app/models/customer.model';
+import { selectAllCustomers } from 'src/app/store/selectors/customer.selectors';
+import { loadCustomers } from 'src/app/store/actions/customer.actions';
 
 @Component({
 	selector: 'app-add-order-page',
@@ -21,6 +24,10 @@ export class AddOrderPageComponent implements OnInit {
 	items: MenuItem[] = [];
 	activeIndex: number = 0;
 	orderEditData: any = {};
+	customers$: Observable<ICustomer[]> = this.store.select(selectAllCustomers);
+	orders$: Observable<IOrder[]> = this.store.select(selectAllOrders);
+	selectedCustomer: ICustomer | null = null;
+	selectedCarrier: ICustomer | null = null;
 
 	constructor(
 		public modal: ModalService,
@@ -34,8 +41,6 @@ export class AddOrderPageComponent implements OnInit {
 			this.orderEditData = params;
 		});
 	}
-
-	orders$: Observable<IOrder[]> = this.store.select(selectAllOrders);
 
 	//form
 	inSubmission: boolean = false;
@@ -112,6 +117,12 @@ export class AddOrderPageComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.customers$.subscribe((customers) => {
+			if (!customers || customers.length === 0) {
+				this.store.dispatch(loadCustomers());
+			}
+		});
+
 		this.items = [
 			{
 				label: 'Klient | Przewoźnik',
@@ -210,6 +221,8 @@ export class AddOrderPageComponent implements OnInit {
 	addOrder() {
 		this.activeIndex = 2;
 		this.order = true;
+		this.client = this.selectedCustomer;
+		this.carrier = this.selectedCarrier;
 	}
 
 	resetForm($event: any, formType: string) {
@@ -242,15 +255,17 @@ export class AddOrderPageComponent implements OnInit {
 		let ordersLength: number = 0;
 
 		this.orders$.subscribe((orders) => {
+			console.log(orders);
+
 			ordersLength = orders.length;
 		});
 
-		const orderNumber = this.orderNumberGen.numberGenerator(ordersLength);
+		const orderNumber = this.orderNumberGen.numberGenerator(ordersLength + 1);
 
 		const completeOrder = {
 			orderNumber: orderNumber,
-			clientDetails: this.client,
-			carrierDetails: this.carrier,
+			clientDetails: this.selectedCustomer,
+			carrierDetails: this.selectedCarrier,
 			orderDetails: this.orderForm.value,
 			conditions: this.conditionForm.value,
 		};

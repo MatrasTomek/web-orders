@@ -1,23 +1,21 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root',
 })
 export class OrderNumberGeneratorService {
+	constructor() {}
 
-  constructor() { }
+	numberGenerator(itemNumber: number) {
+		const date = new Date();
+		const month = date.getMonth();
+		const year = date.getFullYear();
 
-  numberGenerator(itemNumber: number){
-    const date = new Date();
-    const month = date.getMonth()
-    const year = date.getFullYear();
+		return `${itemNumber}/${this.getMonthName(month)}/${year}`;
+	}
 
-return `${itemNumber}/${this.getMonthName(month)}/${year}`
-
-  }
-
-  getMonthName(month: number){
-    const months = ['STY', 'LUT', 'MAR', 'KWI', 'MAJ', 'CZE', 'LIP', 'SIE', 'WRZ', 'PAZ', 'LIS', 'GRU']
-    return months[month]
-  }
+	getMonthName(month: number) {
+		const months = ['STY', 'LUT', 'MAR', 'KWI', 'MAJ', 'CZE', 'LIP', 'SIE', 'WRZ', 'PAZ', 'LIS', 'GRU'];
+		return months[month];
+	}
 }

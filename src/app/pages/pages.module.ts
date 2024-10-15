@@ -23,39 +23,41 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { DropdownModule } from 'primeng/dropdown';
 import { ShowOrderModalModule } from '../show-order-modal/show-order-modal.module';
 
 @NgModule({
-  declarations: [
-    LoginPageComponent,
-    StartPageComponent,
-    OrdersPageComponent,
-    CustomersPageComponent,
-    AboutComponent,
-    AddOrderPageComponent,
-  ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    FormsModule,
-    ReactiveFormsModule,
-    InputTextModule,
-    ButtonModule,
-    PagesRoutingModule,
-    TableModule,
-    TooltipModule,
-    AddCustomerModalModule,
-    GetCustomerModalModule,
-    EditCustomerModalModule,
-    ConfirmationModalModule,
-    StepsModule,
-    CalendarModule,
-    InputSwitchModule,
-    BrowserAnimationsModule,
-    InputTextareaModule,
-    MultiSelectModule,
-    ShowOrderModalModule
-  ],
-  exports: [LoginPageComponent, AboutComponent],
+	declarations: [
+		LoginPageComponent,
+		StartPageComponent,
+		OrdersPageComponent,
+		CustomersPageComponent,
+		AboutComponent,
+		AddOrderPageComponent,
+	],
+	imports: [
+		CommonModule,
+		SharedModule,
+		FormsModule,
+		ReactiveFormsModule,
+		InputTextModule,
+		ButtonModule,
+		PagesRoutingModule,
+		TableModule,
+		TooltipModule,
+		AddCustomerModalModule,
+		GetCustomerModalModule,
+		EditCustomerModalModule,
+		ConfirmationModalModule,
+		StepsModule,
+		CalendarModule,
+		InputSwitchModule,
+		BrowserAnimationsModule,
+		InputTextareaModule,
+		MultiSelectModule,
+		ShowOrderModalModule,
+		DropdownModule,
+	],
+	exports: [LoginPageComponent, AboutComponent],
 })
 export class PagesModule {}

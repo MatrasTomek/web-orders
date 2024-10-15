@@ -1,0 +1,14 @@
+@import './reset';
+@import './variables';
+@import './mixins';
+
+.p-dropdown {
+	.p-dropdown-label {
+		background: grey !important;
+		color: $contentColor !important;
+		border: none !important;
+	}
+	.p-dropdown-trigger {
+		background: $buttonColor !important;
+	}
+}

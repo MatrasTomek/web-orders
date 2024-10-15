@@ -1,395 +1,276 @@
 <div class="add-order-wrapper">
-  <p-steps
-    [model]="items"
-    [readonly]="false"
-    [activeIndex]="activeIndex"
-    (activeIndexChange)="onActiveIndexChange($event)"
-    styleClass="mt-3 mb-3"
-  ></p-steps>
-  <div class="add-order-wrapper__forms forms">
-    <!-- Customer & Carrier -->
+	<p-steps
+		[model]="items"
+		[readonly]="false"
+		[activeIndex]="activeIndex"
+		(activeIndexChange)="onActiveIndexChange($event)"
+		styleClass="mt-3 mb-3"
+	></p-steps>
+	<div class="add-order-wrapper__forms forms">
+		<!-- Customer & Carrier -->
 
-    <div *ngIf="activeIndex === 0" class="forms__customer">
-      <div class="item-wrapper">
-        <h3 class="mb-3">Klient</h3>
-        <div class="item-wrapper__buttons">
-          <p-button
-            type="button"
-            label="Pobierz"
-            (click)="getCustomer($event, 'client')"
-          >
-          </p-button>
-          <p-button
-            type="button"
-            label="Dodaj"
-            (click)="addCustomer($event, 'client')"
-          >
-          </p-button>
-        </div>
-        <div *ngIf="client" class="item-wrapper__details item-details mt-3">
-          <div class="item-details__wrapper">
-            <p>Nazwa:</p>
-            <span>{{ client?.name }}</span>
-          </div>
-          <div class="item-details__wrapper">
-            <p>Adres:</p>
-            <span>{{ client?.adress }}</span>
-          </div>
-          <div class="item-details__wrapper">
-            <p>NIP:</p>
-            <span>{{ client?.vat }}</span>
-          </div>
-          <div class="item-details__wrapper">
-            <p>eMail:</p>
-            <span>{{ client?.email }}</span>
-          </div>
-          <div class="item-details__wrapper">
-            <p>Telefon:</p>
-            <span>{{ client?.phone }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="item-wrapper">
-        <h3 class="mb-3">Przewoźnik</h3>
-        <div class="item-wrapper__buttons">
-          <p-button
-            type="button"
-            label="Pobierz "
-            (click)="getCustomer($event, 'carrier')"
-          >
-          </p-button>
-          <p-button
-            type="button"
-            label="Dodaj "
-            (click)="addCustomer($event, 'carrier')"
-          >
-          </p-button>
-        </div>
-        <div *ngIf="carrier" class="item-wrapper__details item-details mt-3">
-          <div class="item-details__wrapper">
-            <p>Nazwa:</p>
-            <span>{{ carrier?.name }}</span>
-          </div>
-          <div class="item-details__wrapper">
-            <p>Adres:</p>
-            <span>{{ carrier?.adress }}</span>
-          </div>
-          <div class="item-details__wrapper">
-            <p>NIP:</p>
-            <span>{{ carrier?.vat }}</span>
-          </div>
-          <div class="item-details__wrapper">
-            <p>eMail:</p>
-            <span>{{ carrier?.email }}</span>
-          </div>
-          <div class="item-details__wrapper">
-            <p>Telefon:</p>
-            <span>{{ carrier?.phone }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="customer-buttons mt-4">
-        <p-button
-          type="button"
-          styleClass="p-button-danger mr-4"
-          label="Wyczyść"
-          (click)="resetForm($event, 'customer')"
-        >
-        </p-button>
-        <p-button
-          type="button"
-          class=""
-          [disabled]="!client || !carrier"
-          label="Dalej"
-          (click)="!client || !carrier ? null : (activeIndex = 1)"
-        >
-        </p-button>
-      </div>
-    </div>
+		<div *ngIf="activeIndex === 0" class="forms__customer">
+			<div class="item-wrapper">
+				<h3 class="mb-3">Klient</h3>
+				<div class="item-wrapper__buttons">
+					<p-dropdown
+						[options]="(customers$ | async) || []"
+						[(ngModel)]="selectedCustomer"
+						optionLabel="name"
+						[filter]="true"
+						filterBy="name,vat"
+						[showClear]="true"
+						placeholder="Wybierz Klienta"
+					>
+						<ng-template pTemplate="selectedItem">
+							<div class="flex align-items-center gap-2" *ngIf="selectedCustomer">
+								<div>{{ selectedCustomer.name }} ({{ selectedCustomer.vat }})</div>
+							</div>
+						</ng-template>
 
-    <!-- Order details -->
+						<ng-template let-customer pTemplate="item">
+							<div class="flex align-items-center gap-2">
+								<div>{{ customer.name }} ({{ customer.vat }})</div>
+							</div>
+						</ng-template>
+					</p-dropdown>
+					<p-button type="button" label="Dodaj" (click)="addCustomer($event, 'client')"> </p-button>
+				</div>
+				<div *ngIf="client" class="item-wrapper__details item-details mt-3">
+					<div class="item-details__wrapper">
+						<p>Nazwa:</p>
+						<span>{{ client?.name }}</span>
+					</div>
+					<div class="item-details__wrapper">
+						<p>Adres:</p>
+						<span>{{ client?.adress }}</span>
+					</div>
+					<div class="item-details__wrapper">
+						<p>NIP:</p>
+						<span>{{ client?.vat }}</span>
+					</div>
+					<div class="item-details__wrapper">
+						<p>eMail:</p>
+						<span>{{ client?.email }}</span>
+					</div>
+					<div class="item-details__wrapper">
+						<p>Telefon:</p>
+						<span>{{ client?.phone }}</span>
+					</div>
+				</div>
+			</div>
+			<div class="item-wrapper">
+				<h3 class="mb-3">Przewoźnik</h3>
+				<div class="item-wrapper__buttons">
+					<p-dropdown
+						[options]="(customers$ | async) || []"
+						[(ngModel)]="selectedCarrier"
+						optionLabel="name"
+						[filter]="true"
+						filterBy="name,vat"
+						[showClear]="true"
+						placeholder="Wybierz Przewoźnika"
+					>
+						<ng-template pTemplate="selectedItem">
+							<div class="flex align-items-center gap-2" *ngIf="selectedCarrier">
+								<div>{{ selectedCarrier.name }} ({{ selectedCarrier.vat }})</div>
+							</div>
+						</ng-template>
 
-    <div *ngIf="activeIndex === 1" class="forms__order">
-      <div *ngIf="!client && !carrier">
-        <h2 class="mt-4">Klient i Przewoźnik musi być wprowadzony!</h2>
-      </div>
-      <div *ngIf="client && carrier" class="add-order-form-wrapper">
-        <form [formGroup]="orderForm" (ngSubmit)="addOrder()">
-          <div class="add-order-form-wrapper__pickup">
-            <div class="input-column-wrapper">
-              <label class="input-label">Data załadunku</label>
-              <p-calendar
-                [formControl]="loadDate"
-                [showIcon]="true"
-                [showTime]="true"
-                [showButtonBar]="true"
-              ></p-calendar>
-            </div>
-            <div class="input-column-wrapper">
-              <label class="input-label">Miejsce załadunku</label>
-              <app-input
-                [control]="loadPlace"
-                [type]="'text'"
-                [placeholder]="'Wpisz nazwę'"
-              ></app-input>
-            </div>
-            <div class="input-column-wrapper">
-              <label class="input-label">Adres załadunku</label>
-              <app-input
-                [control]="loadAddress"
-                [type]="'text'"
-                [placeholder]="'Wpisz adres'"
-              ></app-input>
-            </div>
-          </div>
-          <div class="add-order-form-wrapper__delivery">
-            <div class="input-column-wrapper">
-              <label class="input-label">Data rozładunku</label>
-              <p-calendar
-                [formControl]="unloadDate"
-                [showIcon]="true"
-                [showTime]="true"
-                [showButtonBar]="true"
-              ></p-calendar>
-            </div>
-            <div class="input-column-wrapper">
-              <label class="input-label">Miejsce rozładunku</label>
-              <app-input
-                [control]="unloadPlace"
-                [type]="'text'"
-                [placeholder]="'Wpisz nazwę'"
-              ></app-input>
-            </div>
-            <div class="input-column-wrapper">
-              <label class="input-label">Adres rozładunku</label>
-              <app-input
-                [control]="unloadAddress"
-                [type]="'text'"
-                [placeholder]="'Wpisz adres'"
-              ></app-input>
-            </div>
-          </div>
+						<ng-template let-customer pTemplate="item">
+							<div class="flex align-items-center gap-2">
+								<div>{{ customer.name }} ({{ customer.vat }})</div>
+							</div>
+						</ng-template>
+					</p-dropdown>
+					<p-button type="button" label="Dodaj " (click)="addCustomer($event, 'carrier')"> </p-button>
+				</div>
+				<div *ngIf="carrier" class="item-wrapper__details item-details mt-3">
+					<div class="item-details__wrapper">
+						<p>Nazwa:</p>
+						<span>{{ carrier?.name }}</span>
+					</div>
+					<div class="item-details__wrapper">
+						<p>Adres:</p>
+						<span>{{ carrier?.adress }}</span>
+					</div>
+					<div class="item-details__wrapper">
+						<p>NIP:</p>
+						<span>{{ carrier?.vat }}</span>
+					</div>
+					<div class="item-details__wrapper">
+						<p>eMail:</p>
+						<span>{{ carrier?.email }}</span>
+					</div>
+					<div class="item-details__wrapper">
+						<p>Telefon:</p>
+						<span>{{ carrier?.phone }}</span>
+					</div>
+				</div>
+			</div>
+			<div class="customer-buttons mt-4">
+				<p-button type="button" styleClass="p-button-danger mr-4" label="Wyczyść" (click)="resetForm($event, 'customer')">
+				</p-button>
+				<p-button
+					type="button"
+					class=""
+					[disabled]="!selectedCustomer || !selectedCarrier"
+					label="Dalej"
+					(click)="!selectedCustomer || !selectedCarrier ? null : (activeIndex = 1)"
+				>
+				</p-button>
+			</div>
+		</div>
 
-          <div class="add-order-form-wrapper__goods">
-            <div class="input-column-wrapper">
-              <label class="input-label">Towar</label>
-              <app-input
-                [control]="goods"
-                [type]="'text'"
-                [placeholder]="'Wpisz nazwę'"
-              ></app-input>
-            </div>
-            <div class="input-column-wrapper">
-              <label class="input-label">Wymiary</label>
-              <app-input
-                [control]="dimension"
-                [type]="'text'"
-                [placeholder]="'Wpisz nazwę'"
-              ></app-input>
-            </div>
-            <div class="input-column-wrapper">
-              <label class="input-label">Waga</label>
-              <app-input
-                [control]="weight"
-                [type]="'text'"
-                [placeholder]="'Wpisz adres'"
-              ></app-input>
-            </div>
-          </div>
+		<!-- Order details -->
 
-          <div class="add-order-form-wrapper__driver">
-            <div class="input-column-wrapper">
-              <label class="input-label">Kierowca</label>
-              <app-input
-                [control]="driver"
-                [type]="'text'"
-                [placeholder]="'Wpisz nazwę'"
-              ></app-input>
-            </div>
-            <div class="input-column-wrapper">
-              <label class="input-label">Pojazd</label>
-              <app-input
-                [control]="truck"
-                [type]="'text'"
-                [placeholder]="'Wpisz nazwę'"
-              ></app-input>
-            </div>
-          </div>
+		<div *ngIf="activeIndex === 1" class="forms__order">
+			<div *ngIf="!selectedCustomer && !selectedCarrier">
+				<h2 class="mt-4">Klient i Przewoźnik musi być wprowadzony!</h2>
+			</div>
+			<div *ngIf="selectedCustomer && selectedCarrier" class="add-order-form-wrapper">
+				<form [formGroup]="orderForm" (ngSubmit)="addOrder()">
+					<div class="add-order-form-wrapper__pickup">
+						<div class="input-column-wrapper">
+							<label class="input-label">Data załadunku</label>
+							<p-calendar [formControl]="loadDate" [showIcon]="true" [showTime]="true" [showButtonBar]="true"></p-calendar>
+						</div>
+						<div class="input-column-wrapper">
+							<label class="input-label">Miejsce załadunku</label>
+							<app-input [control]="loadPlace" [type]="'text'" [placeholder]="'Wpisz nazwę'"></app-input>
+						</div>
+						<div class="input-column-wrapper">
+							<label class="input-label">Adres załadunku</label>
+							<app-input [control]="loadAddress" [type]="'text'" [placeholder]="'Wpisz adres'"></app-input>
+						</div>
+					</div>
+					<div class="add-order-form-wrapper__delivery">
+						<div class="input-column-wrapper">
+							<label class="input-label">Data rozładunku</label>
+							<p-calendar [formControl]="unloadDate" [showIcon]="true" [showTime]="true" [showButtonBar]="true"></p-calendar>
+						</div>
+						<div class="input-column-wrapper">
+							<label class="input-label">Miejsce rozładunku</label>
+							<app-input [control]="unloadPlace" [type]="'text'" [placeholder]="'Wpisz nazwę'"></app-input>
+						</div>
+						<div class="input-column-wrapper">
+							<label class="input-label">Adres rozładunku</label>
+							<app-input [control]="unloadAddress" [type]="'text'" [placeholder]="'Wpisz adres'"></app-input>
+						</div>
+					</div>
 
-          <div class="add-order-form-wrapper__buttons">
-            <p-button
-              type="button"
-              styleClass="p-button-danger mr-4"
-              label="Wyczyść"
-              (click)="resetForm($event, 'order')"
-            >
-            </p-button>
-            <p-button
-              type="button"
-              styleClass="p-button-secondary mr-4"
-              label="Wstecz"
-              (click)="activeIndex = 0"
-            >
-            </p-button>
-            <p-button
-              type="submit"
-              class=""
-              [disabled]="orderForm.invalid"
-              label="Dalej"
-            >
-            </p-button>
-          </div>
-        </form>
-      </div>
-    </div>
+					<div class="add-order-form-wrapper__goods">
+						<div class="input-column-wrapper">
+							<label class="input-label">Towar</label>
+							<app-input [control]="goods" [type]="'text'" [placeholder]="'Wpisz nazwę'"></app-input>
+						</div>
+						<div class="input-column-wrapper">
+							<label class="input-label">Wymiary</label>
+							<app-input [control]="dimension" [type]="'text'" [placeholder]="'Wpisz nazwę'"></app-input>
+						</div>
+						<div class="input-column-wrapper">
+							<label class="input-label">Waga</label>
+							<app-input [control]="weight" [type]="'text'" [placeholder]="'Wpisz adres'"></app-input>
+						</div>
+					</div>
 
-    <!-- Order Conditions -->
+					<div class="add-order-form-wrapper__driver">
+						<div class="input-column-wrapper">
+							<label class="input-label">Kierowca</label>
+							<app-input [control]="driver" [type]="'text'" [placeholder]="'Wpisz nazwę'"></app-input>
+						</div>
+						<div class="input-column-wrapper">
+							<label class="input-label">Pojazd</label>
+							<app-input [control]="truck" [type]="'text'" [placeholder]="'Wpisz nazwę'"></app-input>
+						</div>
+					</div>
 
-    <div *ngIf="activeIndex === 2" class="forms__condition">
-      <div *ngIf="!client || !carrier || orderForm.invalid">
-        <h2 class="mt-4">
-          Klient, Przewoźnik i dane zlecenia muszą być wprowadzone!
-        </h2>
-      </div>
+					<div class="add-order-form-wrapper__buttons">
+						<p-button type="button" styleClass="p-button-danger mr-4" label="Wyczyść" (click)="resetForm($event, 'order')">
+						</p-button>
+						<p-button type="button" styleClass="p-button-secondary mr-4" label="Wstecz" (click)="activeIndex = 0"> </p-button>
+						<p-button type="submit" class="" [disabled]="orderForm.invalid" label="Dalej"> </p-button>
+					</div>
+				</form>
+			</div>
+		</div>
 
-      <div
-        *ngIf="client && carrier && !orderForm.invalid"
-        class="add-condition-form-wrapper"
-      >
-        <form [formGroup]="conditionForm" (ngSubmit)="acceptAllForm()">
-          <div class="add-condition-form-wrapper__require">
-            <div class="switch-input-connect">
-              <div class="input-inline-wrapper">
-                <p-inputSwitch
-                  [formControl]="isFixed"
-                  styleClass="mr-3"
-                ></p-inputSwitch>
-                <label class="input-label">Dostawa terminowa</label>
-              </div>
-              <div *ngIf="isFixed.value" class="mb-2 ml-2">
-                <app-input
-                  [control]="fixDetails"
-                  [type]="'text'"
-                  [placeholder]="'Wpisz Transit Time'"
-                ></app-input>
-              </div>
-            </div>
-            <div class="switch-input-connect">
-              <div class="input-inline-wrapper">
-                <p-inputSwitch
-                  [formControl]="isAdr"
-                  styleClass="mr-3"
-                ></p-inputSwitch>
-                <label class="input-label">ADR</label>
-              </div>
-              <div *ngIf="isAdr.value" class="mb-2 ml-2">
-                <app-input
-                  [control]="adrDetails"
-                  [type]="'text'"
-                  [placeholder]="'Wpisz wymagania ADR'"
-                ></app-input>
-              </div>
-            </div>
-            <div class="switch-input-connect">
-              <div class="input-inline-wrapper">
-                <p-inputSwitch
-                  [formControl]="isFrigo"
-                  styleClass="mr-3"
-                ></p-inputSwitch>
-                <label class="input-label">Chłodnia</label>
-              </div>
-              <div *ngIf="isFrigo.value" class="mb-2 ml-2">
-                <app-input
-                  [control]="frigoDetails"
-                  [type]="'text'"
-                  [placeholder]="'Wpisz temperatury'"
-                ></app-input>
-              </div>
-            </div>
-          </div>
-          <div class="add-condition-form-wrapper__payment">
-            <div class="customer-payment">
-              <div class="input-column-wrapper mr-4">
-                <label class="input-label">Fracht klienta</label>
-                <app-input
-                  [control]="customerFreight"
-                  [type]="'text'"
-                  [placeholder]="'Kwota + Waluta'"
-                ></app-input>
-              </div>
-              <div class="input-column-wrapper">
-                <label class="input-label">Termin klienta</label>
-                <app-input
-                  [control]="customerTerm"
-                  [type]="'text'"
-                  [placeholder]="'Termin płatności'"
-                ></app-input>
-              </div>
-            </div>
-            <div class="carrier-payment">
-              <div class="input-column-wrapper mr-4">
-                <label class="input-label">Fracht przewoźnika</label>
-                <app-input
-                  [control]="carrierFreight"
-                  [type]="'text'"
-                  [placeholder]="'Kwota + Waluta'"
-                ></app-input>
-              </div>
-              <div class="input-column-wrapper">
-                <label class="input-label">Termin przewoźnika</label>
-                <app-input
-                  [control]="carrierTerm"
-                  [type]="'text'"
-                  [placeholder]="'Termin płatności'"
-                ></app-input>
-              </div>
-            </div>
-          </div>
-          <div class="add-condition-form-wrapper__description">
-            <div class="input-column-wrapper">
-              <label class="input-label">Uwagi</label>
-              <textarea
-                rows="5"
-                cols="30"
-                pInputTextarea
-                [formControl]="description"
-              ></textarea>
-            </div>
-          </div>
-          <div class="add-condition-form-wrapper__buttons">
-            <p-button
-              type="button"
-              styleClass="p-button-danger mr-4"
-              label="Wyczyść"
-              (click)="resetForm($event, 'conditions')"
-            >
-            </p-button>
-            <p-button
-              type="button"
-              styleClass="p-button-secondary mr-4"
-              label="Wstecz"
-              (click)="activeIndex = 1"
-            >
-            </p-button>
-            <p-button
-              type="submit"
-              class=""
-              [disabled]="orderForm.invalid || inSubmission"
-              label="Zapisz"
-            >
-            </p-button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+		<!-- Order Conditions -->
+
+		<div *ngIf="activeIndex === 2" class="forms__condition">
+			<div *ngIf="!selectedCustomer || !selectedCarrier || orderForm.invalid">
+				<h2 class="mt-4">Klient, Przewoźnik i dane zlecenia muszą być wprowadzone!</h2>
+			</div>
+
+			<div *ngIf="selectedCustomer && selectedCarrier && !orderForm.invalid" class="add-condition-form-wrapper">
+				<form [formGroup]="conditionForm" (ngSubmit)="acceptAllForm()">
+					<div class="add-condition-form-wrapper__require">
+						<div class="switch-input-connect">
+							<div class="input-inline-wrapper">
+								<p-inputSwitch [formControl]="isFixed" styleClass="mr-3"></p-inputSwitch>
+								<label class="input-label">Dostawa terminowa</label>
+							</div>
+							<div *ngIf="isFixed.value" class="mb-2 ml-2">
+								<app-input [control]="fixDetails" [type]="'text'" [placeholder]="'Wpisz Transit Time'"></app-input>
+							</div>
+						</div>
+						<div class="switch-input-connect">
+							<div class="input-inline-wrapper">
+								<p-inputSwitch [formControl]="isAdr" styleClass="mr-3"></p-inputSwitch>
+								<label class="input-label">ADR</label>
+							</div>
+							<div *ngIf="isAdr.value" class="mb-2 ml-2">
+								<app-input [control]="adrDetails" [type]="'text'" [placeholder]="'Wpisz wymagania ADR'"></app-input>
+							</div>
+						</div>
+						<div class="switch-input-connect">
+							<div class="input-inline-wrapper">
+								<p-inputSwitch [formControl]="isFrigo" styleClass="mr-3"></p-inputSwitch>
+								<label class="input-label">Chłodnia</label>
+							</div>
+							<div *ngIf="isFrigo.value" class="mb-2 ml-2">
+								<app-input [control]="frigoDetails" [type]="'text'" [placeholder]="'Wpisz temperatury'"></app-input>
+							</div>
+						</div>
+					</div>
+					<div class="add-condition-form-wrapper__payment">
+						<div class="customer-payment">
+							<div class="input-column-wrapper mr-4">
+								<label class="input-label">Fracht klienta</label>
+								<app-input [control]="customerFreight" [type]="'text'" [placeholder]="'Kwota + Waluta'"></app-input>
+							</div>
+							<div class="input-column-wrapper">
+								<label class="input-label">Termin klienta</label>
+								<app-input [control]="customerTerm" [type]="'text'" [placeholder]="'Termin płatności'"></app-input>
+							</div>
+						</div>
+						<div class="carrier-payment">
+							<div class="input-column-wrapper mr-4">
+								<label class="input-label">Fracht przewoźnika</label>
+								<app-input [control]="carrierFreight" [type]="'text'" [placeholder]="'Kwota + Waluta'"></app-input>
+							</div>
+							<div class="input-column-wrapper">
+								<label class="input-label">Termin przewoźnika</label>
+								<app-input [control]="carrierTerm" [type]="'text'" [placeholder]="'Termin płatności'"></app-input>
+							</div>
+						</div>
+					</div>
+					<div class="add-condition-form-wrapper__description">
+						<div class="input-column-wrapper">
+							<label class="input-label">Uwagi</label>
+							<textarea rows="5" cols="30" pInputTextarea [formControl]="description"></textarea>
+						</div>
+					</div>
+					<div class="add-condition-form-wrapper__buttons">
+						<p-button type="button" styleClass="p-button-danger mr-4" label="Wyczyść" (click)="resetForm($event, 'conditions')">
+						</p-button>
+						<p-button type="button" styleClass="p-button-secondary mr-4" label="Wstecz" (click)="activeIndex = 1"> </p-button>
+						<p-button type="submit" class="" [disabled]="orderForm.invalid || inSubmission" label="Zapisz"> </p-button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
-<app-add-customer-modal
-  (addUpdate)="addUpdate($event)"
-  [kindOfCustomer]="kindOfCustomer"
-></app-add-customer-modal>
-<app-get-customer-modal
-  (getUpdate)="addUpdate($event)"
-  [kindOfCustomer]="kindOfCustomer"
-></app-get-customer-modal>
+<app-add-customer-modal (addUpdate)="addUpdate($event)" [kindOfCustomer]="kindOfCustomer"></app-add-customer-modal>
 <app-alert *ngIf="showAlert" [color]="alertColor"> {{ alertMsg }}</app-alert>

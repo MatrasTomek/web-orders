@@ -90,7 +90,7 @@ export class OrdersPageComponent implements OnInit {
 
 	goToAddOrder(order: IOrder) {
 		const orderParse = {
-			clientDetails: JSON.stringify(order.clientDetails), // Serializowanie obiektów do JSON
+			clientDetails: JSON.stringify(order.clientDetails),
 			carrierDetails: JSON.stringify(order.carrierDetails),
 			orderDetails: JSON.stringify(order.orderDetails),
 			conditions: JSON.stringify(order.conditions),
