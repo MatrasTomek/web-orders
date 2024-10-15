@@ -91,6 +91,7 @@ export class AddOrderPageComponent implements OnInit {
 	isAdr = new FormControl<boolean>(false);
 	adrDetails = new FormControl('');
 	isFrigo = new FormControl<boolean>(false);
+	isFrachtPln = new FormControl<boolean>(false);
 	frigoDetails = new FormControl('');
 	customerTerm = new FormControl('', [Validators.required]);
 	customerFreight = new FormControl('', [Validators.required]);
@@ -104,6 +105,7 @@ export class AddOrderPageComponent implements OnInit {
 		isAdr: this.isAdr,
 		adrDetails: this.adrDetails,
 		isFrigo: this.isFrigo,
+		isFrachtPln: this.isFrachtPln,
 		frigoDetails: this.frigoDetails,
 		customerTerm: this.customerTerm,
 		customerFreight: this.customerFreight,
@@ -182,6 +184,7 @@ export class AddOrderPageComponent implements OnInit {
 			isAdr: conditions?.isAdr || false,
 			adrDetails: conditions?.adrDetails || '',
 			isFrigo: conditions?.isFrigo || false,
+			isFrachtPln: conditions?.isFrachtPln || false,
 			frigoDetails: conditions?.frigoDetails || '',
 			customerTerm: conditions?.customerTerm || '',
 			customerFreight: conditions?.customerFreight || '',
@@ -190,8 +193,8 @@ export class AddOrderPageComponent implements OnInit {
 			description: conditions?.description || '',
 		});
 
-		this.client = clientDetails;
-		this.carrier = carrierDetails;
+		this.selectedCustomer = clientDetails;
+		this.selectedCarrier = carrierDetails;
 	}
 
 	getCustomer($event: any, kindOfCustomer: 'client' | 'carrier' | null) {
@@ -228,8 +231,8 @@ export class AddOrderPageComponent implements OnInit {
 	resetForm($event: any, formType: string) {
 		switch (formType) {
 			case 'customer':
-				this.client = null;
-				this.carrier = null;
+				this.selectedCustomer = null;
+				this.selectedCarrier = null;
 				break;
 			case 'order':
 				this.orderForm.reset();
@@ -255,8 +258,6 @@ export class AddOrderPageComponent implements OnInit {
 		let ordersLength: number = 0;
 
 		this.orders$.subscribe((orders) => {
-			console.log(orders);
-
 			ordersLength = orders.length;
 		});
 
@@ -290,15 +291,15 @@ export class AddOrderPageComponent implements OnInit {
 			return;
 		}
 
-		// Tutaj trezba dodać zlecenie do tabeli - prezkazać do orders-page lub do state
-
-		// trezba tez dodac przechodzenie do orders-page
-
 		this.alertMsg = Object.keys(this.orderEditData).length !== 0 ? 'Sukces! Zlecenie zmienione.' : 'Sukces! Zlecenie dodane.';
 		this.alertColor = 'success';
 		this.inSubmission = false;
 
 		this.router.navigate(['/orders']);
+		this.client = null;
+		this.selectedCustomer = null;
+		this.carrier = null;
+		this.selectedCarrier = null;
 
 		setTimeout(() => {
 			this.showAlert = false;

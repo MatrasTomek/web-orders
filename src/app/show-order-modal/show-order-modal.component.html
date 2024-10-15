@@ -72,7 +72,9 @@
 			</div>
 			<div class="separator"></div>
 			<div class="show-order-wrapper__conditions conditions">
-				<h3 class="conditions__fracht">Fracht: {{ activeOrder?.conditions?.carrierFreight }} All-In</h3>
+				<h3 class="conditions__fracht">
+					Fracht: {{ activeOrder?.conditions?.carrierFreight }} {{ activeOrder?.conditions?.isFrachtPln ? 'PLN' : 'EUR' }} All-In
+				</h3>
 				<h3 class="conditions__payment">Termin płatności: {{ activeOrder?.conditions?.carrierTerm }} dni</h3>
 			</div>
 			<div class="separator"></div>

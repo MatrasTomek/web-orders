@@ -36,26 +36,26 @@
 					</p-dropdown>
 					<p-button type="button" label="Dodaj" (click)="addCustomer($event, 'client')"> </p-button>
 				</div>
-				<div *ngIf="client" class="item-wrapper__details item-details mt-3">
+				<div *ngIf="selectedCustomer" class="item-wrapper__details item-details mt-3">
 					<div class="item-details__wrapper">
 						<p>Nazwa:</p>
-						<span>{{ client?.name }}</span>
+						<span>{{ selectedCustomer.name }}</span>
 					</div>
 					<div class="item-details__wrapper">
 						<p>Adres:</p>
-						<span>{{ client?.adress }}</span>
+						<span>{{ selectedCustomer.adress }}</span>
 					</div>
 					<div class="item-details__wrapper">
 						<p>NIP:</p>
-						<span>{{ client?.vat }}</span>
+						<span>{{ selectedCustomer.vat }}</span>
 					</div>
 					<div class="item-details__wrapper">
 						<p>eMail:</p>
-						<span>{{ client?.email }}</span>
+						<span>{{ selectedCustomer.email }}</span>
 					</div>
 					<div class="item-details__wrapper">
 						<p>Telefon:</p>
-						<span>{{ client?.phone }}</span>
+						<span>{{ selectedCustomer.phone }}</span>
 					</div>
 				</div>
 			</div>
@@ -85,26 +85,26 @@
 					</p-dropdown>
 					<p-button type="button" label="Dodaj " (click)="addCustomer($event, 'carrier')"> </p-button>
 				</div>
-				<div *ngIf="carrier" class="item-wrapper__details item-details mt-3">
+				<div *ngIf="selectedCarrier" class="item-wrapper__details item-details mt-3">
 					<div class="item-details__wrapper">
 						<p>Nazwa:</p>
-						<span>{{ carrier?.name }}</span>
+						<span>{{ selectedCarrier.name }}</span>
 					</div>
 					<div class="item-details__wrapper">
 						<p>Adres:</p>
-						<span>{{ carrier?.adress }}</span>
+						<span>{{ selectedCarrier.adress }}</span>
 					</div>
 					<div class="item-details__wrapper">
 						<p>NIP:</p>
-						<span>{{ carrier?.vat }}</span>
+						<span>{{ selectedCarrier.vat }}</span>
 					</div>
 					<div class="item-details__wrapper">
 						<p>eMail:</p>
-						<span>{{ carrier?.email }}</span>
+						<span>{{ selectedCarrier.email }}</span>
 					</div>
 					<div class="item-details__wrapper">
 						<p>Telefon:</p>
-						<span>{{ carrier?.phone }}</span>
+						<span>{{ selectedCarrier.phone }}</span>
 					</div>
 				</div>
 			</div>
@@ -234,24 +234,28 @@
 						</div>
 					</div>
 					<div class="add-condition-form-wrapper__payment">
+						<div class="input-inline-wrapper">
+							<p-inputSwitch [formControl]="isFrachtPln" styleClass="mr-3"></p-inputSwitch>
+							<label class="input-label">Frachty w PLN</label>
+						</div>
 						<div class="customer-payment">
 							<div class="input-column-wrapper mr-4">
 								<label class="input-label">Fracht klienta</label>
-								<app-input [control]="customerFreight" [type]="'text'" [placeholder]="'Kwota + Waluta'"></app-input>
+								<app-input [control]="customerFreight" [type]="'number'" [placeholder]="'Kwota'"></app-input>
 							</div>
 							<div class="input-column-wrapper">
 								<label class="input-label">Termin klienta</label>
-								<app-input [control]="customerTerm" [type]="'text'" [placeholder]="'Termin płatności'"></app-input>
+								<app-input [control]="customerTerm" [type]="'number'" [placeholder]="'Termin płatności'"></app-input>
 							</div>
 						</div>
 						<div class="carrier-payment">
 							<div class="input-column-wrapper mr-4">
 								<label class="input-label">Fracht przewoźnika</label>
-								<app-input [control]="carrierFreight" [type]="'text'" [placeholder]="'Kwota + Waluta'"></app-input>
+								<app-input [control]="carrierFreight" [type]="'number'" [placeholder]="'Kwota'"></app-input>
 							</div>
 							<div class="input-column-wrapper">
 								<label class="input-label">Termin przewoźnika</label>
-								<app-input [control]="carrierTerm" [type]="'text'" [placeholder]="'Termin płatności'"></app-input>
+								<app-input [control]="carrierTerm" [type]="'number'" [placeholder]="'Termin płatności'"></app-input>
 							</div>
 						</div>
 					</div>

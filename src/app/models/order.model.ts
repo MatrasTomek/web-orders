@@ -33,6 +33,7 @@ export interface IOrderConditions {
 	isAdr?: boolean;
 	adrDetails?: string;
 	isFrigo?: boolean;
+	isFrachtPln?: boolean;
 	frigoDetails?: string;
 	customerTerm: string;
 	customerFreight: string;
