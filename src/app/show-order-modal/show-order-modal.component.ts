@@ -12,24 +12,10 @@ import html2canvas from 'html2canvas';
 export class ShowOrderModalComponent {
 	@Input() activeOrder: IOrder | null = null;
 
-	public convertedLoadDate: Date | null = null;
-	public convertedUnloadDate: Date | null = null;
-
 	constructor(public modal: ModalService) {}
 
 	ngOnInit(): void {
 		this.modal.register('showOrder');
-	}
-
-	ngOnChanges() {
-		if (!this.activeOrder) {
-			this.convertedLoadDate = null;
-			return;
-		}
-		const loadDate = this.activeOrder.orderDetails?.loadDate;
-		const unloadDate = this.activeOrder.orderDetails?.unloadDate;
-		this.convertedLoadDate = new Date(loadDate.seconds * 1000);
-		this.convertedUnloadDate = new Date(unloadDate.seconds * 1000);
 	}
 
 	ngOnDestroy() {

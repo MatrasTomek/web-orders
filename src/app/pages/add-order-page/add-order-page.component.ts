@@ -263,11 +263,21 @@ export class AddOrderPageComponent implements OnInit {
 
 		const orderNumber = this.orderNumberGen.numberGenerator(ordersLength + 1);
 
+		const orderDetails = this.orderForm.value;
+
+		const loadDateMilliseconds = orderDetails.loadDate ? new Date(orderDetails.loadDate).getTime() : null;
+		const unloadDateMilliseconds = orderDetails.unloadDate ? new Date(orderDetails.unloadDate).getTime() : null;
+
 		const completeOrder = {
+			...(this.orderEditData?.id ? { id: this.orderEditData.id } : {}),
 			orderNumber: orderNumber,
 			clientDetails: this.selectedCustomer,
 			carrierDetails: this.selectedCarrier,
-			orderDetails: this.orderForm.value,
+			orderDetails: {
+				...orderDetails,
+				loadDate: loadDateMilliseconds,
+				unloadDate: unloadDateMilliseconds,
+			},
 			conditions: this.conditionForm.value,
 		};
 
@@ -277,6 +287,11 @@ export class AddOrderPageComponent implements OnInit {
 			} else {
 				this.store.dispatch(addOrder({ Order: completeOrder as IOrder }));
 			}
+
+			console.log(Object.keys(this.orderEditData).length !== 0);
+			console.log(this.orderEditData?.id);
+
+			console.log(completeOrder);
 		} catch (e) {
 			console.error(e);
 

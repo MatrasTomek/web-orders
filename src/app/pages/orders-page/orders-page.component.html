@@ -65,7 +65,12 @@
 						</div>
 					</td>
 					<td *ngFor="let col of selectedColumns">
-						{{ resolveField(order, col.field) }}
+						<span *ngIf="col.field === 'orderDetails.loadDate' || col.field === 'orderDetails.unloadDate'">
+							{{ resolveField(order, col.field) | date : 'dd/MM/yyyy HH:mm' }}
+						</span>
+						<span *ngIf="col.field !== 'orderDetails.loadDate' && col.field !== 'orderDetails.unloadDate'">
+							{{ resolveField(order, col.field) }}
+						</span>
 					</td>
 				</tr>
 			</ng-template>

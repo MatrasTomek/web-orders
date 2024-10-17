@@ -35,28 +35,28 @@ export class OrdersPageComponent implements OnInit {
 		});
 
 		this.cols = [
-			{ field: 'orderNumber', header: 'Numer zlecenia', selected: true },
+			{ field: 'orderNumber', header: 'Numer', selected: true },
 			{ field: 'carrierDetails.name', header: 'Nazwa prewoźnika', selected: true },
 			{ field: 'carrierDetails.adress', header: 'Adres prewoźnika' },
 			{ field: 'carrierDetails.phone', header: 'Telefon prewoźnika' },
 			{ field: 'carrierDetails.vat', header: 'VAT prewoźnika' },
-			{ field: 'carrierDetails.email', header: 'eMail prewoźnika' },
-			{ field: 'clientDetails.name', header: 'Nazwa klienta', selected: true },
+			{ field: 'carrierDetails.email', header: 'eMail przewoźnika' },
+			{ field: 'clientDetails.name', header: 'Nazwa klienta' },
 			{ field: 'clientDetails.adress', header: 'Adres klienta' },
 			{ field: 'clientDetails.phone', header: 'Telefon klienta' },
 			{ field: 'clientDetails.vat', header: 'VAT klienta' },
 			{ field: 'clientDetails.email', header: 'eMail klienta' },
-			{ field: 'orderDetails.loadDate.seconds', header: 'Data załadunku', selected: true },
-			{ field: 'orderDetails.loadPlace', header: 'Miejsce załadunku', selected: true },
-			{ field: 'orderDetails.loadAddress', header: 'Adres załadunku', selected: true },
-			{ field: 'orderDetails.unloadDate.seconds', header: 'Data rozładunku', selected: true },
-			{ field: 'orderDetails.unloadPlace', header: 'Miejsce rozładunku', selected: true },
-			{ field: 'orderDetails.unloadAddress', header: 'Adres rozładunku', selected: true },
+			{ field: 'orderDetails.loadDate', header: 'Data załadunku' },
+			{ field: 'orderDetails.loadPlace', header: 'Miejsce załadunku' },
+			{ field: 'orderDetails.loadAddress', header: 'Adres załadunku' },
+			{ field: 'orderDetails.unloadDate', header: 'Data rozładunku' },
+			{ field: 'orderDetails.unloadPlace', header: 'Miejsce rozładunku' },
+			{ field: 'orderDetails.unloadAddress', header: 'Adres rozładunku' },
 			{ field: 'orderDetails.dimension', header: 'Ilość', selected: true },
 			{ field: 'orderDetails.weight', header: 'Waga', selected: true },
 			{ field: 'orderDetails.goods', header: 'Towar' },
-			{ field: 'orderDetails.driver', header: 'Kierowca', selected: true },
-			{ field: 'orderDetails.truck', header: 'Samochód', selected: true },
+			{ field: 'orderDetails.driver', header: 'Kierowca' },
+			{ field: 'orderDetails.truck', header: 'Samochód' },
 			{ field: 'conditions.adrDetails', header: 'Adr wymagania' },
 			{ field: 'conditions.frigoDetails', header: 'Chłodnia wymagania' },
 			{ field: 'conditions.fixDetails', header: 'Czas tranzytu' },
@@ -102,7 +102,7 @@ export class OrdersPageComponent implements OnInit {
 	openConfirmationModal($event: Event, order: IOrder) {
 		$event.preventDefault();
 
-		this.confirmationMessage = `Czy chesz usunąć zlecenie: ${'test'} ?`;
+		this.confirmationMessage = `Czy chesz usunąć zlecenie: ${order.orderNumber} ?`;
 		this.activeOrderId = order.id;
 		this.modal.toggleModal('confirmationModal');
 	}

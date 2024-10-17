@@ -28,14 +28,14 @@
 			<div class="show-order-wrapper__dates">
 				<div>
 					<h4>
-						Załadunek -- <span>{{ convertedLoadDate | date : 'dd/MM/yyyy HH:mm' }}</span>
+						Załadunek -- <span>{{ activeOrder?.orderDetails?.loadDate | date : 'dd/MM/yyyy HH:mm' }}</span>
 					</h4>
 					<p>{{ activeOrder?.orderDetails?.loadAddress }} | {{ activeOrder?.orderDetails?.loadPlace }}</p>
 				</div>
 				<div class="separator"></div>
 				<div>
 					<h4>
-						Rozładunek -- <span>{{ convertedUnloadDate | date : 'dd/MM/yyyy HH:mm' }}</span>
+						Rozładunek -- <span>{{ activeOrder?.orderDetails?.unloadDate | date : 'dd/MM/yyyy HH:mm' }}</span>
 					</h4>
 					<p>{{ activeOrder?.orderDetails?.unloadAddress }} | {{ activeOrder?.orderDetails?.unloadPlace }}</p>
 				</div>
