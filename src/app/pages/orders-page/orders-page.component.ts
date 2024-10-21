@@ -21,6 +21,7 @@ export class OrdersPageComponent implements OnInit {
 
 	orders$: Observable<IOrder[]> = this.store.select(selectAllOrders);
 	cols: any[] = [];
+	ordersList: IOrder[] = [];
 	selectedColumns: any[] = [];
 	activeOrder: IOrder | null = null;
 	activeOrderId: string | undefined = undefined;
@@ -31,11 +32,13 @@ export class OrdersPageComponent implements OnInit {
 		this.orders$.subscribe((orders) => {
 			if (!orders || orders.length === 0) {
 				this.store.dispatch(loadOrders());
+			} else {
+				this.ordersList = [...orders];
 			}
 		});
 
 		this.cols = [
-			{ field: 'orderNumber', header: 'Numer', selected: true },
+			{ field: 'orderNumber', header: 'Numer', selected: true, width: '10rem' },
 			{ field: 'carrierDetails.name', header: 'Nazwa prewoźnika', selected: true },
 			{ field: 'carrierDetails.adress', header: 'Adres prewoźnika' },
 			{ field: 'carrierDetails.phone', header: 'Telefon prewoźnika' },
@@ -53,7 +56,7 @@ export class OrdersPageComponent implements OnInit {
 			{ field: 'orderDetails.unloadPlace', header: 'Miejsce rozładunku' },
 			{ field: 'orderDetails.unloadAddress', header: 'Adres rozładunku' },
 			{ field: 'orderDetails.dimension', header: 'Ilość', selected: true },
-			{ field: 'orderDetails.weight', header: 'Waga', selected: true },
+			{ field: 'orderDetails.weight', header: 'Waga', selected: true, width: '10rem' },
 			{ field: 'orderDetails.goods', header: 'Towar' },
 			{ field: 'orderDetails.driver', header: 'Kierowca' },
 			{ field: 'orderDetails.truck', header: 'Samochód' },
@@ -85,6 +88,7 @@ export class OrdersPageComponent implements OnInit {
 
 	clear(table: Table) {
 		table.clear();
+		this.ordersList = [...this.ordersList];
 	}
 
 	goToAddOrder(order: IOrder) {
@@ -120,5 +124,19 @@ export class OrdersPageComponent implements OnInit {
 
 		this.activeOrder = order;
 		this.modal.toggleModal('showOrder');
+	}
+
+	sortNestedField(event: any) {
+		const value1 = this.resolveField(event.data[event.index1], event.field);
+		const value2 = this.resolveField(event.data[event.index2], event.field);
+
+		let result = null;
+
+		if (value1 == null && value2 != null) result = -1;
+		else if (value1 != null && value2 == null) result = 1;
+		else if (value1 == null && value2 == null) result = 0;
+		else result = value1.localeCompare(value2);
+
+		return event.order * result;
 	}
 }

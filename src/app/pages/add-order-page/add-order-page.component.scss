@@ -33,14 +33,21 @@
 	}
 
 	.item-wrapper {
-		&__buttons {
+		&__header {
 			width: 100%;
 			display: flex;
 			justify-content: space-between;
+		}
+		&__buttons {
+			width: 100%;
 
-			p-dropdown {
-				width: 70%;
-				max-width: 70%;
+			.p-dropdown {
+				width: calc(100% - 33px);
+				max-width: calc(100% - 33px);
+
+				.p-dropdown-clear-icon {
+					right: 7px !important;
+				}
 			}
 		}
 	}

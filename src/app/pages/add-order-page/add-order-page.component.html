@@ -11,7 +11,10 @@
 
 		<div *ngIf="activeIndex === 0" class="forms__customer">
 			<div class="item-wrapper">
-				<h3 class="mb-3">Klient</h3>
+				<div class="item-wrapper__header mb-4">
+					<h3 class="mb-3">Klient</h3>
+					<p-button type="button" label="Dodaj" (click)="addCustomer($event, 'client')"> </p-button>
+				</div>
 				<div class="item-wrapper__buttons">
 					<p-dropdown
 						[options]="(customers$ | async) || []"
@@ -24,7 +27,7 @@
 					>
 						<ng-template pTemplate="selectedItem">
 							<div class="flex align-items-center gap-2" *ngIf="selectedCustomer">
-								<div>{{ selectedCustomer.name }} ({{ selectedCustomer.vat }})</div>
+								<div>{{ selectedCustomer.name }}</div>
 							</div>
 						</ng-template>
 
@@ -34,7 +37,6 @@
 							</div>
 						</ng-template>
 					</p-dropdown>
-					<p-button type="button" label="Dodaj" (click)="addCustomer($event, 'client')"> </p-button>
 				</div>
 				<div *ngIf="selectedCustomer" class="item-wrapper__details item-details mt-3">
 					<div class="item-details__wrapper">
@@ -60,7 +62,10 @@
 				</div>
 			</div>
 			<div class="item-wrapper">
-				<h3 class="mb-3">Przewoźnik</h3>
+				<div class="item-wrapper__header mb-4">
+					<h3 class="mb-3">Przewoźnik</h3>
+					<p-button type="button" label="Dodaj " (click)="addCustomer($event, 'carrier')"> </p-button>
+				</div>
 				<div class="item-wrapper__buttons">
 					<p-dropdown
 						[options]="(customers$ | async) || []"
@@ -73,7 +78,7 @@
 					>
 						<ng-template pTemplate="selectedItem">
 							<div class="flex align-items-center gap-2" *ngIf="selectedCarrier">
-								<div>{{ selectedCarrier.name }} ({{ selectedCarrier.vat }})</div>
+								<div>{{ selectedCarrier.name }}</div>
 							</div>
 						</ng-template>
 
@@ -83,7 +88,6 @@
 							</div>
 						</ng-template>
 					</p-dropdown>
-					<p-button type="button" label="Dodaj " (click)="addCustomer($event, 'carrier')"> </p-button>
 				</div>
 				<div *ngIf="selectedCarrier" class="item-wrapper__details item-details mt-3">
 					<div class="item-details__wrapper">

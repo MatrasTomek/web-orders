@@ -18,6 +18,7 @@ export class CustomersPageComponent {
 	constructor(public modal: ModalService, private store: Store) {}
 
 	customers$: Observable<ICustomer[]> = this.store.select(selectAllCustomers);
+	customersList: ICustomer[] = [];
 	activeCustomer: ICustomer | null = null;
 	customerId: string | undefined = undefined;
 	confirmationMessage: string = '';
@@ -26,6 +27,8 @@ export class CustomersPageComponent {
 		this.customers$.subscribe((customers) => {
 			if (!customers || customers.length === 0) {
 				this.store.dispatch(loadCustomers());
+			} else {
+				this.customersList = [...customers];
 			}
 		});
 	}
@@ -44,6 +47,7 @@ export class CustomersPageComponent {
 
 	clear(table: Table) {
 		table.clear();
+		this.customersList = [...this.customersList];
 	}
 
 	editCustomer($event: Event, customer: ICustomer) {

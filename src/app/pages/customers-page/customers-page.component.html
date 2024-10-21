@@ -5,9 +5,9 @@
 	</div>
 	<div class="tables mt-4">
 		<p-table
-			*ngIf="customers$ | async as customers"
+			*ngIf="customersList"
 			#customersTb
-			[value]="customers"
+			[value]="customersList"
 			dataKey="id"
 			[rows]="10"
 			[showCurrentPageReport]="true"
