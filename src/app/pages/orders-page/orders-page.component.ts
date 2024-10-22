@@ -63,6 +63,7 @@ export class OrdersPageComponent implements OnInit {
 			{ field: 'conditions.adrDetails', header: 'Adr wymagania' },
 			{ field: 'conditions.frigoDetails', header: 'Chłodnia wymagania' },
 			{ field: 'conditions.fixDetails', header: 'Czas tranzytu' },
+			{ field: 'conditions.isFrachtPln', header: 'Waluta', hidden: true },
 			{ field: 'conditions.customerFreight', header: 'Fracht klienta', selected: true },
 			{ field: 'conditions.customerTerm', header: 'Termin klienta' },
 			{ field: 'conditions.carrierFreight', header: 'Fracht przewoźnika', selected: true },
@@ -71,7 +72,7 @@ export class OrdersPageComponent implements OnInit {
 		];
 
 		this.selectedColumns = this.cols.filter((col) => col.selected);
-		this.fieldsArray = this.cols.map((col) => col.field);
+		this.fieldsArray = this.cols.filter((col) => !col.hidden).map((col) => col.field);
 	}
 
 	openAddModal($event: Event) {
@@ -91,13 +92,14 @@ export class OrdersPageComponent implements OnInit {
 		this.ordersList = [...this.ordersList];
 	}
 
-	goToAddOrder(order: IOrder) {
+	goToEditOrCopyOrder(order: IOrder, action: string) {
 		const orderParse = {
 			clientDetails: JSON.stringify(order.clientDetails),
 			carrierDetails: JSON.stringify(order.carrierDetails),
 			orderDetails: JSON.stringify(order.orderDetails),
 			conditions: JSON.stringify(order.conditions),
-			id: order.id,
+			...(action === 'edit' && { id: order.id }),
+			...(action === 'edit' && { orderNumber: order.orderNumber }),
 		};
 
 		this.router.navigate(['/add-order'], { queryParams: orderParse });
@@ -117,6 +119,12 @@ export class OrdersPageComponent implements OnInit {
 
 	resolveField(obj: any, path: string) {
 		return path.split('.').reduce((o, i) => (o ? o[i] : null), obj);
+	}
+
+	combineFields(order: any, field: string, curr: any): string {
+		const value = this.resolveField(order, field);
+		const currency = this.resolveField(order, curr);
+		return `${value} ${currency ? 'PLN' : 'EUR'}`;
 	}
 
 	showOrder($event: Event, order: IOrder) {

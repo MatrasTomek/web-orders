@@ -58,14 +58,14 @@
 								tooltipPosition="top"
 								style="margin-left: 1rem"
 								class="pi pi-pencil table-icon"
-								(click)="goToAddOrder(order)"
+								(click)="goToEditOrCopyOrder(order, 'edit')"
 							></i>
 							<i
 								pTooltip="Kopiuj"
 								tooltipPosition="top"
 								style="margin-left: 1rem"
 								class="pi pi-copy table-icon"
-								(click)="goToAddOrder(order)"
+								(click)="goToEditOrCopyOrder(order, 'copy')"
 							></i>
 							<i
 								pTooltip="Drukuj"
@@ -80,7 +80,20 @@
 						<span *ngIf="col.field === 'orderDetails.loadDate' || col.field === 'orderDetails.unloadDate'">
 							{{ resolveField(order, col.field) | date : 'dd/MM/yyyy HH:mm' }}
 						</span>
-						<span *ngIf="col.field !== 'orderDetails.loadDate' && col.field !== 'orderDetails.unloadDate'">
+						<span *ngIf="col.field === 'conditions.customerFreight'">
+							{{ combineFields(order, col.field, 'conditions.isFrachtPln') }}
+						</span>
+						<span *ngIf="col.field === 'conditions.carrierFreight'">
+							{{ combineFields(order, col.field, 'conditions.isFrachtPln') }}
+						</span>
+						<span
+							*ngIf="
+								col.field !== 'orderDetails.loadDate' &&
+								col.field !== 'orderDetails.unloadDate' &&
+								col.field !== 'conditions.customerFreight' &&
+								col.field !== 'conditions.carrierFreight'
+							"
+						>
 							{{ resolveField(order, col.field) }}
 						</span>
 					</td>

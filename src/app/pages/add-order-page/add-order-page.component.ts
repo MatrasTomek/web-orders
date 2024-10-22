@@ -125,6 +125,27 @@ export class AddOrderPageComponent implements OnInit {
 			}
 		});
 
+		this.loadDate.markAsTouched();
+		this.loadDate.markAsDirty();
+		this.loadPlace.markAsTouched();
+		this.loadPlace.markAsDirty();
+		this.loadAddress.markAsTouched();
+		this.loadAddress.markAsDirty();
+		this.unloadDate.markAsTouched();
+		this.unloadDate.markAsDirty();
+		this.unloadPlace.markAsTouched();
+		this.unloadPlace.markAsDirty();
+		this.unloadAddress.markAsTouched();
+		this.unloadAddress.markAsDirty();
+		this.customerTerm.markAsTouched();
+		this.customerTerm.markAsDirty();
+		this.customerFreight.markAsTouched();
+		this.customerFreight.markAsDirty();
+		this.carrierTerm.markAsTouched();
+		this.carrierTerm.markAsDirty();
+		this.carrierFreight.markAsTouched();
+		this.carrierFreight.markAsDirty();
+
 		this.items = [
 			{
 				label: 'Klient | Przewoźnik',
@@ -241,7 +262,7 @@ export class AddOrderPageComponent implements OnInit {
 				this.conditionForm.reset();
 				break;
 			default:
-				console.log('Nieznana wartość');
+				console.error('Nieznana wartość');
 		}
 
 		// $event.preventDefault();
@@ -270,7 +291,7 @@ export class AddOrderPageComponent implements OnInit {
 
 		const completeOrder = {
 			...(this.orderEditData?.id ? { id: this.orderEditData.id } : {}),
-			orderNumber: orderNumber,
+			orderNumber: this.orderEditData?.orderNumber ? this.orderEditData?.orderNumber : orderNumber,
 			clientDetails: this.selectedCustomer,
 			carrierDetails: this.selectedCarrier,
 			orderDetails: {
@@ -282,16 +303,12 @@ export class AddOrderPageComponent implements OnInit {
 		};
 
 		try {
-			if (Object.keys(this.orderEditData).length !== 0) {
-				this.store.dispatch(editOrder({ orderId: this.orderEditData?.id, order: completeOrder as IOrder }));
+			if (Object.keys(this.orderEditData).length !== 0 && this.orderEditData?.id) {
+				this.store.dispatch(editOrder({ orderId: this.orderEditData.id, order: completeOrder as IOrder }));
 			} else {
-				this.store.dispatch(addOrder({ Order: completeOrder as IOrder }));
+				console.log('copy or add', completeOrder);
+				// this.store.dispatch(addOrder({ Order: completeOrder as IOrder }));
 			}
-
-			console.log(Object.keys(this.orderEditData).length !== 0);
-			console.log(this.orderEditData?.id);
-
-			console.log(completeOrder);
 		} catch (e) {
 			console.error(e);
 
