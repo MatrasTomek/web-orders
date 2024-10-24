@@ -18,9 +18,10 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { reducers } from './store/reducers';
 import { effects } from './store/effects';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 @NgModule({
-	declarations: [AppComponent, NavComponent],
+	declarations: [AppComponent, NavComponent, SpinnerComponent],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,

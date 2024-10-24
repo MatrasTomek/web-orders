@@ -35,7 +35,7 @@ export const orderReducer = createReducer(
 	on(addOrder, (state) => ({ ...state, loading: true })),
 	on(addOrderSuccess, (state, { order }) => ({
 		...state,
-		orders: [...state.orders, order],
+		orders: [order, ...state.orders, order],
 		loading: false,
 	})),
 	on(addOrderFailure, (state, { error }) => ({ ...state, error, loading: false })),

@@ -306,8 +306,7 @@ export class AddOrderPageComponent implements OnInit {
 			if (Object.keys(this.orderEditData).length !== 0 && this.orderEditData?.id) {
 				this.store.dispatch(editOrder({ orderId: this.orderEditData.id, order: completeOrder as IOrder }));
 			} else {
-				console.log('copy or add', completeOrder);
-				// this.store.dispatch(addOrder({ Order: completeOrder as IOrder }));
+				this.store.dispatch(addOrder({ Order: completeOrder as IOrder }));
 			}
 		} catch (e) {
 			console.error(e);

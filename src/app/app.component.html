@@ -1,13 +1,11 @@
 <app-nav></app-nav>
 
-<app-login-page
-  *ngIf="!(auth.isAuthenticated$ | async); else startPage"
-></app-login-page>
+<app-login-page *ngIf="!(auth.isAuthenticated$ | async); else startPage"></app-login-page>
 
 <ng-template #startPage>
-  <router-outlet></router-outlet>
+	<router-outlet></router-outlet>
 </ng-template>
 
-<app-register-modal
-  *ngIf="!(auth.isAuthenticatesWithDelay$ | async)"
-></app-register-modal>
+<app-register-modal *ngIf="!(auth.isAuthenticatesWithDelay$ | async)"></app-register-modal>
+
+<app-spinner *ngIf="showSpinner$ | async"></app-spinner>

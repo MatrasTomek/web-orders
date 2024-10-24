@@ -35,7 +35,7 @@ export const customerReducer = createReducer(
 	on(addCustomer, (state) => ({ ...state, loading: true })),
 	on(addCustomerSuccess, (state, { customer }) => ({
 		...state,
-		customers: [...state.customers, customer],
+		customers: [customer, ...state.customers],
 		loading: false,
 	})),
 	on(addCustomerFailure, (state, { error }) => ({ ...state, error, loading: false })),

@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { showSpinner, hideSpinner } from '../store/actions/spinner.actions';
 import { ModalService } from '../services/modal.service';
 import { IOrder } from '../models/order.model';
 import jsPDF from 'jspdf';
@@ -12,7 +14,7 @@ import html2canvas from 'html2canvas';
 export class ShowOrderModalComponent {
 	@Input() activeOrder: IOrder | null = null;
 
-	constructor(public modal: ModalService) {}
+	constructor(public modal: ModalService, private store: Store) {}
 
 	ngOnInit(): void {
 		this.modal.register('showOrder');
@@ -28,6 +30,7 @@ export class ShowOrderModalComponent {
 		const htmlContent = document.getElementById('htmlData');
 
 		if (htmlContent) {
+			this.store.dispatch(showSpinner());
 			setTimeout(() => {
 				html2canvas(htmlContent).then((canvas) => {
 					const imgData = canvas.toDataURL('image/png');
@@ -53,7 +56,11 @@ export class ShowOrderModalComponent {
 
 					doc.save(`zlecenie_${orderNumber}_.pdf`);
 				});
-			}, 500);
+			}, 100);
 		}
+		setTimeout(() => {
+			this.modal.toggleModal('showOrder');
+			this.store.dispatch(hideSpinner());
+		}, 2500);
 	}
 }

@@ -9,16 +9,9 @@ import { TooltipModule } from 'primeng/tooltip';
 import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
-  declarations: [InputComponent, ModalComponent, AlertComponent],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    NgxMaskDirective,
-    InputTextModule,
-    TooltipModule,
-  ],
-  exports: [InputComponent, ModalComponent, AlertComponent],
-  providers: [provideEnvironmentNgxMask()],
+	declarations: [InputComponent, ModalComponent, AlertComponent],
+	imports: [CommonModule, ReactiveFormsModule, FormsModule, NgxMaskDirective, InputTextModule, TooltipModule],
+	exports: [InputComponent, ModalComponent, AlertComponent],
+	providers: [provideEnvironmentNgxMask()],
 })
 export class SharedModule {}
