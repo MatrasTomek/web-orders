@@ -14,6 +14,10 @@ import html2canvas from 'html2canvas';
 export class ShowOrderModalComponent {
 	@Input() activeOrder: IOrder | null = null;
 
+	loadAdress: string = '';
+	unloadAdress: string = '';
+	customerName: string = '';
+
 	constructor(public modal: ModalService, private store: Store) {}
 
 	ngOnInit(): void {
@@ -28,6 +32,16 @@ export class ShowOrderModalComponent {
 		const doc = new jsPDF('p', 'mm', 'a4');
 
 		const htmlContent = document.getElementById('htmlData');
+
+		if (this.activeOrder) {
+			const { orderDetails, carrierDetails } = this.activeOrder;
+			this.loadAdress = orderDetails?.loadAddress.replace(/[0-9 -]/g, '').replace(/ /g, '_');
+			this.unloadAdress = orderDetails?.unloadAddress.replace(/[0-9 -]/g, '').replace(/ /g, '_');
+			this.customerName =
+				carrierDetails?.name.replace(/ /g, '').length > 15
+					? carrierDetails?.name.replace(/ /g, '').slice(0, 15)
+					: carrierDetails?.name.replace(/ /g, '');
+		}
 
 		if (htmlContent) {
 			this.store.dispatch(showSpinner());
@@ -54,7 +68,7 @@ export class ShowOrderModalComponent {
 						}
 					}
 
-					doc.save(`zlecenie_${orderNumber}_.pdf`);
+					doc.save(`${orderNumber}_${this.customerName}_${this.loadAdress}_${this.unloadAdress}.pdf`);
 				});
 			}, 100);
 		}
