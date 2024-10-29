@@ -4,12 +4,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import ICustomer from 'src/app/models/customer.model';
 import { IOrder } from 'src/app/models/order.model';
-import IUser from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { loadCustomers } from 'src/app/store/actions/customer.actions';
 import { loadOrders } from 'src/app/store/actions/order.actions';
 import { selectAllCustomers, selectCustomersLoading } from 'src/app/store/selectors/customer.selectors';
-import { selectAllOrders, selectOrdersLoading } from 'src/app/store/selectors/order.selectors';
+import { selectAllOrders } from 'src/app/store/selectors/order.selectors';
 
 @Component({
 	selector: 'app-start-page',

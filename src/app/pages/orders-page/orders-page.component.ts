@@ -130,8 +130,6 @@ export class OrdersPageComponent implements OnInit {
 	showOrder($event: Event, order: IOrder) {
 		$event.preventDefault();
 
-		console.log(order);
-
 		this.activeOrder = order;
 		this.modal.toggleModal('showOrder');
 	}
