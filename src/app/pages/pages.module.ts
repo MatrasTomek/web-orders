@@ -25,6 +25,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { ShowOrderModalModule } from '../show-order-modal/show-order-modal.module';
+import { TruncateTextModule } from '../shared/truncate-text/truncated-text.module';
 
 @NgModule({
 	declarations: [
@@ -57,6 +58,7 @@ import { ShowOrderModalModule } from '../show-order-modal/show-order-modal.modul
 		MultiSelectModule,
 		ShowOrderModalModule,
 		DropdownModule,
+		TruncateTextModule,
 	],
 	exports: [LoginPageComponent, AboutComponent],
 })

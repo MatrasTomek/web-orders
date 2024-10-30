@@ -39,12 +39,12 @@ export class OrdersPageComponent implements OnInit {
 
 		this.cols = [
 			{ field: 'orderNumber', header: 'Numer', selected: true, width: '10rem' },
-			{ field: 'carrierDetails.name', header: 'Nazwa prewoźnika', selected: true },
-			{ field: 'carrierDetails.adress', header: 'Adres prewoźnika' },
-			{ field: 'carrierDetails.phone', header: 'Telefon prewoźnika' },
-			{ field: 'carrierDetails.vat', header: 'VAT prewoźnika' },
+			{ field: 'carrierDetails.name', header: 'Przewoźnik', selected: true },
+			{ field: 'carrierDetails.adress', header: 'Adres przewoźnika' },
+			{ field: 'carrierDetails.phone', header: 'Telefon przewoźnika' },
+			{ field: 'carrierDetails.vat', header: 'VAT przewoźnika' },
 			{ field: 'carrierDetails.email', header: 'eMail przewoźnika' },
-			{ field: 'clientDetails.name', header: 'Nazwa klienta' },
+			{ field: 'clientDetails.name', header: 'Klient' },
 			{ field: 'clientDetails.adress', header: 'Adres klienta' },
 			{ field: 'clientDetails.phone', header: 'Telefon klienta' },
 			{ field: 'clientDetails.vat', header: 'VAT klienta' },

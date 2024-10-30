@@ -27,13 +27,25 @@
 					>
 						<ng-template pTemplate="selectedItem">
 							<div class="flex align-items-center gap-2" *ngIf="selectedCustomer">
-								<div>{{ selectedCustomer.name }}</div>
+								<div>
+									<app-truncate-text
+										[textToTruncate]="selectedCustomer.name"
+										[maxRows]="1"
+										[maxVisibleChars]="50"
+									></app-truncate-text>
+								</div>
 							</div>
 						</ng-template>
 
 						<ng-template let-customer pTemplate="item">
 							<div class="flex align-items-center gap-2">
-								<div>{{ customer.name }} ({{ customer.vat }})</div>
+								<div>
+									<app-truncate-text
+										[textToTruncate]="customer.name"
+										[maxRows]="1"
+										[maxVisibleChars]="50"
+									></app-truncate-text>
+								</div>
 							</div>
 						</ng-template>
 					</p-dropdown>
@@ -78,13 +90,25 @@
 					>
 						<ng-template pTemplate="selectedItem">
 							<div class="flex align-items-center gap-2" *ngIf="selectedCarrier">
-								<div>{{ selectedCarrier.name }}</div>
+								<div>
+									<app-truncate-text
+										[textToTruncate]="selectedCarrier.name"
+										[maxRows]="1"
+										[maxVisibleChars]="50"
+									></app-truncate-text>
+								</div>
 							</div>
 						</ng-template>
 
 						<ng-template let-customer pTemplate="item">
 							<div class="flex align-items-center gap-2">
-								<div>{{ customer.name }} ({{ customer.vat }})</div>
+								<div>
+									<app-truncate-text
+										[textToTruncate]="customer.name"
+										[maxRows]="1"
+										[maxVisibleChars]="50"
+									></app-truncate-text>
+								</div>
 							</div>
 						</ng-template>
 					</p-dropdown>

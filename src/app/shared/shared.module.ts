@@ -7,10 +7,11 @@ import { ModalComponent } from './modal/modal.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { TooltipModule } from 'primeng/tooltip';
 import { AlertComponent } from './alert/alert.component';
+import { TruncateTextModule } from './truncate-text/truncated-text.module';
 
 @NgModule({
 	declarations: [InputComponent, ModalComponent, AlertComponent],
-	imports: [CommonModule, ReactiveFormsModule, FormsModule, NgxMaskDirective, InputTextModule, TooltipModule],
+	imports: [CommonModule, ReactiveFormsModule, FormsModule, NgxMaskDirective, InputTextModule, TooltipModule, TruncateTextModule],
 	exports: [InputComponent, ModalComponent, AlertComponent],
 	providers: [provideEnvironmentNgxMask()],
 })

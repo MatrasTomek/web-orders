@@ -77,6 +77,13 @@
 						</div>
 					</td>
 					<td *ngFor="let col of selectedColumns">
+						<span *ngIf="col.field === 'carrierDetails.name' || col.field === 'clientDetails.name'">
+							<app-truncate-text
+								textToTruncate="{{ resolveField(order, col.field) }}"
+								[maxRows]="1"
+								[maxVisibleChars]="25"
+							></app-truncate-text>
+						</span>
 						<span *ngIf="col.field === 'orderDetails.loadDate' || col.field === 'orderDetails.unloadDate'">
 							{{ resolveField(order, col.field) | date : 'dd/MM/yyyy HH:mm' }}
 						</span>
@@ -88,6 +95,8 @@
 						</span>
 						<span
 							*ngIf="
+								col.field !== 'carrierDetails.name' &&
+								col.field !== 'clientDetails.name' &&
 								col.field !== 'orderDetails.loadDate' &&
 								col.field !== 'orderDetails.unloadDate' &&
 								col.field !== 'conditions.customerFreight' &&

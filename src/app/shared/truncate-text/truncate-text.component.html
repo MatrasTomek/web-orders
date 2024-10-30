@@ -1,0 +1,46 @@
+<ng-container *ngIf="!flexibleTruncate">
+	<span *ngIf="textToTruncate.toString().length <= maxVisibleChars; else showMoreText">
+		{{ textToTruncate }}
+	</span>
+</ng-container>
+
+<ng-template #showMoreText>
+	<span
+		[pTooltip]="textToTruncate"
+		[tooltipPosition]="tooltipPosition"
+		tooltipStyleClass="flyout-description-tooltip"
+		class="trimmed-value-single-line"
+		>{{ textToTruncate.toString() | slice : 0 : maxVisibleChars }} ...
+	</span>
+</ng-template>
+
+<ng-container *ngIf="flexibleTruncate && !customResizeSubject">
+	<div
+		class="trimmed-value"
+		#trimmedValueElement
+		[pTooltip]="textToTruncate"
+		tooltipPosition="left"
+		[tooltipDisabled]="!isTooltipHeightVisible"
+		(resized)="onResize()"
+		tooltipStyleClass="flyout-description-tooltip"
+		appendTo="body"
+		[style.-webkit-line-clamp]="maxRows"
+	>
+		{{ textToTruncate }}
+	</div>
+</ng-container>
+
+<ng-container *ngIf="flexibleTruncate && customResizeSubject">
+	<div
+		class="trimmed-value"
+		#trimmedValueElement
+		[pTooltip]="textToTruncate"
+		tooltipPosition="left"
+		[tooltipDisabled]="!isTooltipHeightVisible"
+		tooltipStyleClass="flyout-description-tooltip"
+		appendTo="body"
+		[style.-webkit-line-clamp]="maxRows"
+	>
+		{{ textToTruncate }}
+	</div>
+</ng-container>
