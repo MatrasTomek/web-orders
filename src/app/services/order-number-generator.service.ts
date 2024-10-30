@@ -6,8 +6,7 @@ import { Injectable } from '@angular/core';
 export class OrderNumberGeneratorService {
 	constructor() {}
 
-	numberGenerator(itemNumber: number) {
-		const date = new Date();
+	numberGenerator(itemNumber: number, date: any) {
 		const month = date.getMonth();
 		const year = date.getFullYear();
 

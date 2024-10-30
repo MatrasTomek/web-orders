@@ -282,7 +282,7 @@ export class AddOrderPageComponent implements OnInit {
 			ordersLength = orders.length;
 		});
 
-		const orderNumber = this.orderNumberGen.numberGenerator(ordersLength + 1);
+		const orderNumber = this.orderNumberGen.numberGenerator(ordersLength + 1, this.orderForm.value.loadDate);
 
 		const orderDetails = this.orderForm.value;
 

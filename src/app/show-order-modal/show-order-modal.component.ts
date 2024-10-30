@@ -49,26 +49,28 @@ export class ShowOrderModalComponent {
 				html2canvas(htmlContent).then((canvas) => {
 					const imgData = canvas.toDataURL('image/png');
 					const a4Width = 210;
-					const a4Height = 297;
+					const a4Height = 250;
 					const imgWidth = 190;
-					let imgHeight = (canvas.height * imgWidth) / canvas.width;
+					let imgHeight = (canvas.height * imgWidth) / canvas.width - 35;
 
 					const positionX = (a4Width - imgWidth) / 2;
 					let positionY = 10;
 
-					while (imgHeight > 0) {
-						if (imgHeight > a4Height - positionY) {
-							doc.addImage(imgData, 'PNG', positionX, positionY, imgWidth, a4Height - positionY);
-							doc.addPage();
-							imgHeight -= a4Height - positionY;
-							positionY = 0;
-						} else {
-							doc.addImage(imgData, 'PNG', positionX, positionY, imgWidth, imgHeight);
-							imgHeight = 0;
-						}
-					}
+					// while (imgHeight > 0) {
+					// 	if (imgHeight > a4Height - positionY) {
+					// 		doc.addImage(imgData, 'PNG', positionX, positionY, imgWidth, a4Height - positionY);
+					// 		doc.addPage();
+					// 		imgHeight -= a4Height - positionY;
+					// 		positionY = 0;
+					// 	} else {
+					// 		doc.addImage(imgData, 'PNG', positionX, positionY, imgWidth, imgHeight);
+					// 		imgHeight = 0;
+					// 	}
+					// }
 
-					doc.save(`${orderNumber}_${this.customerName}_${this.loadAdress}_${this.unloadAdress}.pdf`);
+					doc.addImage(imgData, 'PNG', positionX, positionY, imgWidth, imgHeight);
+
+					doc.save(`zlecenie_${orderNumber}.pdf`);
 				});
 			}, 100);
 		}
