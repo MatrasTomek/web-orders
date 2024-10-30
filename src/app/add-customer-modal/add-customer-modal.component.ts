@@ -4,6 +4,8 @@ import { addCustomer } from '../store/actions/customer.actions';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ModalService } from 'src/app/services/modal.service';
 import ICustomer from '../models/customer.model';
+import { first, Observable } from 'rxjs';
+import { selectAllCustomers } from '../store/selectors/customer.selectors';
 
 @Component({
 	selector: 'app-add-customer-modal',
@@ -16,6 +18,8 @@ export class AddCustomerModalComponent implements OnInit, OnDestroy {
 	@Output() addUpdate = new EventEmitter();
 
 	constructor(public modal: ModalService, private store: Store) {}
+
+	customers$: Observable<ICustomer[]> = this.store.select(selectAllCustomers);
 
 	inSubmission: boolean = false;
 
@@ -57,40 +61,48 @@ export class AddCustomerModalComponent implements OnInit, OnDestroy {
 		this.alertColor = 'info';
 		this.inSubmission = true;
 
-		try {
-			this.store.dispatch(addCustomer({ customer: this.customerForm.value as ICustomer }));
-		} catch (e) {
-			console.error(e);
+		const vat = this.customerForm.get('vat')?.value?.trim();
 
-			this.alertMsg = 'Cos poszło nie tak, spróbuj jeszcze raz za chwilę.';
-			this.alertColor = 'warning';
+		this.customers$.pipe(first()).subscribe((customers) => {
+			const vatExists = customers.some((customer) => customer.vat.trim() === vat);
+
+			if (vatExists) {
+				this.alertMsg = 'Klient z podanym numerem VAT już istnieje.';
+				this.alertColor = 'warning';
+				this.inSubmission = false;
+				setTimeout(() => {
+					this.showAlert = false;
+				}, 3000);
+				return;
+			}
+
+			try {
+				this.store.dispatch(addCustomer({ customer: this.customerForm.value as ICustomer }));
+			} catch (e) {
+				console.error(e);
+
+				this.alertMsg = 'Cos poszło nie tak, spróbuj jeszcze raz za chwilę.';
+				this.alertColor = 'warning';
+				this.inSubmission = false;
+
+				setTimeout(() => {
+					this.showAlert = false;
+				}, 3000);
+
+				return;
+			}
+
+			this.addUpdate.emit();
+
+			this.alertMsg = 'Sukces! Klient dodany.';
+			this.alertColor = 'success';
 			this.inSubmission = false;
+			this.closeModal('close');
 
 			setTimeout(() => {
 				this.showAlert = false;
-			}, 3000);
-
-			return;
-		}
-
-		this.addUpdate
-			.emit
-			// !this.kindOfCustomer
-			// 	? (this.customerForm.value as ICustomer)
-			// 	: {
-			// 			kindOfCustomer: this.kindOfCustomer,
-			// 			customer: this.customerForm.value as ICustomer,
-			// 	  }
-			();
-
-		this.alertMsg = 'Sukces! Klient dodany.';
-		this.alertColor = 'success';
-		this.inSubmission = false;
-		this.closeModal('close');
-
-		setTimeout(() => {
-			this.showAlert = false;
-		}, 2500);
+			}, 2500);
+		});
 	}
 
 	closeModal($event: any) {
