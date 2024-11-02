@@ -85,7 +85,7 @@
 							></app-truncate-text>
 						</span>
 						<span *ngIf="col.field === 'orderDetails.loadDate' || col.field === 'orderDetails.unloadDate'">
-							{{ resolveField(order, col.field) | date : 'dd/MM/yyyy HH:mm' }}
+							{{ resolveField(order, col.field) | date : 'dd/MM/yyyy' }}
 						</span>
 						<span *ngIf="col.field === 'conditions.customerFreight'">
 							{{ combineFields(order, col.field, 'conditions.isFrachtPln') }}

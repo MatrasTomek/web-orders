@@ -161,7 +161,17 @@
 					<div class="add-order-form-wrapper__pickup">
 						<div class="input-column-wrapper">
 							<label class="input-label">Data załadunku</label>
-							<p-calendar [formControl]="loadDate" [showIcon]="true" [showTime]="true" [showButtonBar]="true"></p-calendar>
+							<div class="input-column-wrapper__date">
+								<p-calendar
+									[formControl]="loadDate"
+									[showIcon]="true"
+									[showButtonBar]="true"
+									[showTime]="false"
+									dateFormat="dd.mm.yy"
+									[firstDayOfWeek]="1"
+								></p-calendar>
+								<app-input class="ml-8" [control]="loadHrs" [type]="'text'" [placeholder]="'Wpisz godzinę'"></app-input>
+							</div>
 						</div>
 						<div class="input-column-wrapper">
 							<label class="input-label">Miejsce załadunku</label>
@@ -175,7 +185,17 @@
 					<div class="add-order-form-wrapper__delivery">
 						<div class="input-column-wrapper">
 							<label class="input-label">Data rozładunku</label>
-							<p-calendar [formControl]="unloadDate" [showIcon]="true" [showTime]="true" [showButtonBar]="true"></p-calendar>
+							<div class="input-column-wrapper__date">
+								<p-calendar
+									[formControl]="unloadDate"
+									[showIcon]="true"
+									[showTime]="true"
+									[showButtonBar]="true"
+									dateFormat="dd.mm.yy"
+									[firstDayOfWeek]="1"
+								></p-calendar>
+								<app-input class="ml-8" [control]="unloadHrs" [type]="'text'" [placeholder]="'Wpisz godzinę'"></app-input>
+							</div>
 						</div>
 						<div class="input-column-wrapper">
 							<label class="input-label">Miejsce rozładunku</label>

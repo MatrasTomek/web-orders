@@ -57,10 +57,12 @@ export class AddOrderPageComponent implements OnInit {
 
 	//loads
 	loadDate = new FormControl('', [Validators.required]);
+	loadHrs = new FormControl('', [Validators.required]);
 	loadPlace = new FormControl('', [Validators.required]);
 	loadAddress = new FormControl('', [Validators.required]);
 
 	unloadDate = new FormControl('', [Validators.required]);
+	unloadHrs = new FormControl('', [Validators.required]);
 	unloadPlace = new FormControl('', [Validators.required]);
 	unloadAddress = new FormControl('', [Validators.required]);
 
@@ -73,9 +75,11 @@ export class AddOrderPageComponent implements OnInit {
 
 	orderForm = new FormGroup({
 		loadDate: this.loadDate,
+		loadHrs: this.loadHrs,
 		loadPlace: this.loadPlace,
 		loadAddress: this.loadAddress,
 		unloadDate: this.unloadDate,
+		unloadHrs: this.unloadHrs,
 		unloadPlace: this.unloadPlace,
 		unloadAddress: this.unloadAddress,
 		driver: this.driver,
@@ -127,12 +131,16 @@ export class AddOrderPageComponent implements OnInit {
 
 		this.loadDate.markAsTouched();
 		this.loadDate.markAsDirty();
+		this.loadHrs.markAsTouched();
+		this.loadHrs.markAsDirty();
 		this.loadPlace.markAsTouched();
 		this.loadPlace.markAsDirty();
 		this.loadAddress.markAsTouched();
 		this.loadAddress.markAsDirty();
 		this.unloadDate.markAsTouched();
 		this.unloadDate.markAsDirty();
+		this.unloadHrs.markAsTouched();
+		this.unloadHrs.markAsDirty();
 		this.unloadPlace.markAsTouched();
 		this.unloadPlace.markAsDirty();
 		this.unloadAddress.markAsTouched();
@@ -187,9 +195,11 @@ export class AddOrderPageComponent implements OnInit {
 
 		this.orderForm.patchValue({
 			loadDate: orderDetails?.loadDate || '',
+			loadHrs: orderDetails?.loadHrs || '',
 			loadPlace: orderDetails?.loadPlace || '',
 			loadAddress: orderDetails?.loadAddress || '',
 			unloadDate: orderDetails?.unloadDate || '',
+			unloadHrs: orderDetails?.unloadHrs || '',
 			unloadPlace: orderDetails?.unloadPlace || '',
 			unloadAddress: orderDetails?.unloadAddress || '',
 			driver: orderDetails?.driver || '',
@@ -269,6 +279,30 @@ export class AddOrderPageComponent implements OnInit {
 		// this.confirmationMessage = `Czy chcesz wyczyścić dane ?`;
 		// this.modal.toggleModal('confirmationModal');
 	}
+
+	plLocale: any = {
+		firstDayOfWeek: 1,
+		dayNames: ['niedziela', 'poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota'],
+		dayNamesShort: ['ndz', 'pon', 'wt', 'śr', 'czw', 'pt', 'sob'],
+		dayNamesMin: ['N', 'P', 'W', 'Ś', 'C', 'P', 'S'],
+		monthNames: [
+			'styczeń',
+			'luty',
+			'marzec',
+			'kwiecień',
+			'maj',
+			'czerwiec',
+			'lipiec',
+			'sierpień',
+			'wrzesień',
+			'październik',
+			'listopad',
+			'grudzień',
+		],
+		monthNamesShort: ['sty', 'lut', 'mar', 'kwi', 'maj', 'cze', 'lip', 'sie', 'wrz', 'paź', 'lis', 'gru'],
+		today: 'Dziś',
+		clear: 'Wyczyść',
+	};
 
 	acceptAllForm() {
 		this.showAlert = true;

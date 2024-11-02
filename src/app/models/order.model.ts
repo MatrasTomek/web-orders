@@ -15,9 +15,11 @@ export interface ICarrierDetails {
 
 export interface IOrderDetails {
 	loadDate: any;
+	loadHrs: string;
 	loadPlace: string;
 	loadAddress: string;
 	unloadDate: any;
+	unloadHrs: string;
 	unloadPlace: string;
 	unloadAddress: string;
 	driver?: string;

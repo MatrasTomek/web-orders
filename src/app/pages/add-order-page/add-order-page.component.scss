@@ -115,10 +115,22 @@
 
 			&__pickup {
 				flex-basis: 48%;
+
+				.input-column-wrapper {
+					&__date {
+						display: flex;
+					}
+				}
 			}
 
 			&__delivery {
 				flex-basis: 48%;
+
+				.input-column-wrapper {
+					&__date {
+						display: flex;
+					}
+				}
 			}
 
 			&__goods {
