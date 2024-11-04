@@ -57,7 +57,7 @@ export class ShowOrderModalComponent {
 					const a4Height = doc.internal.pageSize.getHeight();
 
 					const imgWidth = a4Width - 20;
-					const imgHeight = ((canvas.height * imgWidth) / canvas.width) * 0.85;
+					const imgHeight = ((canvas.height * imgWidth) / canvas.width) * 0.8;
 
 					const positionX = (a4Width - imgWidth) / 2;
 					const positionY = 5;
