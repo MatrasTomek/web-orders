@@ -16,6 +16,8 @@
 			[paginator]="true"
 			currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
 			[globalFilterFields]="fieldsArray"
+			[customSort]="true"
+			(sortFunction)="sortNestedField($event)"
 		>
 			<!-- [loading]="loading" -->
 			<ng-template pTemplate="caption">

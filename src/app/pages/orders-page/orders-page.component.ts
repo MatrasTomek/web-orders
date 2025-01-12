@@ -137,16 +137,43 @@ export class OrdersPageComponent implements OnInit {
 	}
 
 	sortNestedField(event: any) {
-		const value1 = this.resolveField(event.data[event.index1], event.field);
-		const value2 = this.resolveField(event.data[event.index2], event.field);
+		const { data, field, order } = event;
 
-		let result = null;
+		if (field === 'orderNumber') {
+			return data.sort((a: any, b: any) => {
+				const aValue = a[field];
+				const bValue = b[field];
 
-		if (value1 == null && value2 != null) result = -1;
-		else if (value1 != null && value2 == null) result = 1;
-		else if (value1 == null && value2 == null) result = 0;
-		else result = value1.localeCompare(value2);
+				const aLastFour = aValue.slice(-4);
+				const bLastFour = bValue.slice(-4);
 
-		return event.order * result;
+				const aFirstTwo = aValue.slice(0, 2);
+				const bFirstTwo = bValue.slice(0, 2);
+
+				const lastFourComparison = order * aLastFour.localeCompare(bLastFour, 'pl', { numeric: true });
+				if (lastFourComparison !== 0) {
+					return lastFourComparison;
+				}
+
+				return order * aFirstTwo.localeCompare(bFirstTwo, 'pl', { numeric: true });
+			});
+		} else {
+			return data.sort((a: any, b: any) => {
+				const aValue = this.getNestedValue(a, field);
+				const bValue = this.getNestedValue(b, field);
+
+				if (typeof aValue === 'string' && typeof bValue === 'string') {
+					return order * aValue.localeCompare(bValue, 'pl');
+				} else if (typeof aValue === 'number' && typeof bValue === 'number') {
+					return order * (aValue - bValue);
+				} else {
+					return 0;
+				}
+			});
+		}
+	}
+
+	getNestedValue(obj: any, path: string): any {
+		return path.split('.').reduce((acc, key) => acc && acc[key], obj);
 	}
 }
