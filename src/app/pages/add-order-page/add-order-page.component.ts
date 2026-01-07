@@ -313,7 +313,7 @@ export class AddOrderPageComponent implements OnInit {
 		let ordersLength: number = 0;
 
 		this.orders$.subscribe((orders) => {
-			ordersLength = orders.filter((order) => order?.orderNumber?.endsWith('2025')).length;
+			ordersLength = orders.filter((order) => order?.orderNumber?.endsWith('2026')).length;
 		});
 
 		const orderNumber = this.orderNumberGen.numberGenerator(ordersLength + 10, this.orderForm.value.loadDate);
