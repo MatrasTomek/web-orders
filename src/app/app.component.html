@@ -1,11 +1,29 @@
-<app-nav></app-nav>
-
-<app-login-page *ngIf="!(auth.isAuthenticated$ | async); else startPage"></app-login-page>
-
-<ng-template #startPage>
+<ng-container *ngIf="(auth.docsMode$ | async) && (auth.isAuthenticated$ | async); else fullApp">
+	<header id="header">
+		<nav class="flex align-items-center justify-content-between nav-wrapper">
+			<div class="nav-wrapper__link">
+				<a routerLink="/docs">WebOrders</a>
+			</div>
+			<div class="nav-wrapper__menu flex">
+				<ul class="flex">
+					<li class="ml-4 log-out" (click)="auth.logOut($event)">
+						<a>Wyloguj</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
 	<router-outlet></router-outlet>
+</ng-container>
+
+<ng-template #fullApp>
+	<app-nav></app-nav>
+	<app-login-page *ngIf="!(auth.isAuthenticated$ | async); else startPage"></app-login-page>
+	<ng-template #startPage>
+		<router-outlet></router-outlet>
+	</ng-template>
+	<app-register-modal *ngIf="!(auth.isAuthenticatesWithDelay$ | async)"></app-register-modal>
 </ng-template>
 
-<app-register-modal *ngIf="!(auth.isAuthenticatesWithDelay$ | async)"></app-register-modal>
-
+<app-login-modal></app-login-modal>
 <app-spinner *ngIf="showSpinner$ | async"></app-spinner>

@@ -1,0 +1,19 @@
+@import '../styles.scss';
+
+.nav-wrapper {
+	width: 100%;
+	height: $navComponentHeight;
+	background-color: $elementsBgColor;
+	padding: 2rem;
+
+	.log-out {
+		cursor: pointer;
+	}
+
+	&__link,
+	&__menu {
+		a {
+			font-size: $s-fz;
+		}
+	}
+}

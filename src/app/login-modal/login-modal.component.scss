@@ -1,0 +1,13 @@
+.login-modal-wrapper {
+	padding: 1rem 0;
+
+	.input-column-wrapper {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 1rem;
+	}
+
+	.buttons {
+		margin-top: 1rem;
+	}
+}

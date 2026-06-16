@@ -1,0 +1,38 @@
+<app-modal modalID="docsLogin">
+	<div heading>Logowanie - Dokumenty</div>
+	<div class="login-modal-wrapper">
+		<form #loginForm="ngForm" (ngSubmit)="login()">
+			<div class="input-column-wrapper">
+				<label class="input-label">Email</label>
+				<input
+					#email="ngModel"
+					type="email"
+					name="email"
+					[(ngModel)]="credentials.email"
+					required
+					placeholder="Wpisz email"
+					pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+					pInputText
+				/>
+				<p *ngIf="email.errors && email.touched && email.dirty" class="form-warning">Poprawny adres Email jest wymagany</p>
+			</div>
+			<div class="input-column-wrapper">
+				<label class="input-label">Hasło</label>
+				<input
+					#password="ngModel"
+					type="password"
+					name="password"
+					[(ngModel)]="credentials.password"
+					placeholder="Hasło"
+					required
+					pInputText
+				/>
+				<p *ngIf="password.errors && password.touched && password.dirty" class="form-warning">Hasło jest wymagane</p>
+			</div>
+			<div class="buttons">
+				<p-button type="submit" [disabled]="loginForm.invalid || inSubmission" label="Zaloguj"></p-button>
+			</div>
+		</form>
+		<app-alert *ngIf="showAlert" [color]="alertColor">{{ alertMsg }}</app-alert>
+	</div>
+</app-modal>

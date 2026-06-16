@@ -8,6 +8,7 @@ import { NavComponent } from './nav/nav.component';
 import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
 import { RegisterModalModule } from './register-modal/register-modal.module';
+import { LoginModalModule } from './login-modal/login-modal.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -30,6 +31,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 		PagesModule,
 		SharedModule,
 		RegisterModalModule,
+		LoginModalModule,
 		AngularFireModule.initializeApp(environment.firebase),
 		AngularFireAuthModule,
 		AngularFirestoreModule,
