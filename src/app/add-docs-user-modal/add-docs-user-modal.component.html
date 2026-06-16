@@ -1,0 +1,31 @@
+<app-modal modalID="addDocsUser">
+  <div heading>Dodaj użytkownika dokumentów</div>
+  <div class="add-docs-user-wrapper">
+    <form [formGroup]="docsUserForm" (ngSubmit)="addUser()">
+      <div class="input-column-wrapper">
+        <label class="input-label">Email</label>
+        <app-input
+          [control]="email"
+          [type]="'text'"
+          [placeholder]="'Wpisz email'"
+        ></app-input>
+      </div>
+      <div class="input-column-wrapper">
+        <label class="input-label">Hasło</label>
+        <app-input
+          [control]="password"
+          [type]="'password'"
+          [placeholder]="'Min. 8 znaków, wielka litera i cyfra'"
+        ></app-input>
+      </div>
+      <div class="buttons">
+        <p-button
+          type="submit"
+          [disabled]="docsUserForm.invalid || inSubmission"
+          label="Dodaj użytkownika"
+        ></p-button>
+      </div>
+    </form>
+    <app-alert *ngIf="showAlert" [color]="alertColor">{{ alertMsg }}</app-alert>
+  </div>
+</app-modal>

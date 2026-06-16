@@ -24,4 +24,9 @@ export class NavComponent implements OnInit {
 		$event.preventDefault();
 		this.modal.toggleModal('docsLogin');
 	}
+
+	openAddDocsUserModal($event: Event) {
+		$event.preventDefault();
+		this.modal.toggleModal('addDocsUser');
+	}
 }

@@ -7,6 +7,7 @@ import { CustomersPageComponent } from './pages/customers-page/customers-page.co
 import { AboutComponent } from './pages/about/about.component';
 import { AddOrderPageComponent } from './pages/add-order-page/add-order-page.component';
 import { DocsPageComponent } from './pages/docs-page/docs-page.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
 	{
@@ -16,23 +17,17 @@ const routes: Routes = [
 	{
 		path: 'orders',
 		component: OrdersPageComponent,
-		data: {
-			isAuth: true,
-		},
+		canActivate: [AuthGuard],
 	},
 	{
 		path: 'add-order',
 		component: AddOrderPageComponent,
-		data: {
-			isAuth: true,
-		},
+		canActivate: [AuthGuard],
 	},
 	{
 		path: 'customers',
 		component: CustomersPageComponent,
-		data: {
-			isAuth: true,
-		},
+		canActivate: [AuthGuard],
 	},
 
 	{

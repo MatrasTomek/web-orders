@@ -70,7 +70,13 @@ export class DocsPageComponent implements OnInit {
 		this.inSubmission = true;
 
 		try {
-			await this.fireAuth.signInWithEmailAndPassword(this.credentials.email, this.credentials.password);
+			const userCredential = await this.fireAuth.signInWithEmailAndPassword(this.credentials.email, this.credentials.password);
+			if (userCredential.user) {
+				const userData = await this.auth.getUserData(userCredential.user.uid);
+				if (userData?.docsOnly) {
+					this.auth.isDocsOnlyUser$.next(true);
+				}
+			}
 			this.auth.setDocsMode(true);
 		} catch (e) {
 			this.alertMsg = 'Błędny login lub hasło.';

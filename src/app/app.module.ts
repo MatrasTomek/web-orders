@@ -9,6 +9,7 @@ import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
 import { RegisterModalModule } from './register-modal/register-modal.module';
 import { LoginModalModule } from './login-modal/login-modal.module';
+import { AddDocsUserModalModule } from './add-docs-user-modal/add-docs-user-modal.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -32,6 +33,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 		SharedModule,
 		RegisterModalModule,
 		LoginModalModule,
+		AddDocsUserModalModule,
 		AngularFireModule.initializeApp(environment.firebase),
 		AngularFireAuthModule,
 		AngularFirestoreModule,

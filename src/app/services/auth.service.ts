@@ -5,6 +5,9 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { BehaviorSubject, Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { initializeApp, deleteApp } from 'firebase/app';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
 	providedIn: 'root',
@@ -14,6 +17,7 @@ export class AuthService {
 	public isAuthenticated$: Observable<boolean>;
 	public isAuthenticatesWithDelay$: Observable<boolean>;
 	public docsMode$ = new BehaviorSubject<boolean>(false);
+	public isDocsOnlyUser$ = new BehaviorSubject<boolean>(false);
 
 	constructor(
 		private auth: AngularFireAuth,
@@ -46,6 +50,28 @@ export class AuthService {
 		});
 	}
 
+	public async getUserData(uid: string): Promise<IUser | null> {
+		const doc = await this.usersCollection.doc(uid).get().toPromise();
+		return (doc?.data() as IUser) ?? null;
+	}
+
+	public async createDocsUser(email: string, password: string) {
+		const appName = `docs-temp-${Date.now()}`;
+		const tempApp = initializeApp(environment.firebase, appName);
+		const tempAuth = getAuth(tempApp);
+		try {
+			const userCredential = await createUserWithEmailAndPassword(tempAuth, email, password);
+			await this.usersCollection.doc(userCredential.user.uid).set({
+				name: email,
+				email: email,
+				phone: '',
+				docsOnly: true,
+			});
+		} finally {
+			await deleteApp(tempApp);
+		}
+	}
+
 	public setDocsMode(value: boolean) {
 		this.docsMode$.next(value);
 	}
@@ -53,6 +79,7 @@ export class AuthService {
 	public async logOut($event: Event) {
 		$event.preventDefault();
 		this.docsMode$.next(false);
+		this.isDocsOnlyUser$.next(false);
 		await this.auth.signOut();
 	}
 }

@@ -1,6 +1,7 @@
 export default interface IUser {
-  email: string;
-  password?: string;
-  name: string;
-  phone: string;
+	email: string;
+	password?: string;
+	name: string;
+	phone: string;
+	docsOnly?: boolean;
 }
