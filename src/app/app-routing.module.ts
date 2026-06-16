@@ -6,6 +6,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { CustomersPageComponent } from './pages/customers-page/customers-page.component';
 import { AboutComponent } from './pages/about/about.component';
 import { AddOrderPageComponent } from './pages/add-order-page/add-order-page.component';
+import { DocsPageComponent } from './pages/docs-page/docs-page.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,13 @@ const routes: Routes = [
     },
   },
 
+  {
+    path: 'docs',
+    component: DocsPageComponent,
+    data: {
+      isAuth: true,
+    },
+  },
   {
     path: 'about',
     component: AboutComponent,

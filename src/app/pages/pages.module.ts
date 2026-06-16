@@ -27,6 +27,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ShowOrderModalModule } from '../show-order-modal/show-order-modal.module';
 import { DocsModalModule } from '../docs-modal/docs-modal.module';
 import { TruncateTextModule } from '../shared/truncate-text/truncated-text.module';
+import { DocsPageComponent } from './docs-page/docs-page.component';
 
 @NgModule({
 	declarations: [
@@ -36,6 +37,7 @@ import { TruncateTextModule } from '../shared/truncate-text/truncated-text.modul
 		CustomersPageComponent,
 		AboutComponent,
 		AddOrderPageComponent,
+		DocsPageComponent,
 	],
 	imports: [
 		CommonModule,

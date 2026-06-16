@@ -1,0 +1,85 @@
+<div class="page-wrapper">
+	<h2 class="page-title mb-4">Dokumenty</h2>
+	<div class="tables mt-4">
+		<p-table
+			*ngIf="ordersList"
+			#docsTb
+			[value]="ordersList"
+			dataKey="id"
+			[rows]="10"
+			[showCurrentPageReport]="true"
+			[rowsPerPageOptions]="[10, 25, 50]"
+			[paginator]="true"
+			currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+			[globalFilterFields]="fieldsArray"
+			[customSort]="true"
+			(sortFunction)="sortNestedField($event)"
+		>
+			<ng-template pTemplate="caption">
+				<div class="flex">
+					<button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(docsTb)"></button>
+					<span class="p-input-icon-left ml-auto">
+						<i class="pi pi-search"></i>
+						<input pInputText type="text" placeholder="Wyszukaj" (input)="handleInput($event)" />
+					</span>
+				</div>
+			</ng-template>
+			<ng-template pTemplate="header">
+				<tr>
+					<th>
+						<div class="flex align-items-center">Opcje</div>
+					</th>
+					<th pSortableColumn="carrierDetails.name" style="min-width: 14rem">
+						Przewoźnik
+						<p-sortIcon field="carrierDetails.name"></p-sortIcon>
+					</th>
+					<th pSortableColumn="orderDetails.loadDate" style="min-width: 12rem">
+						Data załadunku
+						<p-sortIcon field="orderDetails.loadDate"></p-sortIcon>
+					</th>
+					<th pSortableColumn="orderDetails.unloadDate" style="min-width: 12rem">
+						Data rozładunku
+						<p-sortIcon field="orderDetails.unloadDate"></p-sortIcon>
+					</th>
+					<th pSortableColumn="orderDetails.loadPlace" style="min-width: 16rem">
+						Trasa
+						<p-sortIcon field="orderDetails.loadPlace"></p-sortIcon>
+					</th>
+				</tr>
+			</ng-template>
+			<ng-template pTemplate="body" let-order>
+				<tr>
+					<td style="width: 5rem" class="option-row">
+						<div class="flex">
+							<i
+								[pTooltip]="order.documentUrl ? 'Dokumenty' : 'Dodaj docs'"
+								tooltipPosition="top"
+								style="margin-left: 1rem"
+								[class]="'pi table-icon ' + (order.documentUrl ? 'pi-file-pdf' : 'pi-upload')"
+								(click)="openDocsModal($event, order)"
+							></i>
+						</div>
+					</td>
+					<td>
+						<app-truncate-text
+							textToTruncate="{{ resolveField(order, 'carrierDetails.name') }}"
+							[maxRows]="1"
+							[maxVisibleChars]="25"
+						></app-truncate-text>
+					</td>
+					<td>{{ resolveField(order, 'orderDetails.loadDate') | date: 'dd/MM/yyyy' }}</td>
+					<td>{{ resolveField(order, 'orderDetails.unloadDate') | date: 'dd/MM/yyyy' }}</td>
+					<td>
+						{{ resolveField(order, 'orderDetails.loadPlace') }} → {{ resolveField(order, 'orderDetails.unloadPlace') }}
+					</td>
+				</tr>
+			</ng-template>
+			<ng-template pTemplate="emptymessage">
+				<tr>
+					<td colspan="5">Brak zleceń.</td>
+				</tr>
+			</ng-template>
+		</p-table>
+	</div>
+</div>
+<app-docs-modal [activeOrder]="activeOrder"></app-docs-modal>
