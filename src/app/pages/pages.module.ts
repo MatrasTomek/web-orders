@@ -25,6 +25,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { ShowOrderModalModule } from '../show-order-modal/show-order-modal.module';
+import { DocsModalModule } from '../docs-modal/docs-modal.module';
 import { TruncateTextModule } from '../shared/truncate-text/truncated-text.module';
 
 @NgModule({
@@ -57,6 +58,7 @@ import { TruncateTextModule } from '../shared/truncate-text/truncated-text.modul
 		InputTextareaModule,
 		MultiSelectModule,
 		ShowOrderModalModule,
+		DocsModalModule,
 		DropdownModule,
 		TruncateTextModule,
 	],

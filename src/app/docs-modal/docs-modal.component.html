@@ -1,0 +1,59 @@
+<app-modal modalID="docsModal">
+	<div class="modal-header">
+		<h3>{{ hasDocument ? 'Dokumenty zlecenia' : 'Dodaj dokument' }}</h3>
+	</div>
+
+	<div class="modal-body">
+		<!-- View mode: document exists -->
+		<ng-container *ngIf="hasDocument">
+			<p class="doc-filename">
+				<i class="pi pi-file-pdf"></i>
+				{{ documentService.getFilenameFromUrl(activeOrder!.documentUrl!) }}
+			</p>
+			<div class="doc-actions">
+				<button pButton type="button" label="Podejrzyj" icon="pi pi-eye" class="p-button-outlined" (click)="openInNewTab()"></button>
+				<a [href]="activeOrder!.documentUrl" download>
+					<button pButton type="button" label="Pobierz" icon="pi pi-download" class="p-button-outlined ml-2"></button>
+				</a>
+			</div>
+			<div class="mt-3">
+				<button pButton type="button" label="Zastąp dokument" icon="pi pi-upload" class="p-button-text p-button-sm" (click)="switchToUpload()"></button>
+			</div>
+		</ng-container>
+
+		<!-- Upload mode: no document or replacing -->
+		<ng-container *ngIf="!hasDocument">
+			<div class="file-input-wrapper">
+				<label for="docFile" class="file-label">Wybierz plik (PDF lub zdjęcie)</label>
+				<input id="docFile" type="file" accept=".pdf,.jpg,.jpeg,.png" (change)="onFileSelected($event)" class="file-input" />
+			</div>
+			<p *ngIf="selectedFile" class="selected-file-name">
+				<i class="pi pi-file"></i> {{ selectedFile.name }}
+			</p>
+			<p *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</p>
+			<p *ngIf="successMessage" class="success-msg">{{ successMessage }}</p>
+		</ng-container>
+	</div>
+
+	<div class="modal-footer">
+		<ng-container *ngIf="!hasDocument">
+			<button
+				pButton
+				type="button"
+				label="Wyślij"
+				icon="{{ isUploading ? 'pi pi-spin pi-spinner' : 'pi pi-upload' }}"
+				[disabled]="!selectedFile || isUploading"
+				(click)="upload()"
+			></button>
+			<button
+				*ngIf="activeOrder?.documentUrl"
+				pButton
+				type="button"
+				label="Anuluj"
+				class="p-button-outlined ml-2"
+				(click)="cancelUpload()"
+			></button>
+		</ng-container>
+		<button pButton type="button" label="Zamknij" class="p-button-text ml-2" (click)="close()"></button>
+	</div>
+</app-modal>
