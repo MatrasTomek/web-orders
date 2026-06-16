@@ -1,4 +1,4 @@
-@import '../../../styles.scss';
+@import "mixins";
 
 :host ::ng-deep .add-order-wrapper {
 	p-steps {
