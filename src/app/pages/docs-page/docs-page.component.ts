@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Store } from '@ngrx/store';
 import { Table } from 'primeng/table';
 import { Observable } from 'rxjs';
 import { IOrder } from 'src/app/models/order.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { loadOrders } from 'src/app/store/actions/order.actions';
 import { selectAllOrders } from 'src/app/store/selectors/order.selectors';
@@ -15,8 +17,16 @@ import { selectAllOrders } from 'src/app/store/selectors/order.selectors';
 export class DocsPageComponent implements OnInit {
 	@ViewChild('docsTb') docsTable!: Table;
 
+	credentials = { email: '', password: '' };
+	inSubmission = false;
+	showAlert = false;
+	alertMsg = '';
+	alertColor = 'info';
+
 	constructor(
 		public modal: ModalService,
+		public auth: AuthService,
+		private fireAuth: AngularFireAuth,
 		private store: Store,
 	) {}
 
@@ -51,6 +61,22 @@ export class DocsPageComponent implements OnInit {
 	clear(table: Table) {
 		table.clear();
 		this.ordersList = [...this.ordersList];
+	}
+
+	async login() {
+		this.showAlert = true;
+		this.alertMsg = 'Proszę czekać, logowanie trwa...';
+		this.alertColor = 'info';
+		this.inSubmission = true;
+
+		try {
+			await this.fireAuth.signInWithEmailAndPassword(this.credentials.email, this.credentials.password);
+			this.auth.setDocsMode(true);
+		} catch (e) {
+			this.alertMsg = 'Błędny login lub hasło.';
+			this.alertColor = 'warning';
+			this.inSubmission = false;
+		}
 	}
 
 	openDocsModal($event: Event, order: IOrder) {

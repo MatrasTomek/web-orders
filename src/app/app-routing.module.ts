@@ -9,47 +9,44 @@ import { AddOrderPageComponent } from './pages/add-order-page/add-order-page.com
 import { DocsPageComponent } from './pages/docs-page/docs-page.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: StartPageComponent,
-  },
-  {
-    path: 'orders',
-    component: OrdersPageComponent,
-    data: {
-      isAuth: true,
-    },
-  },
-  {
-    path: 'add-order',
-    component: AddOrderPageComponent,
-    data: {
-      isAuth: true,
-    },
-  },
-  {
-    path: 'customers',
-    component: CustomersPageComponent,
-    data: {
-      isAuth: true,
-    },
-  },
+	{
+		path: '',
+		component: StartPageComponent,
+	},
+	{
+		path: 'orders',
+		component: OrdersPageComponent,
+		data: {
+			isAuth: true,
+		},
+	},
+	{
+		path: 'add-order',
+		component: AddOrderPageComponent,
+		data: {
+			isAuth: true,
+		},
+	},
+	{
+		path: 'customers',
+		component: CustomersPageComponent,
+		data: {
+			isAuth: true,
+		},
+	},
 
-  {
-    path: 'docs',
-    component: DocsPageComponent,
-    data: {
-      isAuth: true,
-    },
-  },
-  {
-    path: 'about',
-    component: AboutComponent,
-  },
+	{
+		path: 'docs',
+		component: DocsPageComponent,
+	},
+	{
+		path: 'about',
+		component: AboutComponent,
+	},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule],
 })
 export class AppRoutingModule {}

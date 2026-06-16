@@ -1,4 +1,43 @@
-<div class="page-wrapper">
+<ng-container *ngIf="!(auth.isAuthenticated$ | async)">
+	<div class="docs-login-wrapper">
+		<h2 class="page-title mb-4">Logowanie - Dokumenty</h2>
+		<form #loginForm="ngForm" (ngSubmit)="login()">
+			<div class="input-column-wrapper">
+				<label class="input-label">Email</label>
+				<input
+					#email="ngModel"
+					type="email"
+					name="email"
+					[(ngModel)]="credentials.email"
+					required
+					placeholder="Wpisz email"
+					pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+					pInputText
+				/>
+				<p *ngIf="email.errors && email.touched && email.dirty" class="form-warning">Poprawny adres Email jest wymagany</p>
+			</div>
+			<div class="input-column-wrapper">
+				<label class="input-label">Hasło</label>
+				<input
+					#password="ngModel"
+					type="password"
+					name="password"
+					[(ngModel)]="credentials.password"
+					placeholder="Hasło"
+					required
+					pInputText
+				/>
+				<p *ngIf="password.errors && password.touched && password.dirty" class="form-warning">Hasło jest wymagane</p>
+			</div>
+			<div class="buttons">
+				<p-button type="submit" [disabled]="loginForm.invalid || inSubmission" label="Zaloguj"></p-button>
+			</div>
+		</form>
+		<app-alert *ngIf="showAlert" [color]="alertColor">{{ alertMsg }}</app-alert>
+	</div>
+</ng-container>
+
+<div class="page-wrapper" *ngIf="auth.isAuthenticated$ | async">
 	<h2 class="page-title mb-4">Dokumenty</h2>
 	<div class="tables mt-4">
 		<p-table
@@ -69,9 +108,7 @@
 					</td>
 					<td>{{ resolveField(order, 'orderDetails.loadDate') | date: 'dd/MM/yyyy' }}</td>
 					<td>{{ resolveField(order, 'orderDetails.unloadDate') | date: 'dd/MM/yyyy' }}</td>
-					<td>
-						{{ resolveField(order, 'orderDetails.loadPlace') }} → {{ resolveField(order, 'orderDetails.unloadPlace') }}
-					</td>
+					<td>{{ resolveField(order, 'orderDetails.loadPlace') }} → {{ resolveField(order, 'orderDetails.unloadPlace') }}</td>
 				</tr>
 			</ng-template>
 			<ng-template pTemplate="emptymessage">
