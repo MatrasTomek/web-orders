@@ -76,6 +76,13 @@
 								class="pi pi-print table-icon"
 								(click)="showOrder($event, order)"
 							></i>
+							<i
+								[pTooltip]="order.documentUrl ? 'Dokumenty' : 'Dodaj docs'"
+								tooltipPosition="top"
+								style="margin-left: 1rem"
+								[class]="'pi table-icon ' + (order.documentUrl ? 'pi-file-pdf' : 'pi-upload')"
+								(click)="openDocsModal($event, order)"
+							></i>
 						</div>
 					</td>
 					<td *ngFor="let col of selectedColumns">
@@ -87,7 +94,7 @@
 							></app-truncate-text>
 						</span>
 						<span *ngIf="col.field === 'orderDetails.loadDate' || col.field === 'orderDetails.unloadDate'">
-							{{ resolveField(order, col.field) | date : 'dd/MM/yyyy' }}
+							{{ resolveField(order, col.field) | date: 'dd/MM/yyyy' }}
 						</span>
 						<span *ngIf="col.field === 'conditions.customerFreight'">
 							{{ combineFields(order, col.field, 'conditions.isFrachtPln') }}
@@ -119,6 +126,7 @@
 	</div>
 </div>
 <app-show-order-modal [activeOrder]="activeOrder"></app-show-order-modal>
+<app-docs-modal [activeOrder]="activeOrder"></app-docs-modal>
 <app-confirmation-modal
 	(confirmationFn)="deleteConfirmed($event)"
 	[activeItemId]="activeOrderId"

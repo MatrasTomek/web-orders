@@ -51,4 +51,5 @@ export interface IOrder {
 	carrierDetails: ICarrierDetails;
 	orderDetails: IOrderDetails;
 	conditions: IOrderConditions;
+	documentUrl?: string;
 }

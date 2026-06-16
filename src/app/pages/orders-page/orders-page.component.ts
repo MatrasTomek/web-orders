@@ -17,7 +17,11 @@ import { selectAllOrders } from 'src/app/store/selectors/order.selectors';
 export class OrdersPageComponent implements OnInit {
 	@ViewChild('ordersTb') ordersTable!: Table;
 
-	constructor(public modal: ModalService, private router: Router, private store: Store) {}
+	constructor(
+		public modal: ModalService,
+		private router: Router,
+		private store: Store,
+	) {}
 
 	orders$: Observable<IOrder[]> = this.store.select(selectAllOrders);
 	cols: any[] = [];
@@ -136,26 +140,36 @@ export class OrdersPageComponent implements OnInit {
 		this.modal.toggleModal('showOrder');
 	}
 
+	openDocsModal($event: Event, order: IOrder) {
+		$event.preventDefault();
+		this.activeOrder = order;
+		this.modal.toggleModal('docsModal');
+	}
+
 	sortNestedField(event: any) {
 		const { data, field, order } = event;
 
 		if (field === 'orderNumber') {
 			return data.sort((a: any, b: any) => {
-				const aValue = a[field];
-				const bValue = b[field];
+				const aValue: string = a[field] ?? '';
+				const bValue: string = b[field] ?? '';
 
-				const aLastFour = aValue.slice(-4);
-				const bLastFour = bValue.slice(-4);
+				// Format: {number}/{month}/{year}, e.g. "10/STY/2026"
+				const aParts = aValue.split('/');
+				const bParts = bValue.split('/');
 
-				const aFirstTwo = aValue.slice(0, 2);
-				const bFirstTwo = bValue.slice(0, 2);
+				const aYear = aParts[aParts.length - 1];
+				const bYear = bParts[bParts.length - 1];
 
-				const lastFourComparison = order * aLastFour.localeCompare(bLastFour, 'pl', { numeric: true });
-				if (lastFourComparison !== 0) {
-					return lastFourComparison;
+				const aNum = parseInt(aParts[0], 10);
+				const bNum = parseInt(bParts[0], 10);
+
+				const yearComparison = order * aYear.localeCompare(bYear, 'pl', { numeric: true });
+				if (yearComparison !== 0) {
+					return yearComparison;
 				}
 
-				return order * aFirstTwo.localeCompare(bFirstTwo, 'pl', { numeric: true });
+				return order * (aNum - bNum);
 			});
 		} else {
 			return data.sort((a: any, b: any) => {
