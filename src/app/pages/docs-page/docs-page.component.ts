@@ -91,6 +91,11 @@ export class DocsPageComponent implements OnInit {
 		this.modal.toggleModal('docsModal');
 	}
 
+	openStandaloneDocsModal() {
+		this.activeOrder = null;
+		this.modal.toggleModal('docsModal');
+	}
+
 	resolveField(obj: any, path: string) {
 		return path.split('.').reduce((o, i) => (o ? o[i] : null), obj);
 	}
