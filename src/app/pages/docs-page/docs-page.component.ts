@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Store } from '@ngrx/store';
 import { Table } from 'primeng/table';
 import { Observable } from 'rxjs';
-import { IOrder } from 'src/app/models/order.model';
+import { IOrder, STANDALONE_CARRIER_NAME } from 'src/app/models/order.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { loadOrders } from 'src/app/store/actions/order.actions';
@@ -46,7 +46,19 @@ export class DocsPageComponent implements OnInit {
 			if (!orders || orders.length === 0) {
 				this.store.dispatch(loadOrders());
 			} else {
-				this.ordersList = [...orders];
+				this.ordersList = orders.map((order) => {
+					if (order.isDocOnly && !order.carrierDetails?.name?.trim()) {
+						return {
+							...order,
+							carrierDetails: {
+								...order.carrierDetails,
+								name: STANDALONE_CARRIER_NAME,
+							},
+						};
+					}
+
+					return order;
+				});
 			}
 		});
 	}

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { IOrder } from '../models/order.model';
+import { IOrder, STANDALONE_CARRIER_NAME } from '../models/order.model';
 import { ModalService } from '../services/modal.service';
 import { DocumentService } from '../services/document.service';
 import { addOrder } from '../store/actions/order.actions';
@@ -23,7 +23,7 @@ export class AddDocOnlyModalComponent implements OnInit, OnDestroy {
 	constructor(
 		public modal: ModalService,
 		private store: Store,
-		private documentService: DocumentService
+		private documentService: DocumentService,
 	) {}
 
 	ngOnInit(): void {
@@ -49,12 +49,12 @@ export class AddDocOnlyModalComponent implements OnInit, OnDestroy {
 		this.errorMessage = '';
 		this.successMessage = '';
 
-		this.documentService.uploadDocument(this.selectedFile, 'dokument', this.unloadDate.value).subscribe({
+		this.documentService.uploadDocument(this.selectedFile, STANDALONE_CARRIER_NAME, this.unloadDate.value).subscribe({
 			next: (response) => {
 				const newOrder: IOrder = {
 					isDocOnly: true,
 					clientDetails: { adress: '', name: '', vat: '' },
-					carrierDetails: { adress: '', name: '', vat: '' },
+					carrierDetails: { adress: '', name: STANDALONE_CARRIER_NAME, vat: '' },
 					orderDetails: {
 						loadDate: null,
 						loadHrs: '',

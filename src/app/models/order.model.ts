@@ -44,7 +44,7 @@ export interface IOrderConditions {
 	description?: string;
 }
 
-export const STANDALONE_CARRIER_NAME = 'dokument';
+export const STANDALONE_CARRIER_NAME = 'OMEGA Dulowski';
 
 export function isStandaloneDocumentOrder(order: IOrder): boolean {
 	return !!order.isDocOnly;
