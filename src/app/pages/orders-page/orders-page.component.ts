@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Table } from 'primeng/table';
 import { Observable } from 'rxjs';
-import { IOrder } from 'src/app/models/order.model';
+import { IOrder, isStandaloneDocumentOrder } from 'src/app/models/order.model';
 import { ModalService } from 'src/app/services/modal.service';
 import { OrderService } from 'src/app/services/order.service';
 import { deleteOrder, loadOrders } from 'src/app/store/actions/order.actions';
@@ -37,7 +37,7 @@ export class OrdersPageComponent implements OnInit {
 			if (!orders || orders.length === 0) {
 				this.store.dispatch(loadOrders());
 			} else {
-				this.ordersList = [...orders];
+				this.ordersList = orders.filter((order) => !isStandaloneDocumentOrder(order));
 			}
 		});
 

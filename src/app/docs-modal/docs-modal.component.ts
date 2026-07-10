@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IOrder } from '../models/order.model';
+import { IOrder, STANDALONE_CARRIER_NAME } from '../models/order.model';
 import { ModalService } from '../services/modal.service';
 import { DocumentService } from '../services/document.service';
 import { addOrder, editOrder } from '../store/actions/order.actions';
@@ -13,7 +13,7 @@ import { addOrder, editOrder } from '../store/actions/order.actions';
 export class DocsModalComponent implements OnInit, OnDestroy {
 	@Input() activeOrder: IOrder | null = null;
 
-	readonly standaloneCarrierName = 'TOYOTA';
+	readonly standaloneCarrierName = STANDALONE_CARRIER_NAME;
 
 	selectedFile: File | null = null;
 	isUploading = false;
@@ -98,6 +98,7 @@ export class DocsModalComponent implements OnInit, OnDestroy {
 			},
 			conditions: { customerTerm: '', customerFreight: '', carrierTerm: '', carrierFreight: '' },
 			documentUrl,
+			isStandaloneDocument: true,
 		};
 	}
 
