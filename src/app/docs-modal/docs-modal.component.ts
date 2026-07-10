@@ -24,7 +24,7 @@ export class DocsModalComponent implements OnInit, OnDestroy {
 	constructor(
 		public modal: ModalService,
 		private store: Store,
-		public documentService: DocumentService
+		public documentService: DocumentService,
 	) {}
 
 	ngOnInit(): void {
@@ -50,7 +50,9 @@ export class DocsModalComponent implements OnInit, OnDestroy {
 	upload(): void {
 		if (!this.selectedFile) return;
 
-		const carrierName = this.activeOrder ? this.activeOrder.carrierDetails?.name || 'dokument' : this.standaloneCarrierName;
+		const carrierName = this.activeOrder
+			? this.activeOrder.carrierDetails?.name || this.standaloneCarrierName
+			: this.standaloneCarrierName;
 		const unloadDate = this.activeOrder ? this.activeOrder.orderDetails?.unloadDate : Date.now();
 
 		this.isUploading = true;
@@ -64,7 +66,7 @@ export class DocsModalComponent implements OnInit, OnDestroy {
 						editOrder({
 							orderId: this.activeOrder.id!,
 							order: { ...this.activeOrder, documentUrl: response.url },
-						})
+						}),
 					);
 				} else {
 					this.store.dispatch(addOrder({ Order: this.buildStandaloneOrder(response.url) }));
@@ -98,7 +100,7 @@ export class DocsModalComponent implements OnInit, OnDestroy {
 			},
 			conditions: { customerTerm: '', customerFreight: '', carrierTerm: '', carrierFreight: '' },
 			documentUrl,
-			isStandaloneDocument: true,
+			isDocOnly: true,
 		};
 	}
 

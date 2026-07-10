@@ -44,6 +44,12 @@ export interface IOrderConditions {
 	description?: string;
 }
 
+export const STANDALONE_CARRIER_NAME = 'dokument';
+
+export function isStandaloneDocumentOrder(order: IOrder): boolean {
+	return !!order.isDocOnly;
+}
+
 export interface IOrder {
 	id?: string;
 	orderNumber?: string;

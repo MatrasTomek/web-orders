@@ -120,4 +120,15 @@ export class DocsPageComponent implements OnInit {
 	getNestedValue(obj: any, path: string): any {
 		return path.split('.').reduce((acc, key) => acc && acc[key], obj);
 	}
+
+	formatRoute(order: IOrder): string {
+		const loadPlace = order?.orderDetails?.loadPlace?.trim() || '';
+		const unloadPlace = order?.orderDetails?.unloadPlace?.trim() || '';
+
+		if (loadPlace && unloadPlace) {
+			return `${loadPlace} - ${unloadPlace}`;
+		}
+
+		return loadPlace || unloadPlace || '-';
+	}
 }
