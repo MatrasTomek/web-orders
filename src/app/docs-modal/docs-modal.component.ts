@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { IOrder } from '../models/order.model';
 import { ModalService } from '../services/modal.service';
 import { DocumentService } from '../services/document.service';
-import { editOrder } from '../store/actions/order.actions';
+import { addOrder, editOrder } from '../store/actions/order.actions';
 
 @Component({
 	selector: 'app-docs-modal',
@@ -12,6 +12,8 @@ import { editOrder } from '../store/actions/order.actions';
 })
 export class DocsModalComponent implements OnInit, OnDestroy {
 	@Input() activeOrder: IOrder | null = null;
+
+	readonly standaloneCarrierName = 'TOYOTA';
 
 	selectedFile: File | null = null;
 	isUploading = false;
@@ -46,10 +48,10 @@ export class DocsModalComponent implements OnInit, OnDestroy {
 	}
 
 	upload(): void {
-		if (!this.selectedFile || !this.activeOrder) return;
+		if (!this.selectedFile) return;
 
-		const carrierName = this.activeOrder.carrierDetails?.name || 'dokument';
-		const unloadDate = this.activeOrder.orderDetails?.unloadDate;
+		const carrierName = this.activeOrder ? this.activeOrder.carrierDetails?.name || 'dokument' : this.standaloneCarrierName;
+		const unloadDate = this.activeOrder ? this.activeOrder.orderDetails?.unloadDate : Date.now();
 
 		this.isUploading = true;
 		this.errorMessage = '';
@@ -57,12 +59,16 @@ export class DocsModalComponent implements OnInit, OnDestroy {
 
 		this.documentService.uploadDocument(this.selectedFile, carrierName, unloadDate).subscribe({
 			next: (response) => {
-				this.store.dispatch(
-					editOrder({
-						orderId: this.activeOrder!.id!,
-						order: { ...this.activeOrder!, documentUrl: response.url },
-					})
-				);
+				if (this.activeOrder) {
+					this.store.dispatch(
+						editOrder({
+							orderId: this.activeOrder.id!,
+							order: { ...this.activeOrder, documentUrl: response.url },
+						})
+					);
+				} else {
+					this.store.dispatch(addOrder({ Order: this.buildStandaloneOrder(response.url) }));
+				}
 				this.successMessage = 'Dokument został przesłany pomyślnie.';
 				this.isUploading = false;
 				this.selectedFile = null;
@@ -73,6 +79,26 @@ export class DocsModalComponent implements OnInit, OnDestroy {
 				this.isUploading = false;
 			},
 		});
+	}
+
+	private buildStandaloneOrder(documentUrl: string): IOrder {
+		const now = Date.now();
+		return {
+			clientDetails: { adress: '', name: '', vat: '' },
+			carrierDetails: { adress: '', name: this.standaloneCarrierName, vat: '' },
+			orderDetails: {
+				loadDate: now,
+				loadHrs: '',
+				loadPlace: '',
+				loadAddress: '',
+				unloadDate: now,
+				unloadHrs: '',
+				unloadPlace: '',
+				unloadAddress: '',
+			},
+			conditions: { customerTerm: '', customerFreight: '', carrierTerm: '', carrierFreight: '' },
+			documentUrl,
+		};
 	}
 
 	openInNewTab(): void {

@@ -1,6 +1,6 @@
 <app-modal modalID="docsModal">
 	<div class="modal-header">
-		<h3>{{ hasDocument ? 'Dokumenty zlecenia' : 'Dodaj dokument' }}</h3>
+		<h3>{{ hasDocument ? 'Dokumenty zlecenia' : activeOrder ? 'Dodaj dokument' : 'Dodaj dokument bez zlecenia' }}</h3>
 	</div>
 
 	<div class="modal-body">
@@ -23,6 +23,7 @@
 
 		<!-- Upload mode: no document or replacing -->
 		<ng-container *ngIf="!hasDocument">
+			<input *ngIf="!activeOrder" type="hidden" name="carrierName" [value]="standaloneCarrierName" />
 			<div class="file-input-wrapper">
 				<label for="docFile" class="file-label">Wybierz plik (PDF lub zdjęcie)</label>
 				<input id="docFile" type="file" accept=".pdf,.jpg,.jpeg,.png" (change)="onFileSelected($event)" class="file-input" />
