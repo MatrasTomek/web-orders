@@ -57,6 +57,13 @@
 			<ng-template pTemplate="caption">
 				<div class="flex">
 					<button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(docsTb)"></button>
+					<button
+						pButton
+						label="Dodaj dokument bez zlecenia"
+						class="p-button-outlined ml-2"
+						icon="pi pi-plus"
+						(click)="openAddDocOnlyModal()"
+					></button>
 					<span class="p-input-icon-left ml-auto">
 						<i class="pi pi-search"></i>
 						<input pInputText type="text" placeholder="Wyszukaj" (input)="handleInput($event)" />
@@ -108,7 +115,7 @@
 					</td>
 					<td>{{ resolveField(order, 'orderDetails.loadDate') | date: 'dd/MM/yyyy' }}</td>
 					<td>{{ resolveField(order, 'orderDetails.unloadDate') | date: 'dd/MM/yyyy' }}</td>
-					<td>{{ resolveField(order, 'orderDetails.loadPlace') }} → {{ resolveField(order, 'orderDetails.unloadPlace') }}</td>
+					<td>{{ formatRoute(order) }}</td>
 				</tr>
 			</ng-template>
 			<ng-template pTemplate="emptymessage">
@@ -120,3 +127,4 @@
 	</div>
 </div>
 <app-docs-modal [activeOrder]="activeOrder"></app-docs-modal>
+<app-add-doc-only-modal></app-add-doc-only-modal>

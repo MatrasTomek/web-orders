@@ -19,7 +19,7 @@
 <ng-template #fullApp>
 	<app-nav></app-nav>
 	<ng-container *ngIf="!(auth.isAuthenticated$ | async); else startPage">
-		<app-login-page *ngIf="!(isDocsRoute$ | async); else docsRoute"></app-login-page>
+		<app-login-page *ngIf="!isDocsRoute(); else docsRoute"></app-login-page>
 		<ng-template #docsRoute>
 			<router-outlet></router-outlet>
 		</ng-template>

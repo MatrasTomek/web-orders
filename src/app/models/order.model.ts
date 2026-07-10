@@ -52,4 +52,5 @@ export interface IOrder {
 	orderDetails: IOrderDetails;
 	conditions: IOrderConditions;
 	documentUrl?: string;
+	isDocOnly?: boolean;
 }
