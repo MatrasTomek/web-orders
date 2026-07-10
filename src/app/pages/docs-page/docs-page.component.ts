@@ -91,19 +91,9 @@ export class DocsPageComponent implements OnInit {
 		this.modal.toggleModal('docsModal');
 	}
 
-	openAddDocOnlyModal() {
-		this.modal.toggleModal('addDocOnlyModal');
-	}
-
-	formatRoute(order: IOrder): string {
-		const loadPlace = this.resolveField(order, 'orderDetails.loadPlace');
-		const unloadPlace = this.resolveField(order, 'orderDetails.unloadPlace');
-
-		if (loadPlace && unloadPlace) {
-			return `${loadPlace} → ${unloadPlace}`;
-		}
-
-		return loadPlace || unloadPlace || '';
+	openStandaloneDocsModal() {
+		this.activeOrder = null;
+		this.modal.toggleModal('docsModal');
 	}
 
 	resolveField(obj: any, path: string) {
