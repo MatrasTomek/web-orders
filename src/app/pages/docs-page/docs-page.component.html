@@ -109,7 +109,7 @@
 					</td>
 					<td>{{ resolveField(order, 'orderDetails.loadDate') | date: 'dd/MM/yyyy' }}</td>
 					<td>{{ resolveField(order, 'orderDetails.unloadDate') | date: 'dd/MM/yyyy' }}</td>
-					<td>{{ resolveField(order, 'orderDetails.loadPlace') }} → {{ resolveField(order, 'orderDetails.unloadPlace') }}</td>
+					<td>{{ formatRoute(order) }}</td>
 				</tr>
 			</ng-template>
 			<ng-template pTemplate="emptymessage">
@@ -121,3 +121,4 @@
 	</div>
 </div>
 <app-docs-modal [activeOrder]="activeOrder"></app-docs-modal>
+<app-add-doc-only-modal></app-add-doc-only-modal>

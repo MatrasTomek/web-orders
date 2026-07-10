@@ -26,6 +26,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { ShowOrderModalModule } from '../show-order-modal/show-order-modal.module';
 import { DocsModalModule } from '../docs-modal/docs-modal.module';
+import { AddDocOnlyModalModule } from '../add-doc-only-modal/add-doc-only-modal.module';
 import { TruncateTextModule } from '../shared/truncate-text/truncated-text.module';
 import { DocsPageComponent } from './docs-page/docs-page.component';
 
@@ -61,6 +62,7 @@ import { DocsPageComponent } from './docs-page/docs-page.component';
 		MultiSelectModule,
 		ShowOrderModalModule,
 		DocsModalModule,
+		AddDocOnlyModalModule,
 		DropdownModule,
 		TruncateTextModule,
 	],

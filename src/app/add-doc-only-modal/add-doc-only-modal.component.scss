@@ -1,0 +1,77 @@
+.modal-header {
+	padding: 1rem 1.5rem 0;
+
+	h3 {
+		margin: 0;
+		font-size: 1.2rem;
+		font-weight: 600;
+	}
+}
+
+.modal-body {
+	padding: 1rem 1.5rem;
+}
+
+.modal-footer {
+	padding: 0.75rem 1.5rem 1.5rem;
+	display: flex;
+	align-items: center;
+}
+
+.input-column-wrapper {
+	display: flex;
+	flex-direction: column;
+
+	.input-label {
+		font-size: 0.9rem;
+		color: #555;
+		margin-bottom: 0.25rem;
+	}
+}
+
+.file-input-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.file-label {
+	font-size: 0.9rem;
+	color: #555;
+	margin-bottom: 0.25rem;
+}
+
+.file-input {
+	display: block;
+	font-size: 0.9rem;
+}
+
+.selected-file-name {
+	margin-top: 0.5rem;
+	font-size: 0.9rem;
+	color: #333;
+
+	.pi {
+		margin-right: 0.25rem;
+	}
+}
+
+.error-msg {
+	color: #e74c3c;
+	font-size: 0.875rem;
+	margin-top: 0.5rem;
+}
+
+.success-msg {
+	color: #27ae60;
+	font-size: 0.875rem;
+	margin-top: 0.5rem;
+}
+
+.ml-2 {
+	margin-left: 0.5rem;
+}
+
+.mt-3 {
+	margin-top: 1rem;
+}

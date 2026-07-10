@@ -1,0 +1,39 @@
+<app-modal modalID="addDocOnlyModal">
+	<div class="modal-header">
+		<h3>Dodaj dokument bez zlecenia</h3>
+	</div>
+
+	<div class="modal-body">
+		<div class="input-column-wrapper">
+			<label class="input-label">Data rozładunku *</label>
+			<p-calendar [formControl]="unloadDate" [showIcon]="true" [showButtonBar]="true" dateFormat="dd.mm.yy" [firstDayOfWeek]="1"></p-calendar>
+		</div>
+
+		<div class="input-column-wrapper mt-3">
+			<label class="input-label">Trasa</label>
+			<app-input [control]="route" [type]="'text'" [placeholder]="'np. Warszawa → Kraków'"></app-input>
+		</div>
+
+		<div class="file-input-wrapper mt-3">
+			<label for="docOnlyFile" class="file-label">Wybierz plik (PDF lub zdjęcie) *</label>
+			<input id="docOnlyFile" type="file" accept=".pdf,.jpg,.jpeg,.png" (change)="onFileSelected($event)" class="file-input" />
+		</div>
+		<p *ngIf="selectedFile" class="selected-file-name">
+			<i class="pi pi-file"></i> {{ selectedFile.name }}
+		</p>
+		<p *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</p>
+		<p *ngIf="successMessage" class="success-msg">{{ successMessage }}</p>
+	</div>
+
+	<div class="modal-footer">
+		<button
+			pButton
+			type="button"
+			label="Dodaj"
+			icon="{{ isUploading ? 'pi pi-spin pi-spinner' : 'pi pi-upload' }}"
+			[disabled]="!selectedFile || !unloadDate.value || isUploading"
+			(click)="upload()"
+		></button>
+		<button pButton type="button" label="Zamknij" class="p-button-text ml-2" (click)="close()"></button>
+	</div>
+</app-modal>

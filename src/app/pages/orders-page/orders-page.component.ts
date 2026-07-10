@@ -37,7 +37,7 @@ export class OrdersPageComponent implements OnInit {
 			if (!orders || orders.length === 0) {
 				this.store.dispatch(loadOrders());
 			} else {
-				this.ordersList = orders.filter((order) => !isStandaloneDocumentOrder(order));
+				this.ordersList = orders.filter((order) => !order.isDocOnly);
 			}
 		});
 
