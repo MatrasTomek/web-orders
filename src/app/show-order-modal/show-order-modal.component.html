@@ -7,6 +7,37 @@
 			(click)="generatePDF(activeOrder?.orderNumber)"
 		></p-button>
 	</div>
+	<!-- Pasek akcji — widoczny tylko w układzie 1 (mobile/tablet) -->
+	<div class="details-actions" *ngIf="activeOrder">
+		<p-button
+			type="button"
+			styleClass="p-button-sm"
+			icon="pi pi-pencil"
+			label="Edytuj"
+			(click)="editOrder.emit(activeOrder!)"
+		></p-button>
+		<p-button
+			type="button"
+			styleClass="p-button-sm p-button-secondary"
+			icon="pi pi-copy"
+			label="Kopiuj"
+			(click)="copyOrder.emit(activeOrder!)"
+		></p-button>
+		<p-button
+			type="button"
+			styleClass="p-button-sm"
+			[icon]="activeOrder.documentUrl ? 'pi pi-file-pdf' : 'pi pi-upload'"
+			[label]="activeOrder.documentUrl ? 'Dokumenty' : 'Dodaj docs'"
+			(click)="docsOrder.emit(activeOrder!)"
+		></p-button>
+		<p-button
+			type="button"
+			styleClass="p-button-sm p-button-danger"
+			icon="pi pi-trash"
+			label="Usuń"
+			(click)="deleteOrder.emit(activeOrder!)"
+		></p-button>
+	</div>
 	<div class="order-modal-content">
 		<div class="show-order-wrapper" id="htmlData">
 			<h3 class="show-order-wrapper__number">Zlecenie spedycyjne nr: {{ activeOrder?.orderNumber }}</h3>

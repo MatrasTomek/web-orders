@@ -33,6 +33,15 @@
     border-radius: $ownRadius;
     border: 1px solid $borderColor;
 
+    // Układ 1 (do 1020px): modal nie wychodzi poza ekran, zawartość może się przewijać.
+    @include layout-mobile {
+      width: calc(100vw - 24px);
+      max-width: calc(100vw - 24px);
+      max-height: calc(100vh - 24px);
+      overflow: auto;
+      padding: 1rem;
+    }
+
     .modal-header {
       display: flex;
       align-items: center;

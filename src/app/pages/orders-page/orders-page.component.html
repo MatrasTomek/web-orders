@@ -4,6 +4,29 @@
 		<p-button type="button" class="" label="Dodaj zlecenie" routerLink="../add-order"> </p-button>
 		<p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header" placeholder="Wybierz kolumny"> </p-multiSelect>
 	</div>
+
+	<!-- Układ 1 (do 1020px): karty zamiast tabeli -->
+	<div class="orders-cards mt-4">
+		<div class="order-card" *ngFor="let order of ordersList">
+			<div class="order-card__badges">
+				<span class="order-card__badge order-card__badge--number">{{ order.orderNumber }}</span>
+				<span class="order-card__badge">Zał.: {{ order.orderDetails.loadDate | date: 'dd/MM/yyyy' }}</span>
+				<span class="order-card__badge">Rozł.: {{ order.orderDetails.unloadDate | date: 'dd/MM/yyyy' }}</span>
+			</div>
+			<div class="order-card__route">
+				{{ order.orderDetails.loadPlace || '—' }} <i class="pi pi-arrow-right"></i> {{ order.orderDetails.unloadPlace || '—' }}
+			</div>
+			<p-button
+				type="button"
+				styleClass="p-button-sm"
+				icon="pi pi-eye"
+				label="Pokaż szczegóły"
+				(click)="showOrder($event, order)"
+			></p-button>
+		</div>
+		<div *ngIf="!ordersList || ordersList.length === 0" class="order-card order-card--empty">Brak zleceń.</div>
+	</div>
+
 	<div class="tables mt-4">
 		<p-table
 			*ngIf="ordersList"
@@ -125,7 +148,13 @@
 		</p-table>
 	</div>
 </div>
-<app-show-order-modal [activeOrder]="activeOrder"></app-show-order-modal>
+<app-show-order-modal
+	[activeOrder]="activeOrder"
+	(editOrder)="editFromDetails($event)"
+	(copyOrder)="copyFromDetails($event)"
+	(deleteOrder)="deleteFromDetails($event)"
+	(docsOrder)="docsFromDetails($event)"
+></app-show-order-modal>
 <app-docs-modal [activeOrder]="activeOrder"></app-docs-modal>
 <app-confirmation-modal
 	(confirmationFn)="deleteConfirmed($event)"

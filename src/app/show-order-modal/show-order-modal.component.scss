@@ -1,5 +1,10 @@
 @import "mixins";
 
+// Pasek akcji ukryty w układzie 2 (desktop) — modal pozostaje jak dziś.
+.details-actions {
+	display: none;
+}
+
 .order-modal-content {
 	height: calc(95vh - 120px);
 	align-items: flex-start;
@@ -94,5 +99,43 @@
 		height: 1px;
 		margin: 20px auto;
 		background-color: black;
+	}
+}
+
+// Układ 1 (do 1020px): akcje w kolumnie, sekcje jedna pod drugą, modal pełnej szerokości.
+@include layout-mobile {
+	.details-actions {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		margin-bottom: 12px;
+
+		::ng-deep .p-button {
+			width: 100%;
+			justify-content: center;
+		}
+	}
+
+	.order-modal-content {
+		width: 100%;
+	}
+
+	.show-order-wrapper {
+		transform: none;
+		width: 100%;
+
+		.sides {
+			flex-wrap: wrap;
+
+			&__client,
+			&__carrier {
+				flex-basis: 100%;
+				align-items: flex-start;
+			}
+		}
+
+		.conditions {
+			flex-wrap: wrap;
+		}
 	}
 }

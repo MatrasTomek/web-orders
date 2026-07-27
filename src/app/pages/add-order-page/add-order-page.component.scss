@@ -205,3 +205,176 @@
 		}
 	}
 }
+
+// Układ 1 (do 1020px): wszystkie formularze z góry na dół,
+// inputy i przyciski w kolumnie o szerokości 100%.
+@include layout-mobile {
+	// Reset ustawia border-box tylko na body/pseudo — wymuszamy je tu,
+	// żeby width:100% + padding nie powodowały poziomego przewijania.
+	:host {
+		display: block;
+		max-width: 100%;
+		overflow-x: hidden;
+	}
+
+	:host ::ng-deep * {
+		box-sizing: border-box;
+	}
+
+	// Padding strony (brak .page-wrapper na tym widoku) + brak poziomego scrolla.
+	.add-order-wrapper {
+		padding: 16px;
+		max-width: 100%;
+		overflow-x: hidden;
+	}
+
+	:host ::ng-deep .add-order-wrapper {
+		// Kroki: etykiety mogą się zawijać i mieścić w oknie.
+		.p-steps {
+			overflow-x: auto;
+
+			.p-steps-item .p-menuitem-link {
+				width: auto;
+			}
+		}
+
+		.item-wrapper__buttons .p-dropdown {
+			width: 100%;
+			max-width: 100%;
+		}
+
+		// Dropdown to flex — bez min-width:0 długa, niełamliwa etykieta
+		// rozpycha kontrolkę poza ekran. Pozwalamy jej się kurczyć (ellipsis).
+		.p-dropdown {
+			min-width: 0;
+
+			.p-dropdown-label {
+				min-width: 0;
+				max-width: 100%;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+
+				.flex {
+					min-width: 0;
+					overflow: hidden;
+				}
+
+				.trimmed-value-single-line {
+					display: block;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+			}
+		}
+	}
+
+	.forms {
+		&__order,
+		&__customer,
+		&__condition {
+			width: 100%;
+			margin-top: 24px;
+		}
+
+		// Sekcje formularzy jedna pod drugą.
+		&__customer {
+			flex-direction: column;
+
+			.item-wrapper {
+				flex-basis: 100%;
+				width: 100%;
+			}
+		}
+
+		.add-order-form-wrapper,
+		.add-condition-form-wrapper {
+			form {
+				flex-direction: column;
+				align-items: stretch;
+			}
+
+			&__pickup,
+			&__delivery,
+			&__goods,
+			&__driver,
+			&__require,
+			&__payment,
+			&__description {
+				flex-basis: 100%;
+			}
+
+			// Zagnieżdżone rzędy (towar/kierowca/płatności) także w kolumnie.
+			&__goods,
+			&__driver {
+				flex-direction: column;
+				align-items: stretch;
+
+				> div {
+					flex-basis: 100%;
+				}
+			}
+		}
+
+		.add-condition-form-wrapper {
+			.customer-payment,
+			.carrier-payment {
+				flex-direction: column;
+				align-items: stretch;
+			}
+		}
+
+		// Wiersz z datą (kalendarz + godzina) — jedno pod drugim, bez marginesu bocznego.
+		.input-column-wrapper__date {
+			flex-direction: column;
+			align-items: stretch;
+
+			app-input {
+				margin-left: 0 !important;
+				margin-top: 8px;
+			}
+		}
+
+		// Inputy, dropdowny, kalendarze, textarea i przyciski — pełna szerokość.
+		.input-column-wrapper,
+		.input-column-wrapper__date,
+		app-input,
+		.text-input-wrapper,
+		textarea {
+			width: 100%;
+			max-width: 100%;
+		}
+
+		::ng-deep {
+			.text-input,
+			.p-calendar,
+			.p-calendar .p-inputtext,
+			.p-dropdown,
+			textarea {
+				width: 100%;
+				max-width: 100%;
+			}
+
+			// Element kalendarza (tag komponentu) na pełną szerokość.
+			p-calendar {
+				display: block;
+				width: 100%;
+			}
+		}
+
+		// Przyciski akcji formularzy — kolumna, pełna szerokość, bez marginesów bocznych.
+		.customer-buttons,
+		.add-order-form-wrapper__buttons,
+		.add-condition-form-wrapper__buttons {
+			flex-direction: column;
+			align-items: stretch;
+			gap: 12px;
+
+			::ng-deep .p-button {
+				width: 100%;
+				justify-content: center;
+				margin-right: 0 !important;
+			}
+		}
+	}
+}

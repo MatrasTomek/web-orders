@@ -42,6 +42,11 @@ $break-points: (
   x-large: 1280px,
 );
 
+//media-query — pojedynczy próg rozdzielający dwa układy
+// Układ 1 (mobile/tablet): max-width: $layout-breakpoint
+// Układ 2 (laptop/desktop): baza (bez media) — bez zmian
+$layout-breakpoint: 1020px;
+
 //others
 $transition: 0.4s;
 $navComponentHeight: 60px;

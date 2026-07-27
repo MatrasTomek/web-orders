@@ -17,4 +17,81 @@
       }
     }
   }
+
+  // Układ 2 (desktop): karty ukryte, widoczna tabela — stan bez zmian.
+  .orders-cards {
+    display: none;
+  }
+
+  // Układ 1 (do 1020px): tabela ukryta, widoczne karty.
+  @include layout-mobile {
+    .buttons {
+      flex-direction: column;
+      gap: 12px;
+
+      p-button,
+      p-multiSelect,
+      ::ng-deep .p-button,
+      ::ng-deep .p-multiselect {
+        width: 100%;
+      }
+    }
+
+    .tables {
+      display: none;
+    }
+
+    .orders-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      .order-card {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 1rem;
+        border: 1px solid $tableBorder;
+        border-radius: $ownRadius;
+        background: $tableHeaderBackground;
+
+        &--empty {
+          text-align: center;
+        }
+
+        &__badges {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+
+        &__badge {
+          padding: 0.2rem 0.6rem;
+          border-radius: $primeBorderRadius;
+          background: $buttonColor;
+          color: $contentColor;
+          font-size: $xxs-fz;
+          white-space: nowrap;
+
+          &--number {
+            font-weight: 700;
+            background: $buttonHoverColor;
+          }
+        }
+
+        &__route {
+          font-size: $s-fz;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        ::ng-deep .p-button {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    }
+  }
 }

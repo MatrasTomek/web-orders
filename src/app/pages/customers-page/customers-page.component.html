@@ -3,6 +3,35 @@
 	<div class="buttons">
 		<p-button type="button" class="" label="Dodaj klienta" (click)="openAddModal($event)"> </p-button>
 	</div>
+
+	<!-- Układ 1 (do 1020px): karty zamiast tabeli -->
+	<div class="customers-cards mt-4">
+		<div class="customer-card" *ngFor="let customer of customersList">
+			<div class="customer-card__name">{{ customer.name }}</div>
+			<div class="customer-card__row"><span>NIP:</span> {{ customer.vat }}</div>
+			<div class="customer-card__row"><span>Adres:</span> {{ customer.adress }}</div>
+			<div class="customer-card__row"><span>eMail:</span> {{ customer.email || '—' }}</div>
+			<div class="customer-card__row"><span>Telefon:</span> {{ customer.phone || '—' }}</div>
+			<div class="customer-card__actions">
+				<p-button
+					type="button"
+					styleClass="p-button-sm"
+					icon="pi pi-pencil"
+					label="Edytuj"
+					(click)="editCustomer($event, customer)"
+				></p-button>
+				<p-button
+					type="button"
+					styleClass="p-button-sm p-button-danger"
+					icon="pi pi-trash"
+					label="Usuń"
+					(click)="openConfirmationModal($event, customer)"
+				></p-button>
+			</div>
+		</div>
+		<div *ngIf="!customersList || customersList.length === 0" class="customer-card customer-card--empty">Brak klientów.</div>
+	</div>
+
 	<div class="tables mt-4">
 		<p-table
 			*ngIf="customersList"

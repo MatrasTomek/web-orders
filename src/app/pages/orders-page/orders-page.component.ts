@@ -140,6 +140,31 @@ export class OrdersPageComponent implements OnInit {
 		this.modal.toggleModal('showOrder');
 	}
 
+	// Akcje wyzwalane z modala szczegółów (układ 1 — mobile/tablet).
+	// Najpierw zamykamy modal szczegółów, potem wykonujemy właściwą akcję.
+	editFromDetails(order: IOrder) {
+		this.modal.toggleModal('showOrder');
+		this.goToEditOrCopyOrder(order, 'edit');
+	}
+
+	copyFromDetails(order: IOrder) {
+		this.modal.toggleModal('showOrder');
+		this.goToEditOrCopyOrder(order, 'copy');
+	}
+
+	deleteFromDetails(order: IOrder) {
+		this.modal.toggleModal('showOrder');
+		this.confirmationMessage = `Czy chesz usunąć zlecenie: ${order.orderNumber} ?`;
+		this.activeOrderId = order.id;
+		this.modal.toggleModal('confirmationModal');
+	}
+
+	docsFromDetails(order: IOrder) {
+		this.modal.toggleModal('showOrder');
+		this.activeOrder = order;
+		this.modal.toggleModal('docsModal');
+	}
+
 	openDocsModal($event: Event, order: IOrder) {
 		$event.preventDefault();
 		this.activeOrder = order;

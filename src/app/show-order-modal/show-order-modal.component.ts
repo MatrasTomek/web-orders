@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { showSpinner, hideSpinner } from '../store/actions/spinner.actions';
 import { ModalService } from '../services/modal.service';
@@ -13,6 +13,12 @@ import html2canvas from 'html2canvas';
 })
 export class ShowOrderModalComponent {
 	@Input() activeOrder: IOrder | null = null;
+
+	// Akcje dostępne w modalu szczegółów (widoczne w układzie 1 — mobile/tablet).
+	@Output() editOrder = new EventEmitter<IOrder>();
+	@Output() copyOrder = new EventEmitter<IOrder>();
+	@Output() deleteOrder = new EventEmitter<IOrder>();
+	@Output() docsOrder = new EventEmitter<IOrder>();
 
 	loadAdress: string = '';
 	unloadAdress: string = '';

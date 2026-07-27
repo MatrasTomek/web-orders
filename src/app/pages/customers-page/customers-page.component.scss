@@ -23,4 +23,73 @@
       }
     }
   }
+
+  // Układ 2 (desktop): karty ukryte, widoczna tabela — bez zmian.
+  .customers-cards {
+    display: none;
+  }
+
+  // Układ 1 (do 1020px): tabela ukryta, widoczne karty.
+  @include layout-mobile {
+    .buttons {
+      flex-direction: column;
+      gap: 12px;
+
+      p-button,
+      ::ng-deep .p-button {
+        width: 100%;
+      }
+    }
+
+    .tables {
+      display: none;
+    }
+
+    .customers-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      .customer-card {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 1rem;
+        border: 1px solid $tableBorder;
+        border-radius: $ownRadius;
+        background: $tableHeaderBackground;
+
+        &--empty {
+          text-align: center;
+        }
+
+        &__name {
+          font-size: $s-fz;
+          font-weight: 700;
+          word-break: break-word;
+        }
+
+        &__row {
+          word-break: break-word;
+
+          span {
+            font-weight: 700;
+            margin-right: 4px;
+          }
+        }
+
+        &__actions {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          margin-top: 8px;
+
+          ::ng-deep .p-button {
+            width: 100%;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
 }

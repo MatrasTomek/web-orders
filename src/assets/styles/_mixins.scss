@@ -14,3 +14,11 @@
   height: calc(100% - $navComponentHeight);
   padding: $pagePadding;
 }
+
+// Układ 1: telefon + tablet (do $layout-breakpoint włącznie).
+// Zawartość jest nadpisaniem bazy (= układu 2 / desktop) — desktop-first.
+@mixin layout-mobile {
+  @media screen and (max-width: $layout-breakpoint) {
+    @content;
+  }
+}
