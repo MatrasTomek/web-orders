@@ -347,18 +347,44 @@
 
 		::ng-deep {
 			.text-input,
-			.p-calendar,
-			.p-calendar .p-inputtext,
 			.p-dropdown,
 			textarea {
 				width: 100%;
 				max-width: 100%;
 			}
 
-			// Element kalendarza (tag komponentu) na pełną szerokość.
+			// Kalendarz z ikoną to flex (input + przycisk). NIE ustawiamy input=100%,
+			// bo to psuje flexową sztuczkę PrimeNG i wypycha przycisk poza ekran.
 			p-calendar {
 				display: block;
 				width: 100%;
+			}
+
+			.p-calendar {
+				display: flex;
+				width: 100%;
+				max-width: 100%;
+				min-width: 0;
+
+				.p-inputtext {
+					flex: 1 1 auto;
+					width: 1%;
+					min-width: 0;
+				}
+
+				.p-datepicker-trigger {
+					flex: 0 0 auto;
+				}
+			}
+
+			// Panel kalendarza (rozwinięty) — mieści się w oknie, zawartość może się zawijać.
+			.p-datepicker {
+				max-width: calc(100vw - 24px);
+
+				&.p-datepicker-timeonly,
+				.p-timepicker {
+					flex-wrap: wrap;
+				}
 			}
 		}
 

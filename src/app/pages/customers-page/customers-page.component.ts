@@ -22,6 +22,7 @@ export class CustomersPageComponent {
 	activeCustomer: ICustomer | null = null;
 	customerId: string | undefined = undefined;
 	confirmationMessage: string = '';
+	cardSearchTerm: string = '';
 
 	ngOnInit() {
 		this.customers$.subscribe((customers) => {
@@ -31,6 +32,20 @@ export class CustomersPageComponent {
 				this.customersList = [...customers];
 			}
 		});
+	}
+
+	// Wyszukiwarka dla widoku kart (układ 1) — filtr po stronie klienta.
+	// Tabela (układ 2) nadal używa globalFilter PrimeNG bez zmian.
+	get filteredCustomers(): ICustomer[] {
+		const term = this.cardSearchTerm.trim().toLowerCase();
+		if (!term) {
+			return this.customersList;
+		}
+		return this.customersList.filter((customer) =>
+			[customer.name, customer.vat, customer.adress, customer.email, customer.phone].some(
+				(value) => value != null && value.toString().toLowerCase().includes(term),
+			),
+		);
 	}
 
 	openAddModal($event: Event) {

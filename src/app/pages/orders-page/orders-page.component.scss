@@ -46,6 +46,15 @@
       flex-direction: column;
       gap: 12px;
 
+      &__search {
+        display: block;
+        width: 100%;
+
+        input {
+          width: 100%;
+        }
+      }
+
       .order-card {
         display: flex;
         flex-direction: column;

@@ -6,7 +6,11 @@
 
 	<!-- Układ 1 (do 1020px): karty zamiast tabeli -->
 	<div class="customers-cards mt-4">
-		<div class="customer-card" *ngFor="let customer of customersList">
+		<span class="p-input-icon-left customers-cards__search">
+			<i class="pi pi-search"></i>
+			<input pInputText type="text" placeholder="Wyszukaj" [(ngModel)]="cardSearchTerm" />
+		</span>
+		<div class="customer-card" *ngFor="let customer of filteredCustomers">
 			<div class="customer-card__name">{{ customer.name }}</div>
 			<div class="customer-card__row"><span>NIP:</span> {{ customer.vat }}</div>
 			<div class="customer-card__row"><span>Adres:</span> {{ customer.adress }}</div>
@@ -29,7 +33,7 @@
 				></p-button>
 			</div>
 		</div>
-		<div *ngIf="!customersList || customersList.length === 0" class="customer-card customer-card--empty">Brak klientów.</div>
+		<div *ngIf="filteredCustomers.length === 0" class="customer-card customer-card--empty">Brak klientów.</div>
 	</div>
 
 	<div class="tables mt-4">

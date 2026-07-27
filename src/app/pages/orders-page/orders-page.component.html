@@ -7,7 +7,11 @@
 
 	<!-- Układ 1 (do 1020px): karty zamiast tabeli -->
 	<div class="orders-cards mt-4">
-		<div class="order-card" *ngFor="let order of ordersList">
+		<span class="p-input-icon-left orders-cards__search">
+			<i class="pi pi-search"></i>
+			<input pInputText type="text" placeholder="Wyszukaj" [(ngModel)]="cardSearchTerm" />
+		</span>
+		<div class="order-card" *ngFor="let order of filteredOrders">
 			<div class="order-card__badges">
 				<span class="order-card__badge order-card__badge--number">{{ order.orderNumber }}</span>
 				<span class="order-card__badge">Zał.: {{ order.orderDetails.loadDate | date: 'dd/MM/yyyy' }}</span>
@@ -24,7 +28,7 @@
 				(click)="showOrder($event, order)"
 			></p-button>
 		</div>
-		<div *ngIf="!ordersList || ordersList.length === 0" class="order-card order-card--empty">Brak zleceń.</div>
+		<div *ngIf="filteredOrders.length === 0" class="order-card order-card--empty">Brak zleceń.</div>
 	</div>
 
 	<div class="tables mt-4">

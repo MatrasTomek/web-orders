@@ -31,6 +31,7 @@ export class OrdersPageComponent implements OnInit {
 	activeOrderId: string | undefined = undefined;
 	confirmationMessage: string = '';
 	fieldsArray: string[] = [];
+	cardSearchTerm: string = '';
 
 	ngOnInit() {
 		this.orders$.subscribe((orders) => {
@@ -121,6 +122,21 @@ export class OrdersPageComponent implements OnInit {
 
 	deleteConfirmed($event: any) {
 		this.store.dispatch(deleteOrder({ orderId: $event }));
+	}
+
+	// Wyszukiwarka dla widoku kart (układ 1) — filtr po stronie klienta.
+	// Tabela (układ 2) nadal używa globalFilter PrimeNG bez zmian.
+	get filteredOrders(): IOrder[] {
+		const term = this.cardSearchTerm.trim().toLowerCase();
+		if (!term) {
+			return this.ordersList;
+		}
+		return this.ordersList.filter((order) =>
+			this.fieldsArray.some((field) => {
+				const value = this.resolveField(order, field);
+				return value != null && value.toString().toLowerCase().includes(term);
+			}),
+		);
 	}
 
 	resolveField(obj: any, path: string) {
