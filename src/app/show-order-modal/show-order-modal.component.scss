@@ -6,7 +6,7 @@
 }
 
 .order-modal-content {
-	height: calc(95vh - 120px);
+	max-height: calc(95vh - 120px);
 	align-items: flex-start;
 	overflow: auto;
 	padding-top: 20px;
@@ -17,7 +17,13 @@
 	// height: 80vh;
 	margin: auto;
 	background-color: $tableOddBackground;
-	transform: scale(0.8) translateY(-120px);
+	// Podgląd wydruku pomniejszony do 0.8. Kotwiczymy skalowanie do górnej
+	// krawędzi (transform-origin) zamiast przesuwać treść w górę o stałe 120px —
+	// dawny translateY chował górę dokumentu poza obszarem przewijania na
+	// niższych/wąskich ekranach. Ujemny margines odzyskuje puste 20% pod spodem.
+	transform: scale(0.8);
+	transform-origin: top center;
+	margin-bottom: -20%;
 	padding: 20px;
 	border-radius: $primeBorderRadius * 1.5;
 	border: 1px solid black;
@@ -122,6 +128,7 @@
 
 	.show-order-wrapper {
 		transform: none;
+		margin-bottom: 0; // bez skali nie ma pustego 20% do odzyskania
 		width: 100%;
 
 		.sides {

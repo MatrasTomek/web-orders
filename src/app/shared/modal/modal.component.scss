@@ -33,12 +33,17 @@
     border-radius: $ownRadius;
     border: 1px solid $borderColor;
 
-    // Układ 1 (do 1020px): modal nie wychodzi poza ekran, zawartość może się przewijać.
+    // Baza (każda szerokość): modal nigdy nie wychodzi poza ekran i zostaje
+    // wyśrodkowany — zawartość szersza/wyższa niż ekran przewija się wewnątrz.
+    // Kluczowe dla wąskich desktopów (np. 1021–1080px), gdzie nie działa jeszcze
+    // układ 1, a treść modala potrafiła przekraczać viewport.
+    max-width: calc(100vw - 24px);
+    max-height: calc(100vh - 24px);
+    overflow: auto;
+
+    // Układ 1 (do 1020px): modal pełnej szerokości.
     @include layout-mobile {
       width: calc(100vw - 24px);
-      max-width: calc(100vw - 24px);
-      max-height: calc(100vh - 24px);
-      overflow: auto;
       padding: 1rem;
     }
 
