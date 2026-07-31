@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { IOrder, STANDALONE_CARRIER_NAME } from '../models/order.model';
 import { ModalService } from '../services/modal.service';
 import { DocumentService } from '../services/document.service';
-import { addOrder, editOrder } from '../store/actions/order.actions';
+import { editOrder } from '../store/actions/order.actions';
 
 @Component({
 	selector: 'app-docs-modal',
@@ -48,12 +48,12 @@ export class DocsModalComponent implements OnInit, OnDestroy {
 	}
 
 	upload(): void {
-		if (!this.selectedFile) return;
+		// Dokument bez zlecenia dodaje osobny modal (addDocOnlyModal) — tu zawsze
+		// mamy zlecenie, do którego plik jest podpinany.
+		if (!this.selectedFile || !this.activeOrder) return;
 
-		const carrierName = this.activeOrder
-			? this.activeOrder.carrierDetails?.name || this.standaloneCarrierName
-			: this.standaloneCarrierName;
-		const unloadDate = this.activeOrder ? this.activeOrder.orderDetails?.unloadDate : Date.now();
+		const carrierName = this.activeOrder.carrierDetails?.name || this.standaloneCarrierName;
+		const unloadDate = this.activeOrder.orderDetails?.unloadDate;
 
 		this.isUploading = true;
 		this.errorMessage = '';
@@ -61,16 +61,12 @@ export class DocsModalComponent implements OnInit, OnDestroy {
 
 		this.documentService.uploadDocument(this.selectedFile, carrierName, unloadDate).subscribe({
 			next: (response) => {
-				if (this.activeOrder) {
-					this.store.dispatch(
-						editOrder({
-							orderId: this.activeOrder.id!,
-							order: { ...this.activeOrder, documentUrl: response.url },
-						}),
-					);
-				} else {
-					this.store.dispatch(addOrder({ Order: this.buildStandaloneOrder(response.url) }));
-				}
+				this.store.dispatch(
+					editOrder({
+						orderId: this.activeOrder!.id!,
+						order: { ...this.activeOrder!, documentUrl: response.url },
+					}),
+				);
 				this.successMessage = 'Dokument został przesłany pomyślnie.';
 				this.isUploading = false;
 				this.selectedFile = null;
@@ -81,27 +77,6 @@ export class DocsModalComponent implements OnInit, OnDestroy {
 				this.isUploading = false;
 			},
 		});
-	}
-
-	private buildStandaloneOrder(documentUrl: string): IOrder {
-		const now = Date.now();
-		return {
-			clientDetails: { adress: '', name: '', vat: '' },
-			carrierDetails: { adress: '', name: this.standaloneCarrierName, vat: '' },
-			orderDetails: {
-				loadDate: now,
-				loadHrs: '',
-				loadPlace: '',
-				loadAddress: '',
-				unloadDate: now,
-				unloadHrs: '',
-				unloadPlace: '',
-				unloadAddress: '',
-			},
-			conditions: { customerTerm: '', customerFreight: '', carrierTerm: '', carrierFreight: '' },
-			documentUrl,
-			isDocOnly: true,
-		};
 	}
 
 	openInNewTab(): void {

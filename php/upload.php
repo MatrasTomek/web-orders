@@ -1,20 +1,33 @@
 <?php
-header('Access-Control-Allow-Origin: https://www.zlecenia.developerweb.pl');
+$allowedOrigins = [
+    'https://www.zlecenia.developerweb.pl',
+    'https://zlecenia.developerweb.pl',
+    'http://localhost:4200',
+    'http://127.0.0.1:4200',
+];
+
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+if (in_array($origin, $allowedOrigins, true)) {
+    header('Access-Control-Allow-Origin: ' . $origin);
+}
+header('Vary: Origin');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json; charset=utf-8');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
+    http_response_code(204);
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
     echo json_encode(['error' => 'Dozwolona tylko metoda POST']);
     exit;
 }
 
 if (empty($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
+    http_response_code(400);
     echo json_encode(['error' => 'Błąd przesyłania pliku']);
     exit;
 }
@@ -27,6 +40,7 @@ $mimeType = mime_content_type($file['tmp_name']);
 $origExt  = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
 if (!in_array($mimeType, $allowedMimes) || !in_array($origExt, $allowedExts)) {
+    http_response_code(415);
     echo json_encode(['error' => 'Niedozwolony typ pliku. Akceptowane: PDF, JPG, PNG']);
     exit;
 }
@@ -41,6 +55,7 @@ $filename  = $baseName . '.' . $origExt;
 $destPath  = $uploadDir . $filename;
 
 if (!move_uploaded_file($file['tmp_name'], $destPath)) {
+    http_response_code(500);
     echo json_encode(['error' => 'Nie udało się zapisać pliku na serwerze']);
     exit;
 }

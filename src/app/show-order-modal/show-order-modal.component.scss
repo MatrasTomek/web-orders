@@ -16,6 +16,14 @@
 	// width: 50vw;
 	// height: 80vh;
 	margin: auto;
+	max-width: 100%;
+	// Dane zlecenia (adresy, nr rej. pojazdu itp.) bywają wpisywane bez spacji —
+	// bez tego długi, niełamliwy ciąg znaków wypycha box poza modal (brak
+	// jawnej szerokości + margin: auto nie centruje, gdy treść przekracza box),
+	// co na węższych ekranach (poniżej ok. 1080px) wygląda jak niewyśrodkowany
+	// podgląd wychodzący poza ekran.
+	overflow-wrap: anywhere;
+	word-break: break-word;
 	background-color: $tableOddBackground;
 	// Podgląd wydruku pomniejszony do 0.8. Kotwiczymy skalowanie do górnej
 	// krawędzi (transform-origin) zamiast przesuwać treść w górę o stałe 120px —
