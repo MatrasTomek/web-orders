@@ -1,4 +1,4 @@
-@import "mixins";
+@import 'mixins';
 
 // Pasek akcji ukryty w układzie 2 (desktop) — modal pozostaje jak dziś.
 .details-actions {
@@ -152,5 +152,58 @@
 		.conditions {
 			flex-wrap: wrap;
 		}
+	}
+}
+
+@media print {
+	body * {
+		visibility: hidden;
+	}
+
+	app-show-order-modal,
+	app-show-order-modal * {
+		visibility: visible;
+	}
+
+	.app-modal,
+	.modal-mask,
+	.modal-wrapper,
+	.modal-header,
+	.details-actions,
+	.option-buttons,
+	.header-close,
+	.p-button,
+	button,
+	[ng-reflect-modal-id] {
+		visibility: hidden !important;
+		display: none !important;
+	}
+
+	.show-order-wrapper,
+	.show-order-wrapper * {
+		visibility: visible !important;
+	}
+
+	.show-order-wrapper {
+		position: static !important;
+		display: block !important;
+		max-width: 100% !important;
+		width: 100% !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		border: none !important;
+		background: white !important;
+		transform: none !important;
+		box-shadow: none !important;
+		break-inside: avoid;
+	}
+
+	.show-order-wrapper .separator {
+		background: #000;
+	}
+
+	@page {
+		size: A4 portrait;
+		margin: 10mm;
 	}
 }

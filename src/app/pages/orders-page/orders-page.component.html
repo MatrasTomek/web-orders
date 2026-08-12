@@ -152,13 +152,6 @@
 		</p-table>
 	</div>
 </div>
-<app-show-order-modal
-	[activeOrder]="activeOrder"
-	(editOrder)="editFromDetails($event)"
-	(copyOrder)="copyFromDetails($event)"
-	(deleteOrder)="deleteFromDetails($event)"
-	(docsOrder)="docsFromDetails($event)"
-></app-show-order-modal>
 <app-docs-modal [activeOrder]="activeOrder"></app-docs-modal>
 <app-confirmation-modal
 	(confirmationFn)="deleteConfirmed($event)"

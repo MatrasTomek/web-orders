@@ -1,11 +1,6 @@
 <app-modal modalID="showOrder">
 	<div class="option-buttons">
-		<p-button
-			type="button"
-			styleClass="p-button-secondary mb-2"
-			label="Drukuj"
-			(click)="generatePDF(activeOrder?.orderNumber)"
-		></p-button>
+		<p-button type="button" styleClass="p-button-secondary mb-2" label="Drukuj" (click)="printOrder()"></p-button>
 	</div>
 	<!-- Pasek akcji — widoczny tylko w układzie 1 (mobile/tablet) -->
 	<div class="details-actions" *ngIf="activeOrder">
@@ -60,9 +55,7 @@
 				<div>
 					<h4>
 						Załadunek --
-						<span
-							>{{ activeOrder?.orderDetails?.loadDate | date : 'dd/MM/yyyy' }} {{ activeOrder?.orderDetails?.loadHrs }}</span
-						>
+						<span>{{ activeOrder?.orderDetails?.loadDate | date: 'dd/MM/yyyy' }} {{ activeOrder?.orderDetails?.loadHrs }}</span>
 					</h4>
 					<p>{{ activeOrder?.orderDetails?.loadAddress }} | {{ activeOrder?.orderDetails?.loadPlace }}</p>
 				</div>
@@ -71,7 +64,7 @@
 					<h4>
 						Rozładunek --
 						<span
-							>{{ activeOrder?.orderDetails?.unloadDate | date : 'dd/MM/yyyy' }}
+							>{{ activeOrder?.orderDetails?.unloadDate | date: 'dd/MM/yyyy' }}
 							{{ activeOrder?.orderDetails?.unloadHrs }}</span
 						>
 					</h4>
