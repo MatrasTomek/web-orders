@@ -12,6 +12,7 @@
 				[showButtonBar]="true"
 				dateFormat="dd.mm.yy"
 				[firstDayOfWeek]="1"
+				appendTo="body"
 			></p-calendar>
 		</div>
 
@@ -23,6 +24,7 @@
 				[showButtonBar]="true"
 				dateFormat="dd.mm.yy"
 				[firstDayOfWeek]="1"
+				appendTo="body"
 			></p-calendar>
 			<p *ngIf="unloadDate.touched && unloadDate.dirty && unloadDate.errors?.['required']" class="form-warning">Pole jest wymagane</p>
 		</div>
