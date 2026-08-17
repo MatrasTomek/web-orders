@@ -189,7 +189,7 @@ export class ShowOrderModalComponent {
 						<h3>Warunki realizacji i płatności</h3>
 						<ul>
 							<li class="red">Dokumenty transportowe TYLKO w formacie PDF proszę przesłać wyłącznie na maila: biuro@omega-dulowski.pl. PROSIMY NIE WYSYŁAĆ DOKUMENTÓW POCZTĄ TRADYCYJNĄ.</li>
-							<li class="red">FV po za KSEF należy przesyłać wyłącznie w formacie PDF na maila: biuro@omega-dulowski.pl. PROSIMY NIE WYSYŁAĆ FV POCZTĄ TRADYCYJNĄ.</li>
+							<li class="red">FV poza KSEF należy przesyłać wyłącznie w formacie PDF na maila: biuro@omega-dulowski.pl. PROSIMY NIE WYSYŁAĆ FV POCZTĄ TRADYCYJNĄ.</li>
 							<li>Termin płatności wynosi ${paymentTerm} dni, liczony od daty wpływu FV zleceniobiorcy wraz z dokumentami dotyczącymi tras zawartych w FV.</li>
 							<li>Skrócony termin płatności: skonto 5%, płatność w 48h po otrzymaniu FV wraz z kompletem dokumentów przewozowych. W przypadku skonta FV powinna zostać pomniejszona o 5%, opis: „FV pomniejszona o 5% ze względu na wcześniejszą płatność”.</li>
 							<li class="red">Informujemy, że nie akceptujemy faktur, na których skonto udzielane jest przez zewnętrzne podmioty.</li>
